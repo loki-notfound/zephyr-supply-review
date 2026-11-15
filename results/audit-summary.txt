@@ -1,0 +1,15 @@
+txs 15040
+todo 0
+ZEPH->ZEPH+ZPH         txs  13300 burnt     5,164,647.6699 minted     5,164,647.6699 fees 503.1822
+ZEPHRSV->ZEPHRSV+ZRS   txs   1318 burnt     1,023,509.1170 minted     1,023,509.1170 fees 2.9032
+ZEPHUSD->ZEPHUSD+ZSD   txs    262 burnt        88,314.9165 minted        88,314.9165 fees 0.9225
+ZYIELD->ZYIELD+ZYS     txs    160 burnt       185,474.0775 minted       185,474.0775 fees 0.2775
+per HF: {'8:ZEPH->ZEPH+ZPH': 4919638.45, '8:ZEPHRSV->ZEPHRSV+ZRS': 1005727.19, '8:ZEPHUSD->ZEPHUSD+ZSD': 87406.72, '8:ZYIELD->ZYIELD+ZYS': 185011.5, '10:ZEPH->ZEPH+ZPH': 245009.22, '10:ZEPHRSV->ZEPHRSV+ZRS': 17781.93, '10:ZEPHUSD->ZEPHUSD+ZSD': 908.19, '10:ZYIELD->ZYIELD+ZYS': 462.58}
+burnt!=minted: 0 []
+ZEPH     txs  13300 amount       5,164,647.67 of which from block 511000 on     245,009.22 fees 503.18
+ZEPHRSV  txs   1318 amount       1,023,509.12 of which from block 511000 on      17,781.93 fees 2.90
+ZEPHUSD  txs    262 amount          88,314.92 of which from block 511000 on         908.19 fees 0.92
+ZYIELD   txs    160 amount         185,474.08 of which from block 511000 on         462.58 fees 0.28
+ZEPH: largest transaction 323,181.00; ten largest 26.8 %; hundred largest 60.3 % of the audited amount
+first and last block with an audit transaction: 481502 535998
+DONE

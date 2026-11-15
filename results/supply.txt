@@ -1,0 +1,11 @@
+height 907724
+schedule before 481500           7,108,116.55
+schedule before 536000           7,682,391.51
+total ZPH on chain               12,389,297.37  reserve 5,188,824.96
+total right after block 536000   9,749,949.33
+excess at block 536000           2,067,547.55
+  one-time mint                  1,921,650.00
+  excess in the audited supply   145,897.55
+excess now vs original schedule  1,493,977.53
+reserve at hard fork 8 (inferred) 2,088,863.25
+max genuine in wallets at HF 8   5,019,253.30

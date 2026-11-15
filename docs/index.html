@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is Zephyr&#x27;s supply right? What the code and the chain show</title>
+<meta name="description" content="A review of the Zephyr Protocol supply after the 2025 chain audit: what the public code and the public chain show.">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="index">
+<a class="skip" href="#content">Skip to the text</a>
+<header class="site">
+<a class="name" href="index.html">Zephyr supply review</a>
+<nav aria-label="Pages"><a href="index.html" aria-current="page">Summary</a><a href="full.html">Full report</a><a href="verify.html">Check it yourself</a><a href="https://github.com/loki-notfound/zephyr-supply-review">Repository</a></nav>
+</header>
+<div class="layout">
+<aside>
+<details class="toc"><summary>On this page</summary><ol><li><a href="#the-question-and-the-answer-in-short">The question, and the answer in short</a></li><li><a href="#the-findings-behind-the-answers">The findings behind the answers</a></li><li><a href="#haven-where-the-code-came-from-code">Haven, where the code came from (code)</a></li><li><a href="#what-i-could-not-establish">What I could not establish</a></li><li><a href="#checking-my-work">Checking my work</a></li><li><a href="#author-s-note">Author&#x27;s note</a></li></ol></details>
+<nav class="toc" aria-label="On this page"><p class="label">On this page</p><ol><li><a href="#the-question-and-the-answer-in-short">The question, and the answer in short</a></li><li><a href="#the-findings-behind-the-answers">The findings behind the answers</a></li><li><a href="#haven-where-the-code-came-from-code">Haven, where the code came from (code)</a></li><li><a href="#what-i-could-not-establish">What I could not establish</a></li><li><a href="#checking-my-work">Checking my work</a></li><li><a href="#author-s-note">Author&#x27;s note</a></li></ol></nav>
+</aside>
+<main id="content">
+<h1>Is Zephyr's supply right? What the code and the chain show</h1>
+<p><em>Version 1.0, 2026-11-14. Short version; the <a href="full.html">full report</a> has every commit, code
+line, transaction id and the tools to repeat each check.</em></p>
+<p>Nobody asked me to do this. I took it on because one question kept coming back in the
+community: is the supply right, has anyone outside the project ever checked it, and does the
+audit of the bridge by Sherlock cover that? So I looked at what happened around the 2025 audit. I have
+tried to claim nothing I cannot back up. Each point below says where it comes from: the public
+<strong>code</strong>, the <strong>chain</strong> itself, or what a project has <strong>said</strong>. Where I only have the project's
+word, or could not decide between explanations, I say so. Every quotation comes from
+a text that was read in full. Corrections of fact are welcome.</p>
+<p>This review establishes what happened and what the supply is. It does not judge who is to
+blame.</p>
+<h2 id="the-question-and-the-answer-in-short">The question, and the answer in short</h2>
+<p>Is the supply of ZEPH right? I split that into five questions that public data can answer.</p>
+<p>A few terms first:</p>
+<ul>
+<li><strong>ZEPH</strong> is the base coin; <strong>ZSD</strong> is the stable coin, <strong>ZRS</strong> the reserve coin and <strong>ZYS</strong> the
+yield coin. One can be converted into another through the protocol, and a conversion states
+its amounts in the open. In an ordinary transfer the amounts are hidden.</li>
+<li><strong>Emitted</strong> coins are the ones the block rewards have produced, by a fixed schedule.</li>
+<li>A <strong>range proof</strong> is the part of a transaction that proves no coins are created in it.</li>
+<li>A <strong>ring</strong> hides which earlier output a transaction really spends among fifteen decoys.</li>
+<li>A <strong>hard fork</strong> is a change of the rules from a given block on. The <strong>consensus code</strong> is the
+part of the node software that enforces those rules. Zephyr's is built on Monero's.</li>
+<li>The <strong>reserve</strong> is the ZEPH that backs the stable coin. The supply figures here include it.</li>
+<li>Two kinds of audit appear below. The <strong>chain audit</strong> of 2025 counted the coins. A <strong>code
+audit</strong> is a review of the software by outsiders; that is something else.</li>
+</ul>
+<p><strong>1. Can the number the chain shows be relied on?</strong> Yes, as a count, up to block 902083
+(2026-11-07), where my copy of the chain ends. Up to that block every transaction passes the
+checks that keep a transaction from creating coins, no output was spent twice, and no block
+paid its miner more than reward and fees allow. The totals of all four assets agree with the
+coins generated and the public conversions at both points where they can be compared: right
+after the audit and at that last block. What such checks cannot exclude is a flaw in the rules themselves that nobody knows of
+(question 5).</p>
+<p><strong>2. What went wrong before the audit?</strong> Two defects in consensus code that Zephyr took over
+from Haven Protocol. Until 2024-10-13 a transaction could create coins, and from 2023-10-01
+until 2025-01-23 one asset could be spent as another. Both were used. Both are closed.</p>
+<p><strong>3. What could the audit do, and what could it not?</strong> It made the supply countable for the
+first time. It could not separate coins that had been emitted from coins that had not: amounts
+and histories are hidden, and the chain offers no way to tell them apart. After the audit the
+chain held 2,067,576 ZEPH more than had been emitted: 1,921,650 minted once for an exchange
+balance that was not audited in time, and 145,926 among the audited coins. Zephyr announced the
+mint and how it is offset: block rewards are about 18 % lower for as long as they follow the
+emission curve, about ten more years. By my projection that offsets about 1.8 million of the
+mint, not all of it. The 145,926 are not offset.</p>
+<p><strong>4. What stays unknown?</strong> How many coins each defect produced, who made the transactions, and
+whether the unaudited exchange balance consisted of emitted coins. The second defect can
+explain at most about 262,688 ZEPH of the excess. Of the three transactions with invalid range
+proofs Zephyr says itself that it was &quot;not able to determine if or how much&quot; inflation came
+from them.</p>
+<p><strong>5. Has anyone outside the project reviewed the code of the node?</strong> Not that I could find. In
+2025 Zephyr said no third-party review was planned. The audit by Sherlock that it commissioned in 2026 covers the bridge:
+the scope Zephyr published names the bridge's smart contracts and off-chain services, not the
+node. Asked about it in July 2026, Zephyr's marketing lead wrote: &quot;Scoped to the EVM bridge
+only ... Not the L1&quot; (the L1 is Zephyr's own chain), and that a review of it is &quot;a reasonable
+step&quot; as the protocol grows. This review is not a code audit either: it checks the chain against the rules as they are
+written.</p>
+<p><strong>In short:</strong> up to the block I checked, the number the chain shows is a sound count. At the
+end of the audit (block 536000) it was 2,067,576 ZEPH higher than ordinary emission to that
+block: 1,921,650 that Zephyr minted for an exchange balance that was not audited, for the larger
+part offset by lower block rewards in the years after, and 145,926 among the audited coins,
+which the audit had no way to tell from the rest.</p>
+<h2 id="the-findings-behind-the-answers">The findings behind the answers</h2>
+<p><strong>1. Zephyr's asset code came from Haven Protocol</strong> (code). Of the non-Monero lines in Zephyr's
+first commit (2023-05-26), 38 % are word for word Haven's code of that day. The Djed rules on
+top are Zephyr's own. Zephyr has said the same about the defects: &quot;both Zephyr exploits were
+inherited from &quot;audited&quot; Haven code portions&quot; (X, 2025-08-25).</p>
+<p><strong>2. Two consensus defects</strong> (code):</p>
+<ul>
+<li><strong>A. Range proofs were not checked</strong> from launch (2023-05-29) until hard fork 6 (2024-10-13).
+A range proof is what stops a transaction from creating coins. The omission is already in
+Haven's code a month before Zephyr copied it; Haven fixed the same function on 2024-12-11
+under the title &quot;fix range proof exploit&quot;. I confirmed it by running the code: the old check
+accepts a transaction with a deliberately broken proof, the new one rejects it.</li>
+<li><strong>B. Ring members could be of another asset</strong> from hard fork 3 (2023-10-01) until hard fork 7
+(2025-01-23). An output of the stable coin could be spent as the same number of ZEPH (&quot;asset
+morphing&quot;).</li>
+</ul>
+<p><strong>3. Both were used</strong> (chain). I scanned every transaction from genesis to block 902083:
+1,265,146 transactions, 128 million ring members, every range proof.</p>
+<ul>
+<li>Exactly <strong>three transactions with invalid range proofs</strong>, all on 2024-07-07 within six
+minutes (blocks 289260 and 289262). Zephyr reported the same: &quot;the three suspect
+transactions from 6 months ago&quot; (2025-01-06), which &quot;fail the updated range proofs code&quot;
+(2025-01-23).</li>
+<li><strong>Fourteen transactions</strong> in which a ZEPH input has a ring made only of stable-coin outputs,
+from 2023-10-29 to 2024-09-30. A stable-coin output was necessarily spent as ZEPH there.</li>
+<li><strong>Sixteen more transactions</strong> with one or two foreign ring members. The foreign member may be
+a decoy picked across assets, which harms nobody, or the output that was really spent, which
+is the abuse. In ten of them every ring of the transaction ends a few blocks after hard fork
+3, although the transaction is up to a month later; that shows an unusual way of picking ring
+members, not which of the two it was. I cannot tell for any of the sixteen.</li>
+<li>That is 30 transactions in all, the number Zephyr gave on 2025-01-23 for transactions &quot;with
+cross-asset ring members&quot;.</li>
+<li>Nothing after the fixes.</li>
+<li>I also re-ran, on every transaction, the node's checks on range proof, balance, conversion
+amount and ring signatures, checked that no output was spent twice, and checked the miner
+payout of every block. Nothing fails.</li>
+</ul>
+<p>Amounts are hidden, so the chain shows that it happened and when, not how much or by whom.</p>
+<p><strong>4. How the fixes were made</strong> (code, release notes, Discord). Defect A was closed in v2.0.0 by a
+new verification function. The release notes present that release as the yield feature and
+mention no security fix. Zephyr's own account (2025-01-13): the three transactions &quot;fail an
+updated range proofs check ... introduced in Zephyr v2.0.0 as we refactored that section of the
+code&quot;, and the earlier check &quot;was incorrect, an oversight on our part&quot;. So by its account the
+gap was closed as a by-product, and the three transactions were noticed only after Haven's
+exploit. The code is consistent with that. Defect B was closed by the v2.0.2 hotfix and explained
+two days later: reported by an anonymous developer, 30 transactions, and &quot;our best educated
+guess&quot; of about 200,000 ZEPH of inflation.</p>
+<p><strong>4a. What Zephyr said beforehand</strong> (Discord).</p>
+<ul>
+<li>2024-12-29: it had &quot;identified three transactions in Zephyr that align with suspicious
+activity&quot;, this &quot;does not mean Zephyr was successfully exploited&quot;, and it did not know whether
+&quot;the invalid range-proof issue that affected 50 Haven transactions is exactly the same in
+kind&quot;. It is the same: same omission, same function (points 1 to 3). The text also says the
+protocol &quot;was written by the Zephyr team&quot; and &quot;diverges significantly from Haven's
+implementation&quot;. That holds for the Djed rules, not for the verification code at issue.</li>
+<li>2025-01-06: exchanges were asked to stop deposits. It was &quot;NOT possible that millions of
+excess ZEPH has been sold off on exchanges&quot;; exchange balances were &quot;expected and reasonable,
+all totaling to well under our reported supply of 6.4M&quot;. In the worst case &quot;a necessarily
+limited amount&quot; had been sold, and amounts traced to the three transactions would be
+blacklisted. The released code has no blacklist.</li>
+<li>That 6.4 million is the number of coins generated by that date. No count of coins in wallets
+existed before the audit.</li>
+</ul>
+<p><strong>5. The audit</strong> (code, chain). From 2025-03-31 to 2025-06-15 normal transfers were off and
+every holder had to move each asset once with the amount in the open. Coins not moved became
+invalid. I summed all 15,040 audit transactions: 5,164,648 ZEPH, 1,023,509 ZRS, 88,315 ZSD and
+185,474 ZYS.</p>
+<p>This method counts the coins that were presented. It cannot tell which of them had been
+emitted, and with hidden amounts and histories no audit of this kind can.</p>
+<p>What the chain held right after the audit is these audited coins plus three other things:
+5,164,648 ZEPH audited, 2,289,862 in the reserve, 373,779 paid to miners while the audit ran,
+and 1,921,657 paid in block 536000 (the one-time mint and that block's reward). Together
+9,749,946 ZEPH, the first line of the table below.</p>
+<p><strong>6. The supply</strong> (code, chain).</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th></th>
+<th>ZEPH</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>On chain right after the audit (block 536000)</td>
+<td class="nw">9,749,946</td>
+</tr>
+<tr>
+<td>Emitted up to that block, without the mint</td>
+<td class="nw">7,682,370</td>
+</tr>
+<tr>
+<td><strong>More than was emitted</strong></td>
+<td><strong>2,067,576</strong></td>
+</tr>
+<tr>
+<td>of which a one-time mint in block 536000</td>
+<td class="nw">1,921,650</td>
+</tr>
+<tr>
+<td>of which excess in the audited supply itself</td>
+<td class="nw">145,926</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Zephyr's own numbers agree. On 2025-06-11 it estimated +2,056,803 ZEPH against the reported
+supply, and on 2025-06-15 it published 9,750,021 ZEPH at block 536010, the same total as mine
+by a different route (145,925.75 ZEPH above emission either way).</li>
+<li>The 2,067,576 is a floor. Genuine coins that were never audited make the visible excess
+smaller.</li>
+<li>Both parts rest on public data. The mint is a constant in the code and an output on the
+chain. The 145,926 depends on the reserve, which I rebuilt from block 0 from the public
+conversion amounts: it matches the node's counter to within 0.001 ZEPH at every point where
+the two can be compared, including the value the project set by hand in 2024.</li>
+</ul>
+<p><strong>6a. Which defect explains it</strong> (Zephyr's figures, and my inference). Morphing turns one unit
+of another asset into one ZEPH, so every morphed unit is missing from that asset at the audit.
+Rebuilt from the chain, 262,688 units of the other assets are missing after the audit (Zephyr's
+own estimate was 256,634). Defect B can therefore explain at most about that much, and Zephyr's
+own guess is about 200,000. At least 1.8 million of the excess is not explained by defect B.
+Defect A is the only other known cause, but the chain does not show what the three transactions created, so I do not
+attribute the rest to them. Zephyr's post-audit report (X, 2025-09-06) leaves it open as well: &quot;We
+were not able to determine if or how much net chain-wide inflation originated from this vector,
+but the possibility that this contributed could also not be ruled out.&quot;</p>
+<p><strong>7. The one-time mint</strong> (code, chain, Discord).</p>
+<ul>
+<li>Block 536000 pays 1,921,650 ZEPH to an address that the project fixed in the source code.</li>
+<li>Zephyr announced it with the amount on 2025-06-11: &quot;Due to MEXC being unable to audit their
+entire wallet balance, we are including a mint for their unauditable balance (1,921,650 ZEPH)
+in this Hardfork.&quot; Earlier it had written that MEXC &quot;has yet to audit all of their coins&quot;
+(2025-05-07) and that these &quot;are user funds&quot; (2025-05-09).</li>
+<li>Why it was not audited, per Zephyr: MEXC ran the audit command for days without it finishing,
+&quot;some limitation in their server environment&quot;, and &quot;strict OpSec restrictions&quot; ruled out the
+workarounds. Zephyr called the mint &quot;a last resort&quot;.</li>
+<li>How the amount was checked, per Zephyr (2025-06-17): &quot;I received their exchange wallet seed to
+confirm the balance. I have now done so and paid them to their new exchange wallet.&quot; The
+screenshot shows 1,921,649.73 ZEPH, unaudited. The amount was already in the release, six
+days before that check; Zephyr does not say how it was supplied.</li>
+<li>All of this rests on Zephyr's statements. Nothing on the chain names an exchange, and I cannot
+verify the wallet, the screenshot or the payout.</li>
+<li>The mint was booked as emission, as Zephyr announced: &quot;we are adjusting our emission schedule
+to reflect this&quot;, so that the 18.4 million limit remains (the whitepaper: &quot;Total Supply:
+18.4 Million (+ tail emission 0.6 ZEPH p/block)&quot;). Block rewards have been about 18 %
+lower since: miners, the reserve share and the yield share receive less, while the minted
+coins stay in the supply. The lower rewards last until the fixed tail reward of 0.6 ZEPH per
+block is reached, about ten years after the audit. By my projection they offset about 1.8
+million of the mint; about 124,000 of it stays above the original schedule for good.</li>
+</ul>
+<p><strong>8. Where the extra coins were</strong> I cannot say, and I do not want to guess. Either the unaudited
+exchange balance was mostly made of them and the audited coins were nearly all genuine, or that
+balance was genuine and about two million extra coins were among what others audited, or
+something in between. Both cases take Zephyr's word that the mint replaced an existing balance.
+An exchange holds what its customers deposit; nothing here establishes anything about the
+exchange's conduct.</p>
+<h2 id="haven-where-the-code-came-from-code">Haven, where the code came from (code)</h2>
+<ul>
+<li>Haven's repository has the same omission from 2023-04-25 and corrects it on 2024-12-11
+(&quot;fix range proof exploit&quot;), ten weeks after Zephyr's correction was written and eight after
+it took effect. That is the last change on the main branch of Haven's repository; nothing in it
+is newer than that day.</li>
+<li>Haven's code has a supply audit of its own, in force from 2024-11-19, in which holders move
+funds through an audit transaction and old funds become unspendable. Zephyr's audit has the
+same shape but its own code: 2 of the 591 lines it adds occur in Haven.</li>
+<li>I did not scan Haven's chain, and I leave out what I could not read at the source about Haven
+as a project or about other chains.</li>
+</ul>
+<h2 id="what-i-could-not-establish">What I could not establish</h2>
+<ul>
+<li>How many coins each defect produced, and who was behind the transactions.</li>
+<li>The intent behind the fix of defect A; I have Zephyr's account and the code, which agree.</li>
+<li>Anything about the MEXC balance beyond Zephyr's own statements.</li>
+<li>How many holders lost genuine coins by missing the audit.</li>
+<li>Whether anyone outside the project has reviewed the code of the node. Asked about a
+third-party review, Zephyr answered &quot;None are planned, but they aren't ruled out!&quot; (X,
+2025-08-25). The audit by Sherlock of 2026 concerns the bridge, and Zephyr's public
+repositories of the node and the wallets hold no audit report and no reference to one.</li>
+<li>That there was no third defect. I looked for these two and re-ran the checks named under point 3; a
+flaw in those checks themselves, like A and B, would not show up that way.</li>
+<li>What Zephyr said in places I did not read. The full report lists every source I used and
+what I left unread.</li>
+</ul>
+<h2 id="checking-my-work">Checking my work</h2>
+<p>Every finding can be repeated with a synced v2.3.0 node and the public repositories. My copy of
+the chain ends at block 902083 (2026-11-07); it is identical, by block hash at that block, to
+the chain of a node running the official v2.3.0 binary. The full report lists the transaction ids, the code lines with
+links, the programs and their results.</p>
+<p>I made this review with AI assistance (Claude Fable 5.2, Anthropic); the
+<a href="verify.html#how-this-was-made">README</a> says how. That is why every finding comes with the means
+to repeat it.</p>
+<h2 id="author-s-note">Author's note</h2>
+<p>The review above sticks to what can be shown and does not judge. This note is my opinion, and
+only that.</p>
+<p>I think the team handled a bad situation well. Two defects in inherited code had been live for
+well over a year. Both are closed. Once the scope became clear, the team asked exchanges to
+stop deposits and ran a migration that gave the chain a supply that can be counted. They published
+figures along the way, credited the developer who found the second defect, announced the
+mint before it happened and wrote their own postmortem. A small team did this in a little
+over five months. It could have ended far worse.</p>
+<p>It was not flawless. Ordinary transfers were off for about 76 days, some early statements were
+more certain than the evidence allowed, and a part of the excess is still unexplained. As far
+as I could find, nobody outside the project has reviewed the node's code, and I hope that
+follows.</p>
+<p>I should say where I stand. I bought a small amount of ZEPH in 2023, lost sight of the project
+and missed the audit, so those coins are gone. None of that changes how I see it.</p>
+<p>If I had to grade them, I would give them a B to B− overall.</p>
+
+</main>
+</div>
+<footer class="site">
+<p>Reports: <a href="https://github.com/loki-notfound/zephyr-supply-review/blob/main/LICENSE-REPORTS.md">CC BY 4.0</a>. Programs: <a href="https://github.com/loki-notfound/zephyr-supply-review/blob/main/LICENSE">BSD 3-Clause</a>.
+Corrections of fact are welcome: <a href="https://github.com/loki-notfound/zephyr-supply-review/issues">open an issue</a>.</p>
+</footer>
+</body>
+</html>

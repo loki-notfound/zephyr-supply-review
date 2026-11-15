@@ -1,0 +1,538 @@
+TRANSCRIPT OF POSTS BY @zephyr_org (read-only capture from x.com, session date 2026-11-14)
+Conventions: timestamps are the `datetime` attribute of the post's <time> element (UTC; the ".000" milliseconds are omitted).
+Inside Articles, "## " / "# " mark headings (H2 / H1 in the page's HTML), "- " marks bullet items and "1." marks numbered items; these markers are added by me to show structure, the words are verbatim. Interface text (reply/repost/like/view counters, "Want to publish your own Article? Upgrade to Plus") is not part of the article and is left out.
+
+This copy holds the posts that the reports cite, each with its context, in order of date: a post or
+thread in full, a reply together with the post it answers, the post-audit report in full, and of two
+long articles the cited part. The full transcript has 173 post entries (seven given posts and four
+searches of the account, listed in the full report, section 11); the others are left out here.
+Lines starting with "=== " or "--- " give time, address and kind of each post.
+
+=== 2025-01-06T10:09:58Z | https://x.com/zephyr_org/status/1876209588460249297 | post
+$ZEPH Exchange Deposits Disabled & Upcoming Chain Audit
+
+Background:
+6 months ago, there were three executed transactions on the Zephyr Chain that are of high suspicion. In our current version, it is no longer possible to submit transactions using the same method that allowed those suspicious transactions to be accepted. 
+
+Although our investigations are still ongoing and evolving, the evidence suggests that these transactions could have led to the unauthorized minting of additional ZEPH.
+
+In light of this, we are moving forward with a comprehensive chain audit to fully assess the scope of any potential impact and ensure the integrity of the Zephyr ecosystem.
+
+We’ve also made the decision to request all exchanges disable ZEPH deposits until our planned audit can be completed. As of this announcement, most (if not all) exchanges have confirmed that they have disabled both deposits (and/or withdrawals)
+
+This was not an easy decision, but we believe it will mitigate potential risks more than it will cause harm. We considered this option carefully for some time and maintained a “high alert” status before finally opting to initiate this call.
+
+THE GOOD NEWS:
+
+We have confirmed exchanges wallet balances are expected and reasonable and total to less that our reported circulating supply of 6.4M. 
+
+Taking these drastic actions therefore may seem unwarranted, and we are hopeful that this was a failed exploit attempt, but we cannot fully rule out the possibility of unauthorized ZEPH being minted due to these transactions. 
+
+Now that exchanges are offline, it's not possible for any further excess coins, if they exist, to fall into legitimate users hands.
+
+The audit will have to be comprehensive and impossible amounts will be blacklisted. Post-audit, any coins not audited will be null and void.
+
+THE BAD NEWS:
+
+It is possible that some amount of unauthorized ZEPH was created, sold off slowly over six months, and is now in legitimate users’ hands. With deposits disabled, this flow is stopped if there was any unauthorized ZEPH remaining - and the damage done thus far is now contained. In this worse case, we can expect some inflationary effects.
+
+.
+
+However, we know that we haven't seen multiple millions of ZEPH sold off on exchanges due to trading activity and exchange wallet balances. 
+
+We also would've seen major distortions in our DJED mechanics (e.g., unexpectedly high amount of ZEPH in the reserve), as the excess coins would've been used by legitimate users to mint ZSD, ZYS and ZRS.
+
+So, we have reasons to be optimistic. If there is damage, it won't be insurmountable - and we are working diligently to ensure this is the case.
+
+In saying that, we also are treating this with the seriousness it warrants.
+
+Our Upcoming Audit:
+
+We are working as quickly as possible behind the scenes to finalize the hard fork and audit process.
+
+More details will follow on how to participate, but if your coins are on an exchange, they will effectively handle this process for you. We are going to make this process and simple as possible for every user.
+
+.
+
+We understand these measures are far from ideal and apologize for any inconvenience. However, we believe they are necessary to protect the long-term integrity of our chain and your holdings.
+
+We also recognize that this entire situation is very unfortunate, and we are disappointed in the oversights that contributed to this situation. We apologize, and are doing all we can to rectify this to the best of our ability. We must redouble our efforts to be more diligent going forward. This includes a comprehensive review of our entire codebase, alongside the already planned audit, to ensure issues like this do not recur.
+
+Thank you for your patience and continued support as we work to resolve this in the best possible way. We will keep you updated on all further developments.
+
+— The Zephyr Team
+[image] [transcribed from image]
+Zephyr Protocol logo, then the text:
+SUPPLY INTEGRITY AUDIT
+Important updates regarding our upcoming chain security + supply integrity audit.
+
+=== 2025-06-11T08:35:49Z | https://x.com/zephyr_org/status/1932718400146448736 | post
+🚨 Zephyr Protocol v2.3.0 (HF v11) - Audit Completion 📢
+We've reached the conclusion of our auditing period - preparing to resume protocol activity as normal.
+
+🗓️ ETA for Hardfork v11: ~100 hours
+➡ Download (CLI): 
+http://
+github.com/ZephyrProtocol
+/zephyr/releases/tag/v2.3.0Desktop
+…
+
+- GUI/Web wallet updates will be available shortly.
+
+Hardfork v11,
+(Activated at block 536000, approx. June 15)
+
+> Restoring normal network functionality
+> Supply figures are switched to the new asset_types
+> Old (unaudited) asset types are no longer considered valid Zephyr Protocol Assets
+
+Due to MEXC being unable to audit their entire wallet balance, we are including a mint for their unauditable balance (1,921,650 ZEPH) in this Hardfork.
+
+Our est. new supply figures: 
+ZEPH: 9,706,880*
+ZSD:  368,690*
+ZRS:  1,019,810
+ZYS:  185,397 
+
+*plus mining and yield rewards between now and HF activation, or last minute audits
+
+Est. supply change from current reported:
+ZEPH: +2,056,803
+ZSD:  -106,320.68
+ZRS:  -146,210.32
+ZYS:  -4,103.28 
+
+➡️ Our Response
+To account for the unexpected additional ZEPH now in circulation, we’ve adjusted the emission schedule accordingly.
+
+Going forward, ZEPH emissions will effectively resume from the point they were projected to be at the end of Year 3 on our original emission curve.
+
+This ensures we still remain within the 18.4M maximum supply cap (before tail emission) as originally intended.
+
+We know this has been a long and at times frustrating journey for everyone involved. Your patience, feedback, and unwavering support throughout this process has been invaluable. This hardfork marks a major turning point for the Zephyr Protocol.
+
+This is in effect our relaunch; restoring clarity and setting the stage for a stronger, more focused future.
+
+Thank you for standing with us.
+We're just getting started 💪
+
+— The Zephyr Team
+[video] [transcribed from image] first frame: Zephyr Protocol logo, then: "AUDIT COMPLETION" / "Updates regarding the conclusion of our auditing period + est. supply figures" - UNSURE: the play button covers part of the word "COMPLETION"; only the first frame was read, the video was not played.
+
+=== 2025-06-11T10:52:16Z | https://x.com/Vagner904371843/status/1932752738015981741 | [post answered by the next reply; author @Vagner904371843, NOT @zephyr_org]
+How can the numbers be verified on-chain when all transactions are private?
+
+=== 2025-06-11T13:07:00Z | https://x.com/zephyr_org/status/1932786647004840331 | reply (to @Vagner904371843's post above)
+Only balances that went through the audit process have been verified and migrated, these are now part of the official on-chain state.
+
+Yes Zephyr uses private transactions, we can't see individual histories - but we can define a clear, verified supply moving forward.
+
+Any assets that didn't pass through the audit will be null and void.
+
+=== 2025-06-15T14:12:15Z | https://x.com/zephyr_org/status/1934252617347063976 | post (first post of a thread)
+📢 Zephyr Protocol - AUDIT COMPLETE ✅
+
+Hardfork v11 is live!
+The end of our audit period + the beginning of our effective RELAUNCH 🚀 $ZEPH
+
+After months of work, the numbers are in. The results move us 12 months ahead on the emission curve.
+
+Here’s what you need to know 🧵👇
+[video, 0:00] [transcribed from image] first frame: "AUDIT UPDATE" / "Explore the Findings & Learn About Next Steps for Our Community_"; Zephyr Protocol logo at the bottom left. UNSURE: only the first frame was read, the video was not played.
+
+=== 2025-06-15T14:12:15Z | https://x.com/zephyr_org/status/1934252619540664495 | thread (reply to previous post)
+1/ What changed?
+
+The audit revealed discrepancies between the reported vs actual circulating supply across all Zephyr assets.
+
+Most significantly, $ZEPH was underreported by +2.39M, bringing total circulating supply to 9.75M.
+[image] [transcribed from image]
+Title: AUDIT RESULTS
+Table, columns: Asset | Reported circ. supply | Audited circ. supply
+ZEPH | 7,360,588.16 | 9,750,021.39 | + 2,389,433.23
+ZSD | 473,976.71 | 419,218.23 | - 54,758.48
+ZRS | 1,166,020.32 | 1,028,603.22 | - 137,417.10
+ZYS | 189,500.28 | 185,474.35 | - 4,025.93
+(the figure after the audited value is the small difference line under it; + in red for ZEPH, - in green for the others; Zephyr logo at the bottom)
+
+=== 2025-06-15T14:12:16Z | https://x.com/zephyr_org/status/1934252622405374269 | thread (reply to previous post)
+2/ Percentage Changes by Asset
+
+$ZEPH: + 32.46%
+
+$ZSD: – 11.55%
+
+$ZRS: – 11.79%
+
+$ZYS: – 2.13%
+
+ZEPH supply experienced inflation from previously reported figures, now fully reconciled.
+[image] [transcribed from image]
+Title: AUDIT RESULTS
+Horizontal bar chart, legend: "Reported %" (purple bars) and "Total Audited %" (green bars); rows ZEPH, ZSD, ZRS, ZYS; x-axis: 0%, 50%, 100%, 150%, 200%; dashed vertical line at 100%.
+Labels at the right end of the bars: ZEPH "+ 32.46% circ. supply"; ZSD "- 11.55% circ. supply"; ZRS "- 11.79% circ. supply"; ZYS "- 2.13% circ. supply". (Zephyr logo at the bottom)
+
+=== 2025-06-15T14:12:17Z | https://x.com/zephyr_org/status/1934252625609818421 | thread (reply to previous post)
+3/ What this means for tokenomics
+
+Zephyr has now reached 53.04% of total $ZEPH emissions - about 12 months ahead of schedule.
+
+💪 Emission curve remains intact
+⏳ Tail emissions begin sooner
+🔒 Total supply cap and emission model remain unchanged
+[image] [transcribed from image]
+Title: AUDIT RESULTS
+Left panel "Unpacking the Data" with bullets: "Our recent audit revealed an additional ~2.39M ZEPH in circulation" / "This moves us ~12 months ahead on the emission curve" / "The total supply is unchanged, we've simply reached 53.04% of total emissions earlier than expected" / "Tail emissions will begin sooner, but the curve itself remains intact" / "Long-term tokenomics not impacted"
+Right panel: line chart titled "Cumulative Zephyr Emission over 20 Years"; y-axis "Cumulative Emission (% of Maximum Supply)"; x-axis "Year" (0 to 20); a legend with five entries (cumulative emission post-audit / pre-audit, data points, tail emission post-audit / pre-audit); annotations "Audit Reconciliation" (with about "+2.39M ZEPH"), "Tail Emission starts (Pre-Audit)", "Tail Emission starts (Post-Audit)".
+UNSURE: the chart's axis numbers, legend wording and data labels are too small to read reliably; only the title, axis titles and the left-panel bullets are certain.
+
+=== 2025-06-15T14:12:18Z | https://x.com/zephyr_org/status/1934252628910731412 | thread (reply to previous post)
+4/ Updated Supply Snapshot (Block 536010)
+
+$ZEPH: 9,750,021 ƶeph  
+$ZSD:  419,218 ƶsd  
+$ZRS:  1,028,603 ƶrs  
+$ZYS:  185,474 ƶys
+
+➡️ Use 'supply_info' in the CLI wallet to view live data.
+
+=== 2025-06-15T14:12:18Z | https://x.com/zephyr_org/status/1934252630886211675 | thread (reply to previous post)
+5/ Reserve Status
+
+Zephyr’s reserves remain highly over-collateralized:
+
+Reserve Ratio: 6.94
+
+Assets: $2.91M
+
+Liabilities: $419K
+
+Equity: $2.49M
+
+Stability mechanisms working exactly as designed 💪
+
+=== 2025-06-15T14:12:19Z | https://x.com/zephyr_org/status/1934252633042096581 | thread (reply to previous post)
+6/ What’s next?
+
+➡️ Main explorer is resyncing - use 
+https://
+zeph.network in the meantime
+
+➡️ Web + GUI wallets expected within 24h
+
+➡️ Website + Discord stats will update once explorer finishes syncing
+
+=== 2025-06-15T14:12:19Z | https://x.com/zephyr_org/status/1934252635458019602 | thread (reply to previous post)
+7/ ZEPHYR IS BACK
+
+✅ The audit is complete!
+📈 ZEPH supply inflation reconciled
+🔧 Protocol patched, refined, and stress-tested
+
+Thank you for staying with us during this challenging period. 
+
+The winds are changing, and we're just getting started.
+
+— The Zephyr Team
+
+=== 2025-07-28T16:31:19Z | https://x.com/zephyr_org/status/1949870293406666898 | article
+[image: article cover image] [transcribed from image] Zephyr Protocol logo with the text: ZEPHYR PROTOCOL
+TITLE: The Zephyr Protocol: A Foundational Overview_
+[... the rest of the article is left out here ...]
+## 3. Protocol History and Evolution_
+🛡️ 3.1. The Battle-Tested Narrative (2023-2024 Drawdown) 
+In late 2023 and early 2024, Zephyr experienced a classic crypto boom-and-bust cycle where its market valuation outpaced its adoption, leading to a market correction and a subsequent price drawdown of over 95% for the base asset, $ZEPH.
+Crucially, during this period of extreme stress, the $ZSD stablecoin maintained its peg to the US dollar without issue. This event served as an "inadvertent" protocol stress test and a powerful, real-world validation of the Djed model's resilience. While other protocols have collapsed under similar pressure, Zephyr's hard-coded collateralization rules worked as designed, automatically halting $ZSD minting and preventing a death spiral.
+
+———
+🛡️ 3.2. The Supply Integrity Audit (Late 2024 - Mid-2025)
+This period was a defining test of the protocol's security and the team's commitment to transparency.
+Initial Discovery (Dec 2024)
+3 suspicious transactions that resembled an exploit found on the Haven protocol were found, raising concerns about potential unauthorized minting.
+Second Exploit Identified (Jan 2025)
+An anonymous developer discovered and reported a separate bug that allowed for "asset morphing"—where one asset (like $ZSD) could be spent as another ($ZEPH) with modified wallet code. This exploit was confirmed to have caused inflation of the $ZEPH supply. The bug was immediately patched via a hotfix hardfork (v2.0.2).
+The On-Chain Audit (Mar - Jun 2025)
+To determine the precise impact of these exploits and restore confidence, the team initiated a mandatory, full-scale on-chain audit. All users and exchanges were required to move their funds through a special transaction type to have them recognized on the new, post-audit chain. The process was delayed by the need to grant an extension to the exchange MEXC, which had the largest user wallet and had issues completing the process on time.
+Audit Conclusion and Resolution (Jun 2025)
+The audit concluded with Hardfork v11 (v2.3.0). It confirmed a final circulating supply of ~$9.7M $ZEPH, an inflation of ~2.39M $ZEPH compared to the expected emission schedule. The supplies of $ZSD and $ZRS were correspondingly lower, confirming a portion had been morphed into $ZEPH. To counteract this, the team adjusted the emission curve forward, effectively placing the protocol at the end of its third year of emissions to ensure the 18.4M max supply cap remains intact. The saga ended with the protocol having a verifiably accurate supply and being described as supremely battle-tested; ready for an effective relaunch.
+[... the rest of the article is left out here ...]
+
+=== 2025-08-25T16:55:24Z | https://x.com/zephyr_org/status/1960023215444488459 | article
+[image: article cover image] [transcribed from image] Zephyr Protocol logo, microphone icon, people icon, then the text: "DISCORD AMA" / "-> ROUND 1"  (the arrow is drawn as an arrow glyph in the image)
+(The article has no H1/H2 headings; each Q&A is introduced by a quote block "@.<name> asked:" followed by the question in bold italics, then "➡️ Response_". In the page, "Discord community" and "official Discord" are links; their targets were not read.)
+TITLE: Zephyr Protocol: Community AMA - Round 1
+
+While things are busy behind the scenes, we recently opened the floor to our Discord community to ask the core development team their burning questions about Zephyr Protocol.
+The response in less than 5 days was huge - full of great questions and ideas. It's clear that the community is truly engaged and passionate. We love to see it!
+We've dedicated a permanent channel in Discord (#ama-questions) to continue answering future questions. So, if you haven't done so already, head on over to the official Discord and join in!
+
+Below are fennzar's (core dev) responses to this first round of AMA ⬇️
+[... the rest of the article is left out here ...]
+@.Retropixelpntgs asked:
+Would there be any 3rd party review / audit of the code?
+➡️ Response_
+None are planned, but they aren't ruled out! But what I would say is how did 3rd party audits help Salvium and Haven? Both exploited and they both were 3rd party audited and given the all clear. Frankly, we did place trust the Haven audits and that turned out to be a massive mistake for us; both Zephyr exploits were inherited from "audited" Haven code portions - No Zephyr specific implementations/code (Djed & ZYS etc) has ever been exploited, so what does that tell you? My feeling is that it's a bit of a smokescreen.
+[... the rest of the article is left out here ...]
+
+=== 2025-09-06T16:52:01Z | https://x.com/zephyr_org/status/1964371016303407282 | article
+[image: article cover image] [transcribed from image] Zephyr Protocol logo, then the text: POST-AUDIT REPORT
+TITLE: Zephyr's Chain Reconciliation: Post-Audit Report
+
+## Summary
+Between late 2024 and mid‑2025, Zephyr undertook an unprecedented chain‑wide audit in response to concerns raised after exploits uncovered on other Monero-based forks and our own subsequent investigations. Two distinct issues drove our actions:
+- Cross‑asset ring member bug ("morphing" bug): Prior to v2.0.2 (HF7), consensus did not strictly enforce that ring members match the spending output’s asset_type. With modified wallet code, this allowed some transactions to spend inputs of one asset as if they were another (e.g., ZSD or ZRS spent as ZEPH). Thirty transactions were identified with this characteristic, and analysis suggested a material—but bounded—amount of ZSD (and some ZRS) was morphed 1:1 into ZEPH.
+- Range‑proof anomalies: Three historical transactions failed under updated range‑proof checks. While we did not seem to experience the effects of a catastrophic chain‑wide inflation, these transactions prevented us from asserting perfect finality over historical supply without a chain‑level reconciliation.
+## Response:
+- We executed an emergency hotfix fork (v2.0.2 / HF7 at block 433,000, Jan 2025) enforcing asset‑type matching in rings, closing the morphing vector going forward.
+- We designed and executed an on‑chain Audit hardfork process (v2.1.0 / HF8 at block 481,500, Mar 31, 2025) that temporarily disabled normal transfers and enabled special audit transactions per asset (ZEPH, ZSD, ZRS, ZYS). Coins not audited would be invalidated in a subsequent fork.
+- Due to partner operational constraints, we extended the audit window (v2.2.0 / HF10 at block 511,000, May 9, 2025).
+- We completed the migration, restored normality, and moved supply accounting to the audited asset types (v2.3.0 / HF11 at block 536,000, June 11, 2025). Because one major exchange (MEXC) could not audit its entire custodial balance in time, HF11 included a one‑time mint of 1,921,650 ZEPH to reconcile their unauditable balance.
+## Outcome:
+- Final reported ZEPH supply increased versus the pre‑audit trajectory (roughly aligning with an effective shift to end‑of‑Year‑3 emission), while ZSD, ZRS, and ZYS supplies fell below pre‑audit expectations; consistent with ZSD/ZRS → ZEPH morphing.
+- Old (unaudited) asset types are now invalid; normal functionality is restored.
+- We retained DJED reserve integrity, exchange order book sanity, and ecosystem continuity.
+Bottom line: The audit was disruptive, but necessary. It closed a consensus hole, reconciled supply with evidence‑backed on‑chain attestations, and reset Zephyr on a robust, auditable footing.
+# Incident #1: Cross‑Asset Ring Member Bug ("Morphing")
+## What Happened
+Prior to HF7, ring signatures did not enforce that all ring members shared the same asset_type as the spent output. With custom wallet code, inputs from ZSD/ZRS could be presented in a ring for a ZEPH spend, enabling 1:1 morphing into ZEPH at validation time.
+## Scope & Data Points
+- 30 transactions exhibited cross‑asset ring members beginning soon after v1.0.0 (Sep 2023, when multi‑asset support launched).
+- Pattern analysis inferred ~95k ZSD morphed in 10 of those transactions and an upper bound in the low‑hundreds‑of‑thousands of ZSD/ZRS across the remainder.
+- Most morphing appeared to be ZSD → ZEPH, rational given pricing differentials.
+## User‑Visible Effects
+No immediate market chaos manifested. DJED reserve metrics, exchange order books, and balances remained within expected ranges, implying the morphing volume, while material, was absorbable by the market and/or dispersed over time.
+## Fix
+HF7 (v2.0.2) enforced strict asset‑type matching for ring members at consensus, preventing further morphing attempts.
+# Incident #2: Range‑Proof Anomalies (3 Tx)
+## What Happened
+Three historical transactions failed under updated range-proof verification. During the Zephyr Protocol v2.0.0 development cycle, which enabled the ZSD Yield Mechanism and introduced ZYS (Zephyr Yield Share), we overhauled our codebase and refactored our range-proofs implementation. When these new stricter checks were applied to our historical chain during the audit investigation, the three pre-existing transactions did not validate under the new rules.
+## Risk & Context
+We were not able to determine if or how much net chain-wide inflation originated from this vector, but the possibility that this contributed could also not be ruled out. In addition, their existence prevented a mathematically clean historical reconciliation leaving doubt and uncertainty.
+## Status
+This is distinct from the cross-asset ring-member “morphing” bug fixed at HF7 (v2.0.2). The audit forks (HF8/HF10/HF11) resolved historical ambiguity by migrating supply to audited asset types and invalidating unaudited coins.
+# Why a Chain Audit?
+A Chain audit was the only practical way to produce an explicit, on‑chain snapshot of legitimate supply and ownership.
+# Audit Steps:
+1. Freeze normal activity and enable deterministic audit transactions per asset.
+2. Require every holder (including reserves and exchanges) to re‑attest balances on‑chain.
+3. Invalidate all unaudited coins.
+4. Migrate accounting to new, audited asset types with determined supply figures
+# Timeline
+- Dec 29, 2024: Public disclosure of investigations; exchanges asked to disable deposits while we prepared the audit plan.
+- Jan 21, 2025: HF7 (v2.0.2) announced.
+- Jan 23, 2025: Post‑fork details: bug fixed; 30 cross‑asset ring transactions identified; preliminary morphing estimates shared; continued audit work.
+- Feb 19, 2025: Audit HF announced for Mar 31.
+- Mar 31, 2025: HF8 (v2.1.0) activated at block 481,500; normal transfers paused; audit tx types enabled.
+- Apr 1–May 7, 2025: Audit window opened; CLI + GUI/Web tooling rolled out; periodic progress reports shared.
+- May 9, 2025: HF10 (v2.2.0) audit extension at block 511,000 to accommodate a major exchange’s operational backlog.
+- May 12, 2025: Extension live; final push to completion.
+- Jun 11, 2025: HF11 (v2.3.0) activated at block 536,000; normal network restored; one‑time 1,921,650 ZEPH mint for MEXC unauditable balance; supply accounting switched to audited assets.
+- Jun 16, 2025: HF11 success update; explorers & wallets catching up; on‑chain supply figures published.
+# Impact Assessment
+## Economic
+- ZEPH supply: Final audited ZEPH exceeded the pre‑audit emission trajectory. We adjusted the emission schedule such that the network is effectively at the end of Year 3 for ZEPH emission while preserving the 18.4M max supply (pre‑tail).
+- ZSD/ZRS/ZYS: Supplies came in below pre‑audit expectations, consistent with some ZSD/ZRS having been morphed into ZEPH historically.
+- MEXC reconciliation: A one‑time mint (1,921,650 ZEPH) was included in HF11 to reconcile their custodial balance that could not be fully audited within the window.
+## Audited Supply Deltas
+(Vs. Pre‑Audit Reported)
+- ZEPH: +2,056,803
+- ZSD: −106,320.68
+- ZRS: −146,210.32
+- ZYS: −4,103.28
+## Operational
+- Exchanges were temporarily offline for deposits/withdrawals; partners coordinated audit transactions at scale.
+- Two additional forks (HF10/HF11) were required to accommodate operational realities and finalize the migration.
+# Security & Correctness
+- The morphing vector is permanently closed.
+- Historical ambiguity from the 3 range‑proof‑anomalous transactions is removed by migration to audited asset types and invalidation of unaudited coins.
+# What Went Well
+- Rapid remediation: HF7 closed the morphing vector quickly after discovery.
+- Transparent comms: Frequent public updates; clear instructions for nodes, pools, exchanges, and users (CLI + GUI/Web); Updates on audit progress and audited supply.
+- Deterministic audit design: Using our native-asset conversion framework to create audit transaction types enabled a clean, on-chain attestation process.
+- DJED resilience: Throughout the audit and beyond, DJED reserve integrity was maintained.
+# What Didn’t Go Well
+- Complexity & delay: The audit took longer than initial hopes due to scope expansion (morphing bug) and partner throughput.
+- UX friction: Large wallets (especially with many small inputs) hit splitting constraints; we had to iterate the tooling and provide workarounds.
+- Partner dependency: A single large custodian’s backlog required an extension and a bespoke reconciliation (mint), delaying completion and complicating optics.
+# Final State Snapshot
+At ~HF11 activation / shortly after (heights ~536,000–536,012), publicly shared figures included:
+Supply (wallet supply_info)
+- ZEPH ≈ 9,750,021.39
+- ZSD ≈ 419,218.23
+- ZRS ≈ 1,028,603.22
+- ZYS ≈ 185,474.35
+Reserves (wallet reserve_info)
+- DJED Reserve ZEPH ≈ 2,339,903.24
+- ZSD circ ≈ 419,219.25; ZRS circ ≈ 1,028,603.22
+- Reserve Ratio (spot/MA) ≈ 6.94 / 5.62
+Values evolve with block rewards and asset conversions; see website for live data.
+# Acknowledgments
+We thank the anonymous developer who responsibly disclosed and helped analyze the morphing vector, our exchange and pool partners for their coordination, and the Zephyr community for patience and support during this challenging period. We remain committed to Zephyr’s mission of privacy, decentralization, and financial sovereignty, and look forward to the future of Zephyr Protocol!
+
+=== 2026-04-13T16:47:20Z | https://x.com/zephyr_org/status/2043732782224957593 | reply to @black_bird_LLC's post 2042714170160709835 (which is itself a reply in a thread started by @zephyr_org post 2036154118486532532); contains a quote card
+[context 1: root post of the conversation, by @zephyr_org]
+--- 2026-03-23T18:52:26Z | https://x.com/zephyr_org/status/2036154118486532532 | post [context]
+❯❯ $80M minted from nothing_
+
+Another stablecoin just lost its peg.
+
+▦ ~80 million unbacked tokens minted through a vulnerability in the minting logic.
+
+▦ ~$25M ETH was drained via DEX dumps, which left users holding tokens worth fractions of a cent.
+
+Demand for stablecoins and their yield products is at all-time highs, with billions still flowing in. But infrastructure quality varies wildly, and the gaps are getting expensive.
+
+The Zephyr Stable Dollar (ZSD) implements Minimal Djed — a pegging framework formally verified by IOG, the research arm behind Cardano. 
+
+The math has been peer-reviewed, published, and deployed across multiple implementations with zero peg failures from the framework itself.
+
+🟣 400% min. collateral ratio to mint new stables.
+🟣 Circuit breakers at 800%, 400%, and 200% RR.
+🟣 Survived a 95% crash in the base asset ZEPH — zero ZSD depeg. 
+
+Zephyr Protocol has been stress-tested by the market, not just a whitepaper.
+
+➡️ Not all stablecoins are built the same.
+
+$ZSD $ZEPH
+[image] [transcribed from image] Zephyr Protocol logo; text: "$80M Minted From Nothing_" / "A single exploit. A full depeg." / "Not all stablecoins are built the same." (each of the last two lines is preceded by an arrow glyph); illustration of a shattering cube with a dollar sign.
+
+[context 2: the post that the result answers, by @black_bird_LLC (Blackbird Capital | İsmail)]
+--- 2026-04-10T21:19:44Z | https://x.com/black_bird_LLC/status/2042714170160709835 | reply to the post above [context; author is NOT @zephyr_org]
+Dear Zeph ecosystem developers,
+
+Some of what you are explaining is accurate, but some parts feel incomplete or only partially addressed.
+Is everything you say 100% correct? No.
+Is it completely wrong? Not either.
+
+I’m also a Zeph holder. That’s why I’m asking these questions not to criticize, but to help strengthen the trust around the ecosystem. I would appreciate it if you could not only answer these questions, but also support your answers with clear, verifiable, on-chain evidence wherever possible.
+
+First, I want to acknowledge the strong parts.
+The fact that ZSD requires 400%+ collateral to be minted is an important detail. This clearly separates it from purely algorithmic and unbacked systems like Terra/Luna. The Djed model is also academically developed, backed by research from the Cardano side, and mathematically sound in theory. The circuit breaker mechanism is another positive aspect, as it allows the system to protect itself under certain conditions.
+
+However, this is not the whole picture.
+
+The claim or impression that “there have been no issues” does not fully reflect reality. There have been discussions in the community about past incidents, particularly around an inflation bug and the detection of excess minted coins after an audit. These points suggest that the system is not flawless, and they deserve clear and transparent explanations.
+
+Also, stablecoin safety is not just about math.
+A stablecoin depends on multiple components working together: code quality, oracle design, liquidity depth, market behavior, and potential attack vectors. Without evaluating all of these together, calling a system “safe” is incomplete.
+
+Since ZSD is backed by ZEPH, any significant drop in ZEPH’s price naturally puts pressure on the system. While a 400% collateral ratio provides a theoretical buffer, ZEPH still has relatively low liquidity and a small market depth. This raises an important question: can the system realistically handle large inflows or sudden sell pressure?
+
+The statement that “it survived a 95% drop without depegging” is notable, but context matters. What was the total liquidity at that time? How many active users were in the system? Was the system truly stressed, or was it operating under relatively low volume conditions? In smaller ecosystems, such stress tests may not be fully representative.
+
+To summarize:
+
+The model appears strong on paper, and I acknowledge that. It is clearly not a Terra-style system and seems well-designed in theory. However, there are still important concerns: the market is small, liquidity is limited, there have been past technical issues discussed, and overall adoption remains low.
+
+What I expect is this:
+Not just explanations, but clear, on-chain data, dashboards, and transparent reporting that address these points directly. Because trust is not built by what is said, but by what is proven.
+
+I would like to see your responses, along with concrete evidence on these matters.
+
+[the result itself]
+--- 2026-04-13T16:47:20Z | https://x.com/zephyr_org/status/2043732782224957593 | reply (to the @black_bird_LLC post above); quote
+Appreciate this post @black_bird_LLC - seriously. 
+
+Some valid points raised; it's worth taking the time to address each of them.
+
+Regarding the suggestion that past issues weren't clearly addressed: We disclosed the morphing bug publicly in Dec 2024, posted updates throughout every stage of the 6-month remediation, and published a full postmortem documenting what went well and what didn't.
+
+Full Audit Postmortem:
+
+https://zephyrprotocol.com/blog/2025-08-27-Zephyr-Audit-Postmortem…
+
+https://x.com/zephyr_org/status/1964371016303407282…
+---
+
+The technical details:
+Two distinct issues: cross-asset ring member bug ("morphing") where ZSD/ZRS could be spent as ZEPH — 30 transactions identified, ~95k ZSD morphed in 10 of those.
+And 3 historical transactions that failed under updated range-proof checks, where potential inflation couldn't be confirmed or ruled out.
+
+The response:
+4 hardforks over 6 months. Emergency fix closing the vector (Jan 2025). Full chain pause with audit transactions for every asset (Mar 2025). Extension for exchange backlogs (May 2025). Final migration restoring normal operations (Jun 2025). Every holder and exchange re-attested balances. Unaudited coins were permanently invalidated.
+
+Post-audit supply deltas vs. pre-audit reported:
+ZEPH: +2,056,803 (includes one-time 1,921,650 mint for MEXC's unauditable custodial balance) 
+ZSD: −106,320 
+ZRS: −146,210 
+ZYS: −4,103
+
+Zephyr is a Monero-based privacy chain — individual balances and transaction amounts are not publicly visible. That's by design. Supply reconciliation was achieved through the audit process itself, where every holder attested balances via special audit transactions. The methodology and final figures are documented in the postmortem linked above.
+
+Was the process as smooth as we had hoped?
+No. It was disruptive, took longer than planned, large wallets hit UX friction, and one exchange couldn't complete in time. The postmortem documents all of this. There has never been an effort to deny past challenges.
+---
+
+The 95% drop and if the system was 'truly stressed':
+This misunderstands how Djed works. 
+The peg mechanism is not liquidity-dependent. It's not an AMM pool that can be drained. It's not a redemption queue that breaks under volume. 
+
+The reserve ratio is checked mathematically before every single mint and redeem operation. When it hits a threshold, the protocol halts that operation. It doesn't matter if there are 50 users or 50,000 — the circuit breaker triggers at the same ratio either way. 
+
+More liquidity doesn't make the breakers work better. They work identically at any scale. What changes with scale is the experience of hitting a breaker — more users means more people temporarily unable to redeem. 
+That's a real tradeoff, but the peg doesn't break, because the protocol will not execute a transaction that would push reserves below safety thresholds. 
+
+The math was in the Djed whitepaper. The 95% crash proved it in production. 
+We can only point to things that actually happened — and what happened is the peg held under the most severe conditions ZEPH has faced. 
+Dismissing that because the ecosystem was smaller is asking for a stress test while rejecting the results of one.
+---
+
+On "safety is not just math”:
+Agreed. However, Zephyr's design eliminates several of the usual trust assumptions. There is no admin key, no multisig, no governance committee, no freeze function. Any protocol change requires a hardfork with miner consensus. This is architectural, not a policy choice.
+
+The protocol also has a built-in defense against price manipulation through dual pricing. Every block carries both a spot price and a moving average. 
+When you mint ZSD or ZRS, you pay the higher of the two. When you redeem, you receive the lower. 
+
+This means pumping ZEPH on a thin order book to mint cheap ZSD doesn't work — you'd be minting at the inflated price, not profiting from it. 
+The same logic prevents dump-and-redeem attacks in reverse.
+---
+
+To be transparent about what isn't decentralized yet: 
+The V1 oracle that provides these price feeds is centralized — 3 oracle nodes operated by the team, with signed pricing records embedded in every block. It works, it's battle-tested, and the dual spot/MA mechanism prevents gaming. Granted, it's a centralized component and we don't pretend otherwise.
+
+A fully decentralized Oracle V2 is on the roadmap: 
+https://x.com/zephyr_org/status/1964638320987660597… 
+It becomes critical as the protocol scales, and the team has been upfront that it's a priority for long-term credibility, not an afterthought.
+---
+
+Liquidity/Market size:
+You’re right. Currently Zephyr sits at ~$5M market cap, with ~$400K ZSD circ. 
+This is a currently small ecosystem and we don't claim otherwise. 
+Growth is the challenge; peg mechanics are not. Those are separate problems and we treat them as such.
+---
+
+Some resources for further insights:
+
+▦ Network stats (live): 
+https://zephyrprotocol.com/network
+
+▦ Full protocol codebase: 
+https://github.com/ZephyrProtocol/
+
+▦ Bridge + dev repos: 
+https://github.com/fennzar
+
+▦ Audit postmortem: 
+https://zephyrprotocol.com/blog/2025-08-27-Zephyr-Audit-Postmortem… + 
+https://x.com/zephyr_org/status/1964371016303407282…
+
+▦ Audit tokenomics impact: 
+https://x.com/zephyr_org/status/1934252625609818421…
+
+▦ Oracle V2 + roadmap: 
+https://zephyrprotocol.com/blog/2025-08-28-Zephyr-Vision…
+
+▦ Djed formal verification: 
+https://iog.io/papers/djed-a-formally-verified-crypto-backed-pegged-algorithmic-stablecoin…
+(Note on links: on the page every long link is displayed split over several lines and shortened with a trailing "…"; the link texts above are the displayed texts joined into one line, with "…" kept where it is shown.)
+[quoted] 2025-06-15T14:12:17Z | https://x.com/zephyr_org/status/1934252625609818421 | quote card (post by @zephyr_org; the card shows only part of the post)
+3/ What this means for tokenomics
+
+Zephyr has now reached 53.04% of total $ZEPH emissions - about 12 months ahead of schedule.
+
+💪 Emission curve remains intact
+⏳ Tail emissions begin sooner
+🔒 Total supply cap and emission model remain unchanged
+[image in the card] [transcribed from image] Title: AUDIT RESULTS; left panel "Unpacking the Data" with the five bullets: "Our recent audit revealed an additional ~2.39M ZEPH in circulation" / "This moves us ~12 months ahead on the emission curve" / "The total supply is unchanged, we've simply reached 53.04% of total emissions earlier than expected" / "Tail emissions will begin sooner, but the curve itself remains intact" / "Long-term tokenomics not impacted"; right panel line chart "Cumulative Zephyr Emission over 20 Years". UNSURE: chart axis numbers, legend and data labels are too small to read (same image as in PART B, QUERY 2, post of 2025-06-15, [3/n]; see there).
+(The full text of this quoted post is recorded in PART B, QUERY 2, in the thread of 2025-06-15.)

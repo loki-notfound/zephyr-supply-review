@@ -1,0 +1,344 @@
+RELEASE NOTES of github.com/ZephyrProtocol/zephyr, from the GitHub API (repos/ZephyrProtocol/zephyr/releases), read 2026-11-14.
+Each entry: tag, time of publication (UTC, as the API gives it), then the body verbatim.
+
+##### v0.1.0 #####
+=== 2023-05-29T05:56:36Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v0.1.0
+NAME: Zephyr Protocol - Dawning Sun v0.1.0
+We are excited to announce the initial release of the Zephyr Protocol - Dawning Sun v0.1.0. This release lays the foundation for the privacy-centric, over-collateralized algorithmic stablecoin protocol!
+
+### Highlights of this release:
+
+- Mainnet launch!
+- Adapted for Zephyr from Monero v0.18.2.2
+
+#### Feedback
+Your feedback is invaluable to us. Please submit any bugs or issues you encounter through the GitHub issues page.
+
+#### Conclusion
+
+We look forward to growing Zephyr with our community and appreciate your support in this initial phase. We're committed to providing a private, secure, and stable digital currency. Stay tuned for future updates!
+
+##### v0.2.0 #####
+=== 2023-05-31T00:18:56Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v0.2.0
+NAME: Zephyr Protocol - Dawning Sun v0.2.0
+At block 2000 Zephyr will early hardfork to V2 to include the new LWMA difficulty algorithm. These changes improve the response to hashrate fluctuations on the network and make a 51% attack harder to realize.  
+
+### Highlights of this release:
+
+- LWMA difficulty algorithm
+- Improved network stability
+
+#### Feedback
+Your feedback is invaluable to us. Please submit any bugs or issues you encounter through the GitHub issues page.
+
+##### v0.2.2 #####
+=== 2023-06-14T06:31:17Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v0.2.2
+NAME: Zephyr Protocol - Dawning Sun v0.2.2
+### Highlights of this release:
+
+- Fix wallet default restore height
+- Fix cause of 'failed to get output distribution' error
+
+#### Feedback
+Your feedback is invaluable to us. Please submit any bugs or issues you encounter through the GitHub issues page.
+
+##### v0.9.0-testnet #####
+=== 2023-08-01T08:01:13Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v0.9.0-testnet
+NAME: Zephyr Protocol - Public Testnet v0.9.0
+We're excited to announce the release of Zephyr Protocol - Public Testnet v0.9.0. This pre-release version marks the start of our public testing phase, giving our community the opportunity to engage hands-on with our core functionalities. We're counting on your feedback and contributions to help us fine-tune our system before the mainnet launch.
+
+We are targeting the v1.0.0 branch for this build
+
+The key features available for testing include:
+
+- First look at the new wallet (with a remote node for improved UX)
+- Minting and redeeming stablecoins (Zeph -> ZephUSD and ZephUSD -> Zeph)
+- Minting and redeeming reserve coins (Zeph -> ZephRSV and ZephRSV -> Zeph)
+- Viewing protocol information such as reserve assets, liabilities, equity, and reserve ratios
+
+This release supports Windows and macOS platforms for our new GUI wallet. Please follow the instructions in our testnet launch announcement for wallet setup and usage if you have any issues.
+
+Bear in mind, as this is a testnet version, all transactions and operations are performed with test coins (not real Zeph) in a controlled environment.
+
+We're eagerly looking forward to your participation in this phase. Your feedback is invaluable to us, and we encourage you to report any bugs or issues you encounter. Depending on the severity of the issue, we offer rewards for critical bug reports.
+
+As we move towards our mainnet launch, the testnet will continue to evolve and improve. Your contributions during this time are crucial in shaping the final product.
+
+Thank you for your support and contribution to the Zephyr Protocol project. Together, we're building the future of private, untraceable, over-collateralized financial transactions.
+
+Note: This is a pre-release build intended for testing purposes only and should not be used for production or real-world transactions.
+The new wallet is NOT compatible with mainnet and is built specifically for testnet.
+
+##### v1.0.0 #####
+=== 2023-09-12T07:43:54Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v1.0.0
+NAME: Zephyr Protocol - Osiris v1.0.0
+# Zephyr Protocol - Osiris v1.0.0 Mainnet Release 🚀
+
+We are thrilled to announce the release of Zephyr Protocol - Osiris v1.0.0. This monumental update marks the full activation of Zephyr Protocol, transitioning us from a promising project to a fully-realized platform capable of delivering both privacy and stability in the crypto landscape.
+
+The hardfork to enable the network upgrade will be occuring at block 89300 which is approximately 9am 1st October (UTC).
+
+### Key Features 🌟
+- Full activation of Zephyr Protocol with Djed-inspired stablecoin functionalities and Monero's privacy features.
+- Native currency ZEPH, stablecoin ZephUSD, and reserve coin ZephRSV are fully operational.
+- Enhanced wallet experience with a more intuitive user interface.
+- Comprehensive protocol information dashboard, including reserve assets, liabilities, equity, and reserve ratios.
+
+### Platform Support  💻
+- This release supports Windows, macOS and Linux platforms for our the desktop GUI wallet. For setup and usage instructions, please refer to our mainnet launch announcement.
+
+### Community Participation 🤝
+Your feedback has been invaluable to us throughout our Testnet phase, and we continue to welcome your insights. We offer rewards for critical bug reports, so please don't hesitate to report any issues you encounter.
+
+As we celebrate this significant milestone, we want to extend our heartfelt thanks to our community for supporting the network and helping to shape Zephyr as it moves forward.
+
+### Restoring Existing Wallet:
+Existing wallet cache files are invalidated with this release.
+If you have previously created a wallet it is recommended to do one of the following:
+- Delete the cache file and load the wallet from the .keys file
+- Restore the wallet from seed phrase
+
+##### v1.0.2 #####
+=== 2023-10-23T23:32:14Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v1.0.2
+NAME: Zephyr Protocol - Osiris v1.0.2
+This release is a **required update** for mining pools.
+Resolves an issue where pools have been experiencing rejected blocks when the network is congested with conversion transactions.
+
+For exchanges and regular users, this update is **not mandatory** and v1.0.0 builds will work
+
+## CLI Bug Fixes
+- Fixed mined block rejection due to including conversion tx from the pool into the block that is unacceptable with latest pricing record.
+
+## GUI Wallet Update (not mandatory)
+- Updated naming conventions and logos for assets:
+    - ZephUSD -> ZSD (Zephyr Stable Dollar)
+    - ZephRSV -> ZRS (Zephyr Reserve Share)
+
+- Fixed issue when selecting "all" on price graph
+- Fixed displayed "Conversion Rate" in transaction preview for some conversion/swap transactions
+
+**Mac OSX GUI Users**
+With recent releases of OSX, Apple requires a signing process for app identification. What this means is that the GUI wallet when opened on Mac OSX will give a warning such as "'Zephyr' is damaged and can't be opened"
+Assuming you put the Zephyr app in your Applications directory (default), you can run the following command from 'terminal' to get it working:
+
+`sudo xattr -r -d com.apple.quarantine "/Applications/Zephyr.app"`
+
+This will be fixed in future releases once Zephyr Org has become approved through the apple developer process and we can sign the app with our developer account. Thank you OSX users for your patience during this time! The web wallet will be available very soon if you find running the fix above too difficult.
+
+Note, non m1/m2 OSX users or m1/m2 OSX users who run the x64 version of the GUI may see a similar warning that says "'Zephyr' cannot be opened because the developer cannot be verified". This can be fixed by going to System Settings -> Privacy & Security
+and scrolling down to the section with the button labelled "Open Anyway". This will also allow you to get the app running on OSX.
+
+##### v1.0.3 #####
+=== 2023-11-12T02:31:01Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v1.0.3
+NAME: Zephyr Protocol - Osiris v1.0.3
+This release is a **required update** for mining pools.
+
+## CLI Bug Fixes
+- Fixed block template cache not invalidating after being stored with transactions that do not meet reserve requirements.
+
+##### v1.0.4 #####
+=== 2023-11-12T09:13:00Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v1.0.4
+NAME: Zephyr Protocol - Osiris v1.0.4
+This release is a **required update** for mining pools.
+
+## Bug Fixes
+- Fixed filling block template with the most recently fetched pricing record rather than the last accepted pricing record which caused block rejection when attempting to add to chain.
+
+##### v1.1.0 #####
+=== 2024-06-19T23:38:53Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v1.1.0
+NAME: Zephyr Protocol - Osiris v1.1.0
+This release is a **required update** for everyone running their own node.
+
+If your daemon is stuck on block 274662 simply running the updated daemon will fix the sync issue. If your daemon is stuck after this point, you will also have to use the pop_blocks command to go back to block 274662 or earlier to continue syncing. Alternatively deleting your existing chain and resyncing from scratch will resolve.
+
+## Bug Fixes
+- Fix reserve reward removal after popped block with block weight greater than median weight and patch reserve supply at height 274662. This fixes the sync issues after reorgs.
+
+##### v1.2.0 #####
+=== 2024-06-27T05:37:30Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v1.2.0
+NAME: Zephyr Protocol - Artemis v1.2.0
+# Zephyr Protocol - Artemis v1.2.0 Release 🚀
+
+This release is a required update for **everyone** running their own node.
+
+This update supports the new hardfork updates with improved reserve ratio moving average calculations, and fee changes for the minting and redeeming of Zephyr Stable Dollars and Zephyr Reserve Shares. 
+
+### **Hardfork v4**
+(_Activated at block 294000_)
+
+Activates the new pricing record format to save the reserve ratio values in the pricing record.
+
+## **Hardfork v5**
+(_Activated at block 295000_)
+
+The reserve ratio moving average is now derived from an average of previous reserve ratio values over a 24 hour period.
+This method smooths out fluctuations when Zephyr Stable Dollars are minted or redeemed, and removes the possibility for a bad actor to manipulate the reserve ratio by minting/redeeming ZSD which would previously immediately affect both the spot and moving average reserve ratios.
+
+
+Fee Adjustments:
+
+Mint ZSD: 2% → 0.1%
+Redeem ZSD: 2% → 0.1%
+Mint ZRS: 0% → 1%
+Redeem ZRS: 2% → 1%
+
+##### v2.0.0 #####
+=== 2024-09-29T22:16:34Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.0.0
+NAME: Zephyr Protocol v2.0.0 - ZSD Yield
+# Zephyr Protocol v2.0.0 - ZSD Yield Release 🚀
+
+This release is a required update for **everyone** running their own node or local wallet (CLI and GUI).
+
+## **Hardfork v6**
+(_Activated at block 360000_)
+
+### ZSD Yield Mechanism
+The most significant addition in this update is the ZSD Yield Mechanism, designed to provide yield rewards to users who stake their ZSD. By staking ZSD, users receive Zephyr Yield Shares (ZYS)—a new native asset representing their value of the ZSD Yield Reserve.
+
+### Key Changes:
+
+- New Yield Reserve mechanism
+- 5% block reward will now be allocated to generate ZSD for the ZYS holders
+- New native asset Zephyr Yield Shares (ZYS) 
+- Removal of governance reward
+
+This update solidifies ZSD as a compelling store of stable value, rewarding those who contribute to its circulation and incentivising growth within the Zephyr ecosystem.
+
+### Key Block Reward Changes
+To support ZSD Yield, we’ve restructured the block reward allocation:
+
+- Miner reward: 75% ➡️ 65%
+- Reserve reward: 20% ➡️ 30%
+- ZSD Yield reward: 🆕 New 5% allocation
+- Governance reward: 5% ➡️ 0% (Removed)
+
+
+## New v2.0.1 Builds
+Fixed a minor wallet issue that could occur when redeeming ZYS
+
+##### v2.0.2 #####
+=== 2025-01-21T05:29:40Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.0.2
+NAME: Zephyr Protocol v2.0.2 - ZSD Yield (Hotfix)
+# Zephyr Protocol v2.0.2 Hotfix
+This release is a required update for **Mining Pools** 
+
+Exchanges: Please remain in an "offline" state with suspended deposits and withdrawals. If you wish to keep your node online, then it is important to update to this version.
+
+Regular Desktop Users (non web): We aren't planning on releasing other platform binaries for this release, as we are going to be updating again soon with our chain audit release. Web wallet will be updated.  
+
+## NOTE:
+This is NOT the chain audit hardfork. An issue was uncovered that necessitates this pre-emptive fork ahead of the audit update.
+
+## **Hardfork v7**
+(_Activated at block 433000_)
+
+### Key Changes:
+This is an important security update, and contains an important hotfix.
+Further details TBA post fork to v7 due to the nature of the hotfix.
+
+##### v2.1.0 #####
+=== 2025-03-31T00:40:26Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.1.0
+NAME: Zephyr Protocol v2.1.1 - Audit
+# Zephyr Protocol v2.1.1 - Audit
+This release is a required update for **everyone**
+
+Exchanges: Please remain in an "offline" state with suspended deposits and withdrawals.
+🆕 GUI wallets and web wallet are now available
+
+**Mandatory Resync**
+This update requires the blockchain to be completely resynced.
+Delete your existing database and then start zephyrd.
+
+Linux default location: .zephyr in home folder
+Windows default location: C:\ProgramData\zephyr\
+
+## **Hardfork v8**
+(_Activated at block 481500_)
+
+Audit hardfork. All regular transfers and conversion are disabled from this block.
+Only audit transaction types are available until Hardfork v9:
+
+Wallet-cli commands for audit transactions:
+
+_Audit all balance at once:_
+- `audit_all index=all <wallet_address>` //ZEPH
+- `audit_stable_all index=all <wallet_address>` //ZSD
+- `audit_reserve_all index=all <wallet_address>` //ZRS
+- `audit_yield_all index=all <wallet_address>` //ZYS
+
+or
+
+_Audit a specific amount:_
+- `audit <wallet_address> <amount>` //ZEPH
+- `audit_stable <wallet_address> <amount>` //ZSD
+- `audit_reserve <wallet_address> <amount>` //ZRS
+- `audit_yield <wallet_address> <amount>` //ZYS
+
+**ANY COINS THAT ARE NOT AUDITED BEFORE HARDFORK V9 (apx. May 7th) WILL BE INVALIDATED.**
+This is a mandatory process for every user.
+
+**Troubleshooting:**
+If you have issues submitting audit transactions, you should rescan your wallet. Command is `rescan_bc` in zephyr-wallet-cli.
+There are limitations on the size of transactions for non-zeph assets, in that case you may need to audit several smaller amounts of those assets.
+
+Auditing assets converts them to the new internal `asset_type(s)` 
+This is important for exchanges to handle, although sending/receiving the old asset types will no longer be possible.
+
+ZEPH -> ZPH
+ZEPHUSD -> ZSD
+ZEPHRSV -> ZRS
+ZYILED -> ZYS
+
+We are changing the internal `asset_type` for Zephyr to `ZPH` in order to differentiate the old unaudited Zephyr from the new audited version in the codebase. But the ticker for Zephyr should remain as "ZEPH". 
+
+Mining rewards in this hardfork are of the new Zephyr asset type "ZPH" and don't need to go through the audit process.
+Mining pool payouts to individuals are not possible until normal functionality is restored (planned v10 hardfork)
+
+## **Hardfork v9**
+(_Activated at block 508000_)
+
+All transactions on the network are paused while the results of the audit are analyzed. We can open a second auditing window after v9 if it is deemed necessary, but we don't foresee this.
+ 
+Hardfork v10 (TBA) is planned in order to restore normal functionality, and will be another required update for everyone.
+
+##### v2.2.0 #####
+=== 2025-05-09T04:24:59Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.2.0
+NAME: Zephyr Protocol v2.2.0 - Audit Extension
+# Zephyr Protocol v2.2.0 - Audit Extension
+Previously planned post-audit switch moved from v10 to v11
+
+## **Hardfork v10**
+(_Activated at block 511000_)
+
+Re-enabling the Audit state as in Hardfork v8. All regular transfers and conversion are disabled from this block.
+Only audit transaction types are available until Hardfork v11.
+
+Last opportunity to get your assets Audited! This extension has been granted to ensure that critical services and partners that support the Zephyr Ecosystem have been able to get all of their assets audited successfully. 
+
+Hardfork v11 (TBA) is planned in order to restore normal functionality, and will be another required update for everyone.
+Once we have confirmation on completed audits we will release a new build to hardfork ASAP.
+
+##### v2.3.0 #####
+=== 2025-06-11T03:27:43Z | https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.3.0
+NAME: Zephyr Protocol v2.3.0 - Audit Completion
+# Zephyr Protocol v2.3.0 - Audit Completion
+This release is a required update for **everyone**
+
+## **Hardfork v11**
+(_Activated at block 536000_)
+
+- Restoring normal network functionality
+- Supply figures are switched to the new asset_types
+- Old (unaudited) asset types are no longer considered valid Zephyr Protocol Assets:
+
+| Old Asset Type (unaudited) | New Asset Type |
+| --- | --- |
+| ZEPH | ZPH* |
+| ZEPHUSD | ZSD |
+| ZEPHRSV | ZRS |
+| ZYIELD | ZYS |
+
+*The new asset_type for Zephyr is now "ZPH" in the codebase. This was done in order to have consistency with our other new assets types and to differentiate it from the old type. However the ticker for Zephyr remains and will be referred to as ZEPH. This asset_type change is relevant to exchanges, services etc
+
+Due to MEXC being unable to audit their entire wallet balance, we are including a mint for their unauditable balance in this Hardfork.
+

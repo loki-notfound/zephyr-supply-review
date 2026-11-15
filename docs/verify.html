@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>zephyr-supply-review</title>
+<meta name="description" content="A review of the Zephyr Protocol supply after the 2025 chain audit: what the public code and the public chain show.">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="verify">
+<a class="skip" href="#content">Skip to the text</a>
+<header class="site">
+<a class="name" href="index.html">Zephyr supply review</a>
+<nav aria-label="Pages"><a href="index.html">Summary</a><a href="full.html">Full report</a><a href="verify.html" aria-current="page">Check it yourself</a><a href="https://github.com/loki-notfound/zephyr-supply-review">Repository</a></nav>
+</header>
+<div class="layout">
+<aside>
+<details class="toc"><summary>On this page</summary><ol><li><a href="#how-this-was-made">How this was made</a></li><li><a href="#in-one-paragraph">In one paragraph</a></li><li><a href="#what-is-here">What is here</a></li><li><a href="#checking-it-yourself">Checking it yourself</a></li><li><a href="#limits">Limits</a></li><li><a href="#licence">Licence</a></li></ol></details>
+<nav class="toc" aria-label="On this page"><p class="label">On this page</p><ol><li><a href="#how-this-was-made">How this was made</a></li><li><a href="#in-one-paragraph">In one paragraph</a></li><li><a href="#what-is-here">What is here</a></li><li><a href="#checking-it-yourself">Checking it yourself</a></li><li><a href="#limits">Limits</a></li><li><a href="#licence">Licence</a></li></ol></nav>
+</aside>
+<main id="content">
+<h1>zephyr-supply-review</h1>
+<p>Is the supply of Zephyr Protocol (ZEPH) right? A review of what the public code and the public
+chain show: how coins beyond the emission came to exist, what the chain audit of 2025 could and
+could not do about them, and whether the number the chain shows today can be relied on.</p>
+<p>Nobody asked me to look into it. I did because the question whether the supply is right, and
+whether anyone outside the project had checked it, kept coming back in the Zephyr community.
+The rule I held to: nothing is claimed that cannot be checked. Every finding names whether it rests on the code, on the chain,
+or on what the project itself wrote, and the tools to repeat each check are in this repository.</p>
+<p>I hold a small amount of ZEPH and have no other relationship with the project.</p>
+<ul>
+<li><a href="index.html"><code>REPORT.md</code></a>: the short report. Start here.</li>
+<li><a href="full.html"><code>REPORT-FULL.md</code></a>: the full report, with every commit, code line, transaction id,
+quotation and source.</li>
+</ul>
+<h2 id="how-this-was-made">How this was made</h2>
+<p>This review was made with AI assistance, on my own initiative and under my direction.</p>
+<ul>
+<li><strong>Analysis and writing.</strong> I used Claude Fable 5.2, an AI model made by Anthropic, to read the
+source code, to write and run the programs in <code>tools/</code>, to compare their results and to draft
+the reports.</li>
+<li><strong>Sources.</strong> The statements on Discord, on X and on the project's website were transcribed by
+a second AI model (Claude Sonnet 5.5, Anthropic) working in my own browser, on my instructions
+and with read-only use of my accounts. Nothing was posted or changed.</li>
+<li><strong>Review.</strong> Two other AI models (GPT-6 Astra by OpenAI and Gemini 4 Hydrogen by Google) each
+reviewed a draft independently, with the code and the results at hand. Their findings were
+checked one by one; those that held were corrected in the text or the tools.</li>
+</ul>
+<p>I take responsibility for what is published here. I checked the code, the programs, their
+results and the quotations myself, some in full and some by sampling, and I compared the key
+quotations with the originals. If something is wrong, the error is mine.</p>
+<p>The programs and their results are published so that no finding depends on trusting me or any
+model: each one can be repeated.</p>
+<h2 id="in-one-paragraph">In one paragraph</h2>
+<p>Zephyr's multi-asset code came from Haven Protocol and carried two consensus defects: range
+proofs were not verified until hard fork 6, and ring members were not required to match the asset
+type of the input until hard fork 7. Three transactions with invalid range proofs and thirty with
+ring members of another asset are on the chain. After the audit of 2025 the chain holds 2,067,576
+ZEPH more than was emitted, of which 1,921,650 is a one-time mint for an exchange balance that was
+not audited. Amounts are hidden, so the chain shows that this happened and when, not who did it
+or how much each transaction created. Both defects are closed in the current release. Up to
+block 902083 every transaction passes the node's checks on range proof, balance, conversion
+amount and ring signatures, no output was spent twice, and no block paid out more than reward
+and fees allow. The review establishes what happened and what the supply is; it does not judge
+who is to blame.</p>
+<h2 id="what-is-here">What is here</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tools/</code></td>
+<td>the programs: a read-only chain scanner, a re-validation of every transaction, a check of every key image and of every block's miner payout, a rebuild of emission and reserve from genesis, a direct test of the range-proof defect, a code comparison, and two scripts that query a node</td>
+</tr>
+<tr>
+<td><code>results/</code></td>
+<td>what those programs printed on a fully synced chain up to block 902083, one file per program</td>
+</tr>
+<tr>
+<td><code>sources/</code></td>
+<td>transcripts of the project's Discord channels, of its posts on X and of the web pages that the reports quote, and the release notes</td>
+</tr>
+<tr>
+<td><code>docs/</code>, <code>site/</code></td>
+<td>the reports as a small static site, and the script that renders it from the Markdown files</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="checking-it-yourself">Checking it yourself</h2>
+<p>You need a fully synced Zephyr node, version 2.3.0, and for the C++ tools a normal build of
+<code>ZephyrProtocol/zephyr</code> at tag <code>v2.3.0</code>.</p>
+<ol>
+<li>
+<p><strong>Same chain.</strong> The block hash at height 902083 must be
+<code>c2e6d09f5eeb37453fe34a1245fc6bb92a137441375256acf120da8ef1338eba</code>. A block hash commits to
+every earlier block and transaction, so if it matches, your node holds the chain these results
+were made on.</p>
+<pre><code>curl -s http://127.0.0.1:17767/json_rpc -H 'Content-Type: application/json' \
+  -d '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:&quot;0&quot;,&quot;method&quot;:&quot;get_block_header_by_height&quot;,&quot;params&quot;:{&quot;height&quot;:902083}}'
+</code></pre>
+</li>
+<li>
+<p><strong>Build the tools.</strong> They compile against the libraries of your Zephyr build and change
+nothing in it.</p>
+<pre><code>tools/build.sh /path/to/zephyr/build/dir bin
+</code></pre>
+</li>
+<li>
+<p><strong>Run them</strong> on the node's database directory (<code>~/.zephyr/lmdb</code> by default). All of them open
+it read-only; stop the daemon first or work on a copy.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it shows</th>
+<th>Result to expect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bin/gaptest LMDB 300000</code></td>
+<td>the old check accepts a transaction with a corrupted range proof, the new one rejects it</td>
+<td><code>results/gaptest.txt</code></td>
+</tr>
+<tr>
+<td><code>bin/chainscan LMDB 0 902084</code></td>
+<td>ring members of another asset, and range proofs that do not verify</td>
+<td>3 <code>BPP</code> lines and 49 <code>RING</code> lines, as in <code>results/scan-findings.tsv</code>; counters per range in <code>results/scan-stats.tsv</code></td>
+</tr>
+<tr>
+<td><code>bin/ringdetail LMDB &lt; txids</code></td>
+<td>every foreign ring member of the flagged transactions</td>
+<td><code>results/ringdetail.tsv</code></td>
+</tr>
+<tr>
+<td><code>bin/refs LMDB 289260 300000 ID1 ID2 ID3</code></td>
+<td>later rings that reference the outputs of the three transactions with invalid proofs (their ids are the <code>BPP</code> lines of the scan)</td>
+<td><code>results/refs-bpp.tsv</code></td>
+</tr>
+<tr>
+<td><code>bin/ledger LMDB 89300 274662 274663 360000 420760 433000 481500 481717 508000 511000 536000 536001 536010</code></td>
+<td>coins generated, the reserve and the asset totals, rebuilt from block 0</td>
+<td><code>results/ledger.tsv</code></td>
+</tr>
+<tr>
+<td><code>bin/revalidate LMDB 0 902084</code></td>
+<td>every transaction against the checks the code applies at its height</td>
+<td>no failure lines; counters as in <code>results/revalidate-stats.tsv</code> (made in ranges of 5,000 blocks)</td>
+</tr>
+<tr>
+<td><code>bin/keyimages LMDB</code></td>
+<td>every key image on the chain, and any that occurs twice</td>
+<td>one <code>STAT</code> line with <code>duplicates=0</code>, as in <code>results/keyimages.tsv</code></td>
+</tr>
+<tr>
+<td><code>bin/coinbase LMDB 0 902084</code></td>
+<td>the miner transaction of every block: amounts per asset against reward, shares and fees, and the reward against the emission formula</td>
+<td>one <code>STAT</code> line with <code>bad=0</code> and <code>over_formula=0</code>; totals per fork period in <code>results/coinbase.tsv</code></td>
+</tr>
+<tr>
+<td><code>bin/origin LMDB &lt; txids</code></td>
+<td>the transaction that created each ring member of the flagged inputs</td>
+<td><code>results/origin.tsv</code></td>
+</tr>
+<tr>
+<td><code>bin/origin LMDB ages &lt; txids</code></td>
+<td>the oldest and newest ring member of every input of the flagged transactions</td>
+<td><code>results/ring-ages.tsv</code></td>
+</tr>
+<tr>
+<td><code>bin/blockhash LMDB 289262 360000 433000 481500 536000</code></td>
+<td>block hashes of the database</td>
+<td><code>results/blockhash-local.tsv</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><code>txids</code> holds the ids of the thirty flagged transactions, one per line:
+<code>grep '^RING' results/scan-findings.tsv | cut -f4 | sort -u &gt; txids</code>.
+<code>chainscan</code> and <code>revalidate</code> take a block range, so they can be run in parallel over ranges of
+a few thousand blocks, as the results here were.</p>
+</li>
+<li>
+<p><strong>The code comparison</strong> needs clones of both repositories and no node:</p>
+<pre><code>python3 tools/heritage.py /path/to/zephyr 1f3b2f496 /path/to/haven-main 211ddae93
+</code></pre>
+<p>The last line reads <code>1042   2710  38.5 %  total, 85 files</code>; the full output is in
+<code>results/heritage.txt</code>.</p>
+</li>
+<li>
+<p><strong>Through RPC only</strong>, a restricted node is enough:</p>
+<pre><code>python3 tools/supply.py http://127.0.0.1:17767
+python3 tools/audit_sum.py workdir http://127.0.0.1:17767
+</code></pre>
+<p><code>supply.py</code> prints the reconciliation for the height your node is at; <code>results/supply.txt</code> is
+what it printed at height 907724. <code>audit_sum.py</code> reads the 15,040 audit transactions, writes
+them to <code>workdir/audit-transactions.tsv</code> and prints the sums per asset; both are in
+<code>results/</code>. It can be interrupted and resumed.</p>
+</li>
+</ol>
+<h2 id="limits">Limits</h2>
+<ul>
+<li>Transaction amounts are hidden. Nothing here says how many coins a given transaction created.</li>
+<li>The real spend inside a ring cannot be identified.</li>
+<li>Statements of the project are quoted from texts that were read in full and are marked as statements;
+they are not verified unless the report says so.</li>
+<li>The results end at block 902083 (2026-11-07).</li>
+</ul>
+<h2 id="licence">Licence</h2>
+<p>Programs: BSD 3-Clause (<a href="https://github.com/loki-notfound/zephyr-supply-review/blob/main/LICENSE"><code>LICENSE</code></a>). Reports: CC BY 4.0
+(<a href="https://github.com/loki-notfound/zephyr-supply-review/blob/main/LICENSE-REPORTS.md"><code>LICENSE-REPORTS.md</code></a>).</p>
+<p>Corrections of fact are welcome: open an issue.</p>
+
+</main>
+</div>
+<footer class="site">
+<p>Reports: <a href="https://github.com/loki-notfound/zephyr-supply-review/blob/main/LICENSE-REPORTS.md">CC BY 4.0</a>. Programs: <a href="https://github.com/loki-notfound/zephyr-supply-review/blob/main/LICENSE">BSD 3-Clause</a>.
+Corrections of fact are welcome: <a href="https://github.com/loki-notfound/zephyr-supply-review/issues">open an issue</a>.</p>
+</footer>
+</body>
+</html>

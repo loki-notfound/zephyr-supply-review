@@ -1,0 +1,99 @@
+TRANSCRIPT OF SHERLOCK REFERENCES (read-only capture, session date 2026-11-14)
+This copy holds the four items that the reports cite, in order of date. The full transcript also
+holds the other messages by the two project accounts that the searches returned, and counts
+of the messages by other members, which were not copied.
+
+=== 2026-07-08T17:40:15Z | zephyr_org (project account) | https://x.com/zephyr_org/status/2074911455317487749 | channel: X
+❯❯ EVM Bridge enters final development stages_
+
+We’re pleased to announce that we are partnering with @sherlockdefi for a full security audit, the last major milestone before mainnet!
+
+Sherlock is one of the top security firms in DeFi ⚡
+Their track record speaks volumes: Optimism, LayerZero integrations, IBC infrastructure, and many more high-profile cross-chain bridges.
+
+Audit scope includes:
+▦ Dual review: smart contracts + off-chain infrastructure
+▦ Manual expert analysis + automated fuzzing
+▦ Full re-review of all remediations
+
+The EVM bridge will unlock Zephyr’s assets and powerful yield engine for the entire Ethereum ecosystem.
+
+This is where adoption happens.
+Security is non-negotiable.
+
+➡️ Follow for updates as we move toward launch.
+$ZEPH $ZSD $ZYS
+
+=== 2026-07-14T00:27:04Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1526384501843034273 | channel: announcements
+❯ Audit + next steps
+We have selected Sherlock for the external audit
+
+The path from here is pretty clear:
+
+finish and land the current hardening pass → rerun the full release gate → code freeze → Sherlock audit → fix anything they find → make the launch decision from evidence.
+
+I wrote a much deeper technical update for anyone who wants to see what has changed under the hood:
+
+➡️ [https://gist.github.com/fennzar/c49e915f7ab57cc436a73e671242e7f2]
+
+Thank you for sticking with us, testing things, reporting issues and supporting the audit effort. This has become much larger and more serious than the original bridge prototype, but it is also in a far stronger place because we treated it that way.
+
+Very excited to have all of this work starting to converge 🙂
+
+Do it once, do it right ✅
+
+=== 2026-07-28T10:10:29Z | hydratedGoose (team role shown: Marketing Lead) | https://discord.com/channels/1112605073948819559/1439644649265303665/1531604756433469480 | channel: community-funding
+@here
+❯❯ Sherlock audit scope_
+This is to give everyone a full picture of the scope for the EVM bridge audit:
+
+Sherlock’s security review of the Zephyr EVM bridge is split across a senior 3-person team,
+
+[names of two auditors]: off-chain bridge repository, API, watchers and relayers
+[name of an auditor]: Solidity smart contracts
+The bridge engine is deliberately categorised as out-of-scope; not deemed necessary for review)
+
+Smart-contract coverage
+Access control and privileged operations
+Signature validation
+Burn and claim authorisation
+Any additional attack vectors identified during manual review
+
+Off-chain bridge coverage
+Replay attacks, message forgery and cross-chain state inconsistencies
+Reorg, finality, quorum and signature-validation failures
+Cross-domain ordering issues and race conditions
+Liquidity accounting, solvency and upgradeability risks
+DoS and liveness-degradation vectors
+API authentication, authorisation, rate-limit bypass and request tampering
+Watcher and relayer trust-boundary weaknesses
+Key management, secret handling and unsafe RPC dependencies
+Centralised-service integrity and single-point-of-failure risks
+Deployment, CI/CD and environment-configuration gaps
+
+Methodology
+Deep manual code review and invariant reasoning
+Cross-chain state-machine analysis
+Functional and API penetration testing with Burp Suite
+Static analysis and fuzzing with Slither, Foundry and Echidna
+Infrastructure-security tooling
+
+A re-review after fixes is included. If remediation requires major structural changes, any full re-audit would need to be scoped separately (although this is unlikely).
+
+Sherlock's public portfolio includes other bridge audits including: Morph L2, Thanos L2 native token bridge, DODO's cross-chain DEX, Allbridge Core, plus broader cross-chain work for LayerZero, Centrifuge, and Cosmos/Interchain Labs.
+
+=== 2026-08-10T01:56:49Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1536191562755608637 | channel: announcements
+@everyone
+
+SHERLOCK AUDIT UPDATE!! FIRST ROUND COMPLETE! 🔥
+Thank you to everyone who contributed to this ❤️
+
+I have access now into the report/issues raised. Get to trawl through everything but it looks thorough and certainly very like to prove its worth in spades; first impressions are great!
+
+100+ notes; many are low/info/general.
+5 of which are marked as high prio for context.
+
+Without knowing what is typical I have to say I'm overall pleased with my work here 🙂
+
+There is a lot for me to go over though 😅
+Back to the grind 🫡

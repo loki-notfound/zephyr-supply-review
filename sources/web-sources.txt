@@ -1,0 +1,315 @@
+TRANSCRIPT OF WEB PAGES (read-only capture, session date 2026-11-14)
+This copy holds the index of the project's blog and the pages that the reports cite. Two further
+pages of the full transcript, which the reports do not cite, are left out, as are the notes of
+the capture session.
+
+##### ITEM 1: Zephyr Protocol blog index #####
+=== DATE AS SHOWN ON PAGE, TIME ZONE NOT STATED (per post, see lines below) | https://zephyrprotocol.com/blog ===
+PAGE TITLE: Zephyr Protocol
+TIME SOURCE: DATE AS SHOWN ON PAGE (no <time> element, no article:published_time meta, no JSON-LD on the index)
+# Blog & News
+THE THINKING, IDEAS, AND TECHNOLOGY
+Posts as listed on the index (13 posts; no pagination or "load more" control found). One line per post: date as shown | title | full address.
+- 2025-09-25 | Zephyr Cross-Chain Bridge Proposal | https://zephyrprotocol.com/blog/2025-09-25-Zephyr-Cross-Chain-Bridge-Proposal
+- 2024-08-15 | Zephyr Protocol — Exploring the ZSD Yield Mechanism for Enhanced Adoption | https://zephyrprotocol.com/blog/2024-08-15-Zephyr-Protocol-Exploring-the-ZSD-Yield-Mechanism
+- 2024-05-22 | Zephyr Protocol - v1.2.0 Hardfork Announcement | https://zephyrprotocol.com/blog/2024-05-22-Zephyr-Protocol-v1-2-0-Hardfork-Announcement
+- 2023-06-20 | Stablecoin Solutions - A Comparative Analysis | https://zephyrprotocol.com/blog/2023-06-20-Stablecoin-Solutions-A-Comparative-Analysis
+- 2023-06-01 | Introducing Zephyr Protocol - The Untraceable Stablecoin | https://zephyrprotocol.com/blog/2023-06-01-Introducing-Zephyr-Protocol-The-Untraceable-Stablecoin
+- 2025-08-28 | Zephyr Protocol – Vision, Value Proposition & Growth Prospectus | https://zephyrprotocol.com/blog/2025-08-28-Zephyr-Vision
+- 2024-06-26 | Zephyr Protocol - Artemis v1.2.0 Release | https://zephyrprotocol.com/blog/2024-05-22-Zephyr-Protocol-Artemis-v1-2-0-Release
+- 2023-07-19 | Zephyr Protocol — Tokenomics Information | https://zephyrprotocol.com/blog/2023-07-19-Zephyr-Protocol-Tokenomics-Information
+- 2023-06-19 | Zephyr Protocol and Djed - An Analysis | https://zephyrprotocol.com/blog/2023-06-19-Zephyr-Protocol-and-Djed-An-Analysis
+- 2025-08-27 | Zephyr Audit – Postmortem | https://zephyrprotocol.com/blog/2025-08-27-Zephyr-Audit-Postmortem
+- 2024-09-30 | Zephyr Protocol v2.0.0 - ZSD Yield Annoucement | https://zephyrprotocol.com/blog/2024-09-30-Zephyr-Protocol-v2-0-0-ZSD-Yield-Hardfork-Annoucement
+- 2024-05-30 | Zephyr Protocol - ZSD Adoption - Chicken and Egg | https://zephyrprotocol.com/blog/2024-05-30-Zephyr-Protocol-ZSD-Adoption-Chicken-and-Egg
+- 2023-06-15 | Zephyr Protocol FAQ | https://zephyrprotocol.com/blog/2023-06-15-Zephyr-Protocol-FAQs
+
+##### ITEM 2: Zephyr Audit – Postmortem #####
+=== 2025-08-27 (DATE AS SHOWN ON PAGE, TIME ZONE NOT STATED) | https://zephyrprotocol.com/blog/2025-08-27-Zephyr-Audit-Postmortem ===
+PAGE TITLE: Zephyr Protocol
+TIME SOURCE: DATE AS SHOWN ON PAGE (no <time> element, no article:published_time/modified_time meta, no JSON-LD found in the page)
+# Zephyr Audit – Postmortem
+## Summary
+Between late 2024 and mid‑2025, Zephyr undertook an unprecedented chain‑wide audit in response to concerns raised after exploits uncovered on other Monero-based forks and our own subsequent investigations. Two distinct issues drove our actions:
+- Cross‑asset ring member bug ("morphing" bug): Prior to v2.0.2 (HF7), consensus did not strictly enforce that ring members match the spending output’s asset_type. With modified wallet code, this allowed some transactions to spend inputs of one asset as if they were another (e.g., ZSD or ZRS spent as ZEPH). Thirty transactions were identified with this characteristic, and analysis suggested a material—but bounded—amount of ZSD (and some ZRS) was morphed 1:1 into ZEPH.
+- Range‑proof anomalies: Three historical transactions failed under updated range‑proof checks. While we did not seem to experience the effects of a catastrophic chain‑wide inflation, these transactions prevented us from asserting perfect finality over historical supply without a chain‑level reconciliation.
+### Response:
+- We executed an emergency hotfix fork (v2.0.2 / HF7 at block 433,000, Jan 2025) enforcing asset‑type matching in rings, closing the morphing vector going forward.
+- We designed and executed an on‑chain Audit hardfork process (v2.1.0 / HF8 at block 481,500, Mar 31, 2025) that temporarily disabled normal transfers and enabled special audit transactions per asset (ZEPH, ZSD, ZRS, ZYS). Coins not audited would be invalidated in a subsequent fork.
+- Due to partner operational constraints, we extended the audit window (v2.2.0 / HF10 at block 511,000, May 9, 2025).
+- We completed the migration, restored normality, and moved supply accounting to the audited asset types (v2.3.0 / HF11 at block 536,000, June 11, 2025). Because one major exchange (MEXC) could not audit its entire custodial balance in time, HF11 included a one‑time mint of 1,921,650 ZEPH to reconcile their unauditable balance.
+### Outcome:
+- Final reported ZEPH supply increased versus the pre‑audit trajectory (roughly aligning with an effective shift to end‑of‑Year‑3 emission), while ZSD, ZRS, and ZYS supplies fell below pre‑audit expectations; consistent with ZSD/ZRS → ZEPH morphing.
+- Old (unaudited) asset types are now invalid; normal functionality is restored.
+- We retained DJED reserve integrity, exchange order book sanity, and ecosystem continuity.
+Bottom line: The audit was disruptive, but necessary. It closed a consensus hole, reconciled supply with evidence‑backed on‑chain attestations, and reset Zephyr on a robust, auditable footing.
+## Incident #1: Cross‑Asset Ring Member Bug ("Morphing")
+### What Happened
+Prior to HF7, ring signatures did not enforce that all ring members shared the same asset_type as the spent output. With custom wallet code, inputs from ZSD/ZRS could be presented in a ring for a ZEPH spend, enabling 1:1 morphing into ZEPH at validation time.
+### Scope & Data Points
+- 30 transactions exhibited cross‑asset ring members beginning soon after v1.0.0 (Sep 2023, when multi‑asset support launched).
+- Pattern analysis inferred ~95k ZSD morphed in 10 of those transactions and an upper bound in the low‑hundreds‑of‑thousands of ZSD/ZRS across the remainder.
+- Most morphing appeared to be ZSD → ZEPH, rational given pricing differentials.
+### User‑Visible Effects
+No immediate market chaos manifested. DJED reserve metrics, exchange order books, and balances remained within expected ranges, implying the morphing volume, while material, was absorbable by the market and/or dispersed over time.
+### Fix
+HF7 (v2.0.2) enforced strict asset‑type matching for ring members at consensus, preventing further morphing attempts.
+## Incident #2: Range‑Proof Anomalies (3 Tx)
+### What Happened
+Three historical transactions failed under updated range-proof verification. During the Zephyr Protocol v2.0.0 development cycle, which enabled the ZSD Yield Mechanism and introduced ZYS (Zephyr Yield Share), we overhauled our codebase and refactored our range-proofs implementation. When these new stricter checks were applied to our historical chain during the audit investigation, the three pre-existing transactions did not validate under the new rules.
+### Risk & Context
+We were not able to determine if or how much net chain-wide inflation originated from this vector, but the possibility that this contributed could also not be ruled out. In addition, their existence prevented a mathematically clean historical reconciliation leaving doubt and uncertainty.
+### Status
+This is distinct from the cross-asset ring-member “morphing” bug fixed at HF7 (v2.0.2). The audit forks (HF8/HF10/HF11) resolved historical ambiguity by migrating supply to audited asset types and invalidating unaudited coins.
+## Why A Chain Audit?
+A Chain audit was the only practical way to produce an explicit, on‑chain snapshot of legitimate supply and ownership.
+### Audit Steps:
+1. Freeze normal activity and enable deterministic audit transactions per asset.
+1. Require every holder (including reserves and exchanges) to re‑attest balances on‑chain.
+1. Invalidate all unaudited coins.
+1. Migrate accounting to new, audited asset types with determined supply figures
+## Timeline
+- Dec 29, 2024: Public disclosure of investigations; exchanges asked to disable deposits while we prepared the audit plan.
+- Jan 21, 2025: HF7 (v2.0.2) announced.
+- Jan 23, 2025: Post‑fork details: bug fixed; 30 cross‑asset ring transactions identified; preliminary morphing estimates shared; continued audit work.
+- Feb 19, 2025: Audit HF announced for Mar 31.
+- Mar 31, 2025: HF8 (v2.1.0) activated at block 481,500; normal transfers paused; audit tx types enabled.
+- Apr 1–May 7, 2025: Audit window opened; CLI + GUI/Web tooling rolled out; periodic progress reports shared.
+- May 9, 2025: HF10 (v2.2.0) audit extension at block 511,000 to accommodate a major exchange’s operational backlog.
+- May 12, 2025: Extension live; final push to completion.
+- Jun 11, 2025: HF11 (v2.3.0) activated at block 536,000; normal network restored; one‑time 1,921,650 ZEPH mint for MEXC unauditable balance; supply accounting switched to audited assets.
+- Jun 16, 2025: HF11 success update; explorers & wallets catching up; on‑chain supply figures published.
+## Impact Assessment
+### Economic
+- ZEPH supply: Final audited ZEPH exceeded the pre‑audit emission trajectory. We adjusted the emission schedule such that the network is effectively at the end of Year 3 for ZEPH emission while preserving the 18.4M max supply (pre‑tail).
+- ZSD/ZRS/ZYS: Supplies came in below pre‑audit expectations, consistent with some ZSD/ZRS having been morphed into ZEPH historically.
+- MEXC reconciliation: A one‑time mint (1,921,650 ZEPH) was included in HF11 to reconcile their custodial balance that could not be fully audited within the window.
+### Audited Supply Deltas (Vs. Pre‑Audit Reported):
+- ZEPH: +2,056,803
+- ZSD: −106,320.68
+- ZRS: −146,210.32
+- ZYS: −4,103.28
+### Operational
+- Exchanges were temporarily offline for deposits/withdrawals; partners coordinated audit transactions at scale.
+- Two additional forks (HF10/HF11) were required to accommodate operational realities and finalize the migration.
+## Security & Correctness
+- The morphing vector is permanently closed.
+- Historical ambiguity from the 3 range‑proof‑anomalous transactions is removed by migration to audited asset types and invalidation of unaudited coins.
+## What Went Well
+- Rapid remediation: HF7 closed the morphing vector quickly after discovery.
+- Transparent comms: Frequent public updates; clear instructions for nodes, pools, exchanges, and users (CLI + GUI/Web); Updates on audit progress and audited supply.
+- Deterministic audit design: Using our native-asset conversion framework to create audit transaction types enabled a clean, on-chain attestation process.
+- DJED resilience: Throughout the audit and beyond, DJED reserve integrity was maintained.
+## What Didn’t Go Well
+- Complexity & delay: The audit took longer than initial hopes due to scope expansion (morphing bug) and partner throughput.
+- UX friction: Large wallets (especially with many small inputs) hit splitting constraints; we had to iterate the tooling and provide workarounds.
+- Partner dependency: A single large custodian’s backlog required an extension and a bespoke reconciliation (mint), delaying completion and complicating optics.
+## Final State Snapshot
+At ~HF11 activation / shortly after (heights ~536,000–536,012), publicly shared figures included:
+- Supply (wallet supply_info)
+  - ZEPH ≈ 9,750,021.39
+  - ZSD ≈ 419,218.23
+  - ZRS ≈ 1,028,603.22
+  - ZYS ≈ 185,474.35
+- Reserves (wallet reserve_info)
+  - DJED Reserve ZEPH ≈ 2,339,903.24
+  - ZSD circ ≈ 419,219.25; ZRS circ ≈ 1,028,603.22
+  - Reserve Ratio (spot/MA) ≈ 6.94 / 5.62
+Values evolve with block rewards and asset conversions; see website for live data.
+## Acknowledgments
+We thank the anonymous developer who responsibly disclosed and helped analyze the morphing vector, our exchange and pool partners for their coordination, and the Zephyr community for patience and support during this challenging period. We remain committed to Zephyr’s mission of privacy, decentralization, and financial sovereignty, and look forward to the future of Zephyr Protocol!
+
+##### ITEM 4: Zephyr Protocol V2.0.0 - ZSD Yield Annoucement (matched: hardfork, in the address and in the section "The Hardfork") #####
+=== 2024-09-30 (DATE AS SHOWN ON PAGE, TIME ZONE NOT STATED) | https://zephyrprotocol.com/blog/2024-09-30-Zephyr-Protocol-v2-0-0-ZSD-Yield-Hardfork-Annoucement ===
+PAGE TITLE: Zephyr Protocol
+TIME SOURCE: DATE AS SHOWN ON PAGE (no <time> element, no article:published_time/modified_time meta, no JSON-LD found in the page)
+# Zephyr Protocol V2.0.0: Introducing ZSD Yield To Drive Adoption
+As the world of decentralized finance (DeFi) continues to evolve, the need for stable, secure, and innovative financial solutions grows more critical. The Zephyr Protocol, with its Zephyr Stable Dollar (ZSD), has positioned itself as a robust player in the market, but the next chapter in its journey is all about driving adoption and ensuring long-term success. That’s why we are thrilled to announce the upcoming release of Zephyr Protocol v2.0.0, featuring the groundbreaking ZSD Yield Mechanism.
+
+This update is more than just a technical improvement—it’s a strategic move designed to break the "chicken and egg" dilemma faced by all stablecoins. In this article, we’ll dive into what v2.0.0 brings to the table, how the new ZSD Yield Mechanism works, and why these changes are crucial for adoption, utility, and growth in the Zephyr ecosystem.
+## The Hardfork: Block 360,000 (ETA ~2 Weeks)
+The v2.0.0 update will launch with a hardfork at Block 360,000, which is expected to occur in approximately two weeks. This is a critical milestone, so users, miners, and exchanges need to prepare accordingly. This is a required update and includes vital changes that will enable Zephyr Protocol to reach the next level of adoption.
+## What’s Coming In Zephyr Protocol V2.0.0?
+The primary focus of v2.0.0 is the introduction of the ZSD Yield Mechanism—an exciting new feature that allows users to stake their ZSD and receive yield rewards in return. This mechanism provides tangible financial incentives for holding ZSD, making it more competitive in a market dominated by stablecoins offering APY returns.
+### Block Reward Allocation Changes:
+To support the ZSD Yield Mechanism, we’ve restructured the block reward allocation as follows:
+- Miner reward: 75% ➡️ 65%
+- Reserve reward: 20% ➡️ 30%
+- ZSD Yield reward: NA% ➡️ 5% (New)
+- Governance reward: 5% ➡️ 0% (Removed)
+
+This allocation is designed to balance the needs of miners, reserve providers, and ZSD holders, while reinforcing the protocol’s long-term stability and growth.
+
+More on the removal of the governance reward and project funding later!
+## ZSD Yield Mechanism: How It Works
+This system operates similarly to the existing Zephyr Reserve Share (ZRS) model, which has already proven to be successful within the protocol.
+
+At the heart of the Zephyr Protocol v2.0.0 update is the new ZSD Yield Mechanism—a system designed to offer rewards to ZSD holders who stake their stablecoins (in return recieve Zephyr Yield Shares - ZYS), driving increased circulation and wider adoption.
+### Key Features Of The ZSD Yield Mechanism:
+- 5% block reward allocation: This portion of the block reward is converted into ZSD based on the current ZEPH price, adding it to the Yield Reserve.
+- Zephyr Yield Shares (ZYS): ZYS tracks the value of your stake in the Yield Reserve and can be redeemed for ZSD at any time.
+- No lock-up periods: Users can enter or exit the yield program at will, making it flexible and user-friendly.
+
+Let’s break down how this innovative mechanism works:
+
+1. Block Reward Allocation
+
+5% of the total block reward is now allocated to ZSD Yield. This block reward allocation is key to creating the financial incentive for ZYS holders.
+
+2. Minting ZSD and Adding to Yield Reserve
+
+The ZEPH generated from the 5% ZSD Yield block reward is used to mint new ZSD. This newly minted ZSD is then deposited into the Yield Reserve. At the same time, the ZEPH from the block reward is added to the Reserve, which backs the stablecoins minted through the yield process.
+
+In simpler terms:
+- ZEPH block reward ➡️ Used to Auto-Mint ZSD ➡️ ZSD goes into the Yield Reserve
+- ZEPH itself is added to the Reserve for backing of these new stablecoins.
+
+3. Zephyr Yield Share (ZYS)
+
+When you stake your ZSD, you receive Zephyr Yield Shares (ZYS)—a new native asset that represents your share in the ZSD Yield Reserve. ZYS works similarly to Zephyr Reserve Shares (ZRS), but its value is based in ZSD rather than ZEPH.
+
+Because ZYS is priced in ZSD, the value of ZYS can only appreicate over time. Contray to ZRS, as this acts as a leveraged postion in the Djed-based stablecoin protocol. ZRS is priced in ZEPH meaning the dollar value of this can change, and ZRS's value in ZEPH can depreicate if the underlying price of ZEPH falls significantly over and above the effects of the Reserve reward and conversion fees.
+
+ZYS can be redeemed for ZSD at any time, with no lock-up periods or restrictions. This ensures that users maintain full control over their funds while benefiting from the yield rewards generated through the block reward allocation.
+
+This also means that there are no direct-to-wallet payouts, value is captured in the appreication of ZYS alone. This has an auto-reinvestment effect for ZYS holders but for those looking to take profits can do so by simply redeeming the equivant portion of their ZYS.
+
+ZYS in priced simply as:
+
+Total ZSD in Yield Reserve / Total ZYS in Circulation
+
+With a starting price of 1.00 ZSD.
+
+Example: Starting at 100,000 ZSD staked for ZYS on day one, there would be 100,000 ZYS minted in return. Over a period of time, 10,000 ZSD will be added to the Yield reserve due to the ZSD Yield Reward; which would result in:
+- ZYS Price = Total ZSD in Yield Reserve / Total ZYS in Circulation
+- ZYS Price = 110,000 ZSD / 100,000 ZYS = 1.10 ZSD
+
+What Determines ZYS Price and thus ZSD Yield Returns
+
+The price of Zephyr Yield Shares (ZYS) is primarily determined by the level of competition for the yield rewards. As more ZYS enters circulation, the rewards are distributed among a larger pool of stakers, which affects ZYS's price appreication and thus returns.
+
+The raw amount of ZSD that gets minted into the Yield Reserve is directly tied to the value of the 5% ZEPH yield reward from the block reward. Essentially, the higher the value of the allocated ZEPH, the more ZSD will be minted from this.
+
+The market will naturally dictate the returns for ZYS based on demand and competition. Crucially, the total competition for ZYS is capped by the amount of ZSD in circulation, which is governed by Zephyr's Djed-based stablecoin protcol level restrictions. No new ZSD—and by extension, no new ZYS—can be minted if the Reserve Ratio falls below 400%.
+
+Historical returns from ZYS appreciation will be available on the upcoming Yield Info page, along with projections for future returns. While we can't predict yield returns with absolute certainty due to the nature of the implementation, we can provide upper and lower ranges based on the known 5% ZEPH block reward allocation. Users can reference these projections and historical data to make informed decisions about their staking and investment strategies.
+
+4. How ZSD Payouts Are Possible
+
+A key question is: How can Zephyr promise ZSD payouts through yield? The answer lies in the dynamic relationship between the ZEPH block reward and ZSD minting.
+
+ZSD payouts are made possible because the yield reward is derived from a fixed percentage of the ZEPH block reward. As ZEPH is generated through mining and the block reward, it is converted into ZSD based on the current market price of ZEPH.
+
+The amount of ZSD minted isn’t fixed in dollar terms, it fluctuates in accordance with ZEPH’s price. This means that although the exact quantity of ZSD generated may vary, the payouts remain proportional to the protocol’s block rewards and ZEPH’s market value.
+
+A higher ZEPH price leads to a higher reserve ratio, allowing for more ZSD to be minted, which in turn can be used to increases competition for yield. Conversely, a lower ZEPH price restricts the amount of ZSD in circulation, reducing competition for the yield.
+
+Although ZEPH’s price influences the system, it plays a secondary role because the mechanisms in place naturally balance the supply of ZSD, ensuring that the returns on staking remain competitive and sustainable, regardless of market fluctuations.
+
+5. Maintaining Stability — Reserve Ratio and Block Reward Logic
+
+While minting ZSD for yield rewards does create new liabilities in the form of new ZSD, this is carefully managed to maintain the Reserve Ratio, which defines the total value of ZEPH backing all circulating ZSD.
+
+Reserve Ratio = Assets (ZEPH in Reserve) / Liabilities (Total ZSD in circulation)
+
+To maintain stability, the system is designed with a 7:1 ratio—for every unit of new ZSD created as a yield reward, seven units of ZEPH are added to the Reserve to back these new liabilities. 35% of the block reward (30% Reserve reward + 5% ZSD Yield reward) is added as new assets, while 5% of this value is coverted to ZSD resulting in new liabilties.
+
+This balance ensures that the Reserve Ratio remains healthy and stable, naturally normalizing around 700%. This resilience is key to ensuring the long-term success and security of the protocol.
+
+By offering attractive yields, maintaining the stability of the Reserve Ratio, and ensuring ZSD payouts remain proportional to the block rewards, the ZSD Yield Mechanism provides a powerful tool for driving adoption as a stable store of value.
+## Why ZSD Yield? The Path To Adoption
+At its core, the ZSD Yield Mechanism addresses a fundamental challenge in stablecoin adoption—how to create value and incentives for users to hold and use the coin. While ZSD is already decentralized, private, and stable, simply being a solid store of value isn't enough in today’s competitive market.
+
+Stablecoin adoption has three key pillars:
+1. Being a store of stable value — which ZSD already achieves, but is being improved upon this update.
+1. Ensuring trading liquidity and value movement across platforms.
+1. Supporting online and real-world payments - by integrating with payment processors.
+
+Our vision includes tackling these pillars in order, and excelling as a stable store of value is critical for any stablecoin protocol. Our grand vision includes ZSD pairs on exchanges for trading and movement of funds as well as intergrating with payment processors. The "chicken and egg" problem arises with this grand vision, as we need to ensure that ZSD is impossible to ignore and make platforms intergrating Zephyr very attractive. More on this below!
+
+ZSD already excels as a store of stable value. It has been stress-tested and proven to be decentralized, private, and most importantly, stable. Those who have minted ZSD to date have clearly found it to be a solid solution for this purpose. And are holding ZSD for this express purpose. However, as mentioned in the article, superior tech alone isn't enough to drive broader adoption beyond our early adopters.
+
+The next market segment we're targeting requires more than just stability... Inflation erodes the concept of "stable value," simply holding a stablecoin seems to be not attractive enough. This is why we're so focused on launching ZSD Yield - which allows us to compete directly with lending platforms that provide APY returns on other stablecoins - the final checkbox remaining to nail the store of value proposition.
+
+This is where "money talks" comes in. ZSD Yield will be the added incentive we need to bring more users into our ecosystem. We are competing with projects that have first-mover advantages, institutional support, and VC backing etc etc. We need to be just that much more attactive.
+## Tackling The "Chicken And Egg" Problem
+One of the biggest barriers to adoption for any stablecoin protocol is a classic "chicken and egg" problem. For ZSD to gain widespread traction over a stable store of value, we need more liquidity, trading pairs, and exchange support. However, exchanges and traders are more likely to get involved if there’s already significant circulation and usage.
+
+This is where ZSD Yield steps in. By offering an attractive financial incentive for holding and staking ZSD, the yield mechanism will drive increased circulation, which, in turn, will make ZSD more appealing to exchanges and liquidity providers to due increased demand. More ZSD in circulation means more use cases, greater liquidity, and ultimately fulfill our grand vision for wide-spread adoption.
+### The Benefits Of ZSD Yield Include:
+- Competing with Lending Platforms: ZSD Yield offers competitive returns, making it a compelling alternative to stablecoins available on lending platforms that offer APY rewards.
+- Offsetting Inflation: Yield returns provide a hedge against inflation, ensuring that ZSD holders can maintain and grow their purchasing power over time.
+- Flexibility and Accessibility: With no lock-up periods, users have full control over their ZYS and can redeem for ZSD at any time.
+## Removal Of Governance Reward
+As part of our continued efforts to decentralize the protocol and create a truly community-driven environment, we have made the decision to remove the governance reward from the block reward allocation. This step is aligned with our vision of making Zephyr Protocol more focused on community involvement, ensuring that incentives are more closely tied to the success of ZRS and ZYS holders and the broader ecosystem.
+
+The development team will remain invested in the protocol through active participation in the ZRS and ZYS systems using accrued ZEPH, just like every other community member. This ensures that everyone has a stake in Zephyr’s long-term success.
+
+Additionally, a portion of the the Treasury funds will gradually participate in these mechanisms post-launch to help cover ongoing expenses and future investments, such as marketing and development, without creating undue competition on day one.
+
+In practice, the development team anticipates that the returns generated through participation in these systems will be comparable to the current 5% governance reward. Given that 35% of the block reward is now dedicated to incentive-based staking mechanisms, there is ample opportunity to ensure ongoing development funding and commitments remain steady.
+
+Ultimately, this change is largely designed to enhance community trust and prevent concerns that could arise from governance rewards being equal to the new ZSD Yield rewards. By making this shift, we reinforce our commitments and align ourselves even more closely with the success of the protocol’s users and stakeholders.
+## The Future Of Zephyr Protocol And Final Thoughts
+As we look ahead, the introduction of the ZSD Yield Mechanism marks a significant step forward in the adoption and utility of the Zephyr Protocol. With this update, we are providing the tools necessary to drive ZSD circulation, increase liquidity, and position ZSD as a leader in the stablecoin market.
+
+Stay tuned for further updates, including a dedicated explainer video for ZSD Yield and new website features designed to help users navigate and participate in this exciting new chapter for Zephyr Protocol.
+
+Zephyr Protocol v2.0.0 is more than just an update—it’s a milestone in our journey toward creating a truly decentralized, stable, and adoption-ready stablecoin. With the ZSD Yield Mechanism, we are providing users with compelling incentives to participate in the ecosystem, while ensuring that the protocol remains robust and sustainable for the long term.
+
+Get ready for the hardfork at Block 360,000 and prepare to experience the next evolution of Zephyr Protocol!
+
+##### ITEM B1 (candidate A): Suspension of Deposits for ZEPH #####
+=== 2025-01-22T09:45:59Z | https://www.mexc.com/announcements/article/suspension-of-deposits-for-zeph-17827791521494 ===
+PAGE TITLE: Suspension of Deposits for ZEPH
+TIME SOURCE: a (<time datetime="2025-01-22T09:45:59.000Z">; JSON-LD datePublished is "2025-01-22T17:45:59+08:00", which is the same instant)
+UPDATED/EDITED DATE: no "updated" or "edited" date is shown on the page. The JSON-LD in the page source carries "dateModified":"2025-09-19T15:08:28+08:00" (= 2025-09-19T07:08:28Z).
+# Suspension of Deposits for ZEPH
+#Deposits & Withdrawals
+
+As requested by the ZEPHYR (ZEPH) project team, MEXC suspended deposits of ZEPH.
+
+We apologize for any inconvenience this may cause. Thanks for your support!
+
+##### ITEM B2: Suspension of ZEPH Deposits and Withdrawals #####
+=== 2025-05-14T06:12:19Z | https://www.mexc.com/announcements/article/suspension-of-zeph-deposits-and-withdrawals-17827791524070 ===
+PAGE TITLE: Suspension of ZEPH Deposits and Withdrawals
+TIME SOURCE: a (<time datetime="2025-05-14T06:12:19.000Z">; JSON-LD datePublished is "2025-05-14T14:12:19+08:00", which is the same instant)
+UPDATED/EDITED DATE: no "updated" or "edited" date is shown on the page. The JSON-LD in the page source carries "dateModified":"2025-09-18T13:56:00+08:00" (= 2025-09-18T05:56:00Z).
+# Suspension of ZEPH Deposits and Withdrawals
+#Deposits & Withdrawals
+
+Due to the <hard fork of ZEPHYR (ZEPH)> <https://x.com/zephyr_org/status/1921843835384033632>, MEXC suspended ZEPH deposits and withdrawals.
+
+We apologize for any inconvenience this may cause. Thank you for your support!
+
+##### ITEM B3: Kryptex notice, Important Notification for Zephyr Protocol (ZEPH) #####
+=== 7 January 2025 (DATE AS SHOWN ON PAGE, TIME ZONE NOT STATED) | https://www.kryptex.com/en/news/zephyr-exchnage-pending-en ===
+PAGE TITLE: Important Notification for Zephyr Protocol (ZEPH) | Kryptex
+TIME SOURCE: DATE AS SHOWN ON PAGE (no <time> element, no article:published_time/modified_time meta, no JSON-LD found)
+UPDATED/EDITED DATE: no "updated" or "edited" date is shown on the page.
+# Important Notification for Zephyr Protocol (ZEPH)
+- Automatic exchanges of Zephyr Protocol (ZEPH) to Bitcoin (BTC) have been temporarily suspended.
+- All Zephyr Protocol (ZEPH) payouts pending exchange to Bitcoin will be processed automatically as soon as deposits are reopened on the exchanges.
+
+🟢The mining pool and payouts continue to operate as usual.
+
+Deposits for Zephyr Protocol are currently blocked on all supported exchanges, including MEXC, XeggeX, CoinEx, NonKYC, and TradeOgre.
+
+According to exchange support teams, this restriction was implemented at the request of the Zephyr Protocol developers. There is no information yet on when deposits will be reinstated.
+
+You can find more details in the official statement from the coin’s developers:
+<https://discord.com/channels/1112605073948819559/1112605856488493176/1325691467523686452> <https://discord.com/channels/1112605073948819559/1112605856488493176/1325691467523686452>
+
+📊 What’s next?
+
+We recommend switching Monero (XMR):
+
+- <Monero (XMR)> <https://pool.kryptex.com/xmr>
+
+If you choose to continue mining Zephyr Protocol (ZEPH), please be aware of the potential risks associated with the current exchange restrictions.
+
+For Kryptex app users: if you haven’t made any manual changes to your settings, the app has already switched you to another coin automatically.
+
+We will keep you updated as the situation develops.
+💎 The Kryptex Team

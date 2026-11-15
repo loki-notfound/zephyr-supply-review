@@ -1,0 +1,604 @@
+ZEPHYR PROTOCOL DISCORD, TWO CHANNELS PLUS SEARCH - READ-ONLY TRANSCRIPT
+Server: https://discord.com/channels/1112605073948819559
+Part A channel: audit-log-updates - https://discord.com/channels/1112605073948819559/1359471488364970104
+Part B channel: minor-announcements - https://discord.com/channels/1112605073948819559/1179739666434498570
+Part C: selected messages from a server search (from: fennzar)
+Capture date: 2026-11-14
+
+METHOD NOTE: Discord does not expose the raw message source, so text is taken from the rendered page.
+Formatting is reconstructed from the rendered page: headings as "#", "##", "###"; bold as **...**; italics as *...*; list items as "- "; quotes as "> "; code blocks in ``` fences; inline code in backticks.
+Custom emoji are shown by their name between colons. "[edited]" on its own line after a message means Discord showed its edited marker for that message; it is not part of the message text.
+"[unresolved channel mention]" would mark a channel mention that Discord could not resolve (none occurred in these parts). Zero-width word-joiner characters (U+2060) that precede or follow channel mentions are kept where they appeared.
+Timestamps come from the datetime attribute of the time element (UTC, with milliseconds). Message ids come from the element ids. In Part C the timestamp, channel id and message id come from the same search-result entries.
+Part C header lines have the channel name added at the end ("| channel: ..."), as Discord shows it, including its emoji.
+Where a reply in Part C pointed at a message Discord could not load, the line "[reply to a message that could not be loaded]" is written at that position.
+Link-preview embeds are recorded as "[link preview embed shown: ...]" and the date and time Discord shows for the linked post are left out.
+Image text is marked "[transcribed from image]". Empty table cells are written "(blank)".
+
+##### PART A: audit-log-updates #####
+
+=== 2025-04-09T10:25:09.555Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1359474210342436996
+@here
+
+Adding this channel especially to track the audit progress
+
+**DAY 9**
+[image]
+[transcribed from image] DAY | 9 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 2,595,007.00 | 346,576.00 | 302,162.00 | 137,524.00
+[transcribed from image] In Reserve | 2,112,496.00 | 263,903.00 | (blank) | (blank)
+[transcribed from image] User Audited | 482,511.00 | 82,673.00 | 302,162.00 | 137,524.00
+[transcribed from image] Reported | 7,175,599.56 | 468,371.88 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress - DAY 9". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 36.16% / 29.44%; ZSD 100.00% / 74.00% / 56.34%; ZRS 100.00% / 25.91% / (no bar); ZYS 100.00% / 72.57% / (no bar)
+
+=== 2025-04-10T09:59:12.166Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1359830066045124778
+@here
+[image]
+[transcribed from image] DAY | 10 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 2,909,044.00 | 348,160.00 | 568,313.00 | 169,773.00
+[transcribed from image] Change | 314,037.00 | 1,447.00 | 266,151.00 | 32,249.00
+[transcribed from image] In Reserve | 2,114,136.00 | 264,040.00 | (blank) | (blank)
+[transcribed from image] User Audited | 794,908.00 | 84,120.00 | 568,313.00 | 169,773.00
+[transcribed from image] Reported | 7,175,599.56 | 468,371.88 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 40.54% / 29.46%; ZSD 100.00% / 74.33% / 56.37%; ZRS 100.00% / 48.74% / (no bar); ZYS 100.00% / 89.59% / (no bar)
+
+=== 2025-04-11T10:07:53.304Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1360194639721926706
+@here 
+[edited]
+
+=== 2025-04-11T10:17:08.124Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1360196966805540894
+[image]
+[transcribed from image] A | B | C | D | E | F (spreadsheet column letters)
+[transcribed from image] DAY | 11 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 3,018,094.00 | 348,679.00 | 612,695.00 | 172,749.00
+[transcribed from image] Change | 109,050.00 | 185.00 | 44,382.00 | 2,976.00
+[transcribed from image] In Reserve | 2,117,988.00 | 264,374.00 | (blank) | (blank)
+[transcribed from image] User Audited | 900,106.00 | 84,305.00 | 612,695.00 | 172,749.00
+[transcribed from image] Reported | 7,191,323.93 | 468,844.51 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 41.97% / 29.45%; ZSD 100.00% / 74.37% / 56.39%; ZRS 100.00% / 52.55% / (no bar); ZYS 100.00% / 91.16% / (no bar)
+
+=== 2025-04-12T08:03:33.963Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1360525740843733103
+@here
+[image]
+[transcribed from image] DAY | 12 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 3,347,552.00 | 348,923.00 | 649,732.00 | 176,367.00
+[transcribed from image] Change | 329,458.00 | 35.00 | 37,037.00 | 3,618.00
+[transcribed from image] In Reserve | 2,120,395.00 | 264,583.00 | (blank) | (blank)
+[transcribed from image] User Audited | 1,227,157.00 | 84,340.00 | 649,732.00 | 176,367.00
+[transcribed from image] Reported | 7,198,180.42 | 469,052.34 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 46.51% / 29.46%; ZSD 100.00% / 74.39% / 56.41%; ZRS 100.00% / 55.72% / (no bar); ZYS 100.00% / 93.07% / (no bar)
+
+=== 2025-04-13T10:51:17.357Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1360930337643040779
+@here
+[image]
+[transcribed from image] DAY | 13 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 3,652,398.00 | 349,229.00 | 710,457.00 | 177,475.00
+[transcribed from image] Change | 304,846.00 | 45.00 | 60,725.00 | 1,108.00
+[transcribed from image] In Reserve | 2,123,368.00 | 264,844.00 | (blank) | (blank)
+[transcribed from image] User Audited | 1,529,030.00 | 84,385.00 | 710,457.00 | 177,475.00
+[transcribed from image] Reported | 7,206,673.28 | 469,314.13 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 50.68% / 29.46%; ZSD 100.00% / 74.41% / 56.43%; ZRS 100.00% / 60.93% / (no bar); ZYS 100.00% / 93.65% / (no bar)
+
+=== 2025-04-14T10:10:30.448Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1361282462428303481
+@here
+[image]
+[transcribed from image] DAY | 14 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 3,878,602.00 | 349,481.00 | 731,053.00 | 178,288.00
+[transcribed from image] Change | 226,204.00 | 19.00 | 20,596.00 | 813.00
+[transcribed from image] In Reserve | 2,126,012.00 | 265,077.00 | (blank) | (blank)
+[transcribed from image] User Audited | 1,752,590.00 | 84,404.00 | 731,053.00 | 178,288.00
+[transcribed from image] Reported | 7,214,227.78 | 469,546.69 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 53.76% / 29.47%; ZSD 100.00% / 74.43% / 56.45%; ZRS 100.00% / 62.70% / (no bar); ZYS 100.00% / 94.08% / (no bar)
+
+=== 2025-04-15T10:24:38.679Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1361648408032579655
+@here
+[image]
+[transcribed from image] DAY | 15 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 4,012,877.00 | 349,723.00 | 738,277.00 | 178,370.00
+[transcribed from image] Change | 134,275.00 | 242.00 | 7,224.00 | 82.00
+[transcribed from image] In Reserve | 2,128,740.00 | 265,314.00 | (blank) | (blank)
+[transcribed from image] User Audited | 1,884,137.00 | 84,409.00 | 738,277.00 | 178,370.00
+[transcribed from image] Reported | 7,222,034.22 | 469,784.10 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 55.56% / 29.48%; ZSD 100.00% / 74.44% / 56.48%; ZRS 100.00% / 63.32% / (no bar); ZYS 100.00% / 94.13% / (no bar)
+
+=== 2025-04-16T10:32:50.867Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1362012860284276758
+@here
+[image]
+[transcribed from image] DAY | 16 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 4,219,031.00 | 350,171.00 | 740,670.00 | 178,422.00
+[transcribed from image] Change | 206,154.00 | 448.00 | 2,393.00 | 52.00
+[transcribed from image] In Reserve | 2,131,470.00 | 265,552.00 | (blank) | (blank)
+[transcribed from image] User Audited | 2,087,561.00 | 84,619.00 | 740,670.00 | 178,422.00
+[transcribed from image] Reported | 7,229,823.25 | 470,021.43 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 58.36% / 29.48%; ZSD 100.00% / 74.50% / 56.50%; ZRS 100.00% / 63.52% / (no bar); ZYS 100.00% / 94.15% / (no bar)
+
+=== 2025-04-17T14:03:29.074Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1362428256632049694
+@here
+[image]
+[transcribed from image] DAY | 17 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 4,491,069.00 | 350,431.00 | 747,987.00 | 178,448.00
+[transcribed from image] Change | 272,038.00 | 260.00 | 7,317.00 | 26.00
+[transcribed from image] In Reserve | 2,131,470.00 | 265,552.00 | (blank) | (blank)
+[transcribed from image] User Audited | 2,359,599.00 | 84,879.00 | 747,987.00 | 178,448.00
+[transcribed from image] Reported | 7,229,823.25 | 470,021.43 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 62.12% / 29.48%; ZSD 100.00% / 74.56% / 56.50%; ZRS 100.00% / 64.15% / (no bar); ZYS 100.00% / 94.17% / (no bar)
+
+=== 2025-04-21T12:53:31.569Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1363860202482565272
+@here
+[image]
+[transcribed from image] DAY | 21 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 4,803,295.00 | 351,368.00 | 799,691.00 | 180,099.00
+[transcribed from image] Change | 71,674.00 | 231.00 | 19,427.00 | 538.00
+[transcribed from image] In Reserve | 2,145,142.50 | 266,703.90 | (blank) | (blank)
+[transcribed from image] User Audited | 2,658,152.50 | 84,664.10 | 799,691.00 | 180,099.00
+[transcribed from image] Reported | 7,268,885.27 | 471,173.05 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 66.08% / 29.51%; ZSD 100.00% / 74.57% / 56.60%; ZRS 100.00% / 68.58% / (no bar); ZYS 100.00% / 95.04% / (no bar)
+
+=== 2025-04-22T15:58:18.912Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1364269094035259555
+@here
+[image]
+[transcribed from image] DAY | 22 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 4,829,940.00 | 351,614.00 | 802,058.00 | 180,104.00
+[transcribed from image] Change | 26,645.00 | 246.00 | 2,367.00 | 5.00
+[transcribed from image] In Reserve | 2,148,174.63 | 266,950.32 | (blank) | (blank)
+[transcribed from image] User Audited | 2,681,765.37 | 84,663.68 | 802,058.00 | 180,104.00
+[transcribed from image] Reported | 7,277,548.49 | 471,419.47 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 66.37% / 29.52%; ZSD 100.00% / 74.59% / 56.63%; ZRS 100.00% / 68.79% / (no bar); ZYS 100.00% / 95.04% / (no bar)
+
+=== 2025-04-23T15:39:16.540Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1364626690445279363
+@here
+[image]
+[transcribed from image] DAY | 23 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 4,876,053.00 | 351,918.00 | 802,696.00 | 180,104.00
+[transcribed from image] Change | 46,113.00 | 304.00 | 638.00 | 0.00
+[transcribed from image] In Reserve | 2,150,824.41 | 267,179.92 | (blank) | (blank)
+[transcribed from image] User Audited | 2,725,228.59 | 84,738.08 | 802,696.00 | 180,104.00
+[transcribed from image] Reported | 7,285,119.32 | 471,649.07 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 66.93% / 29.52%; ZSD 100.00% / 74.61% / 56.65%; ZRS 100.00% / 68.84% / (no bar); ZYS 100.00% / 95.04% / (no bar)
+
+=== 2025-04-27T08:13:58.656Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1365964178979950643
+@here
+[image]
+[transcribed from image] DAY | 26 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 5,615,472.00 | 353,736.00 | 852,292.00 | 183,228.00
+[transcribed from image] Change | 739,419.00 | 1,818.00 | 49,596.00 | 3,124.00
+[transcribed from image] In Reserve | 2,160,688.44 | 268,047.29 | (blank) | (blank)
+[transcribed from image] User Audited | 3,454,783.56 | 85,688.71 | 852,292.00 | 183,228.00
+[transcribed from image] Reported | 7,313,302.26 | 472,516.44 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 76.78% / 29.54%; ZSD 100.00% / 74.86% / 56.73%; ZRS 100.00% / 73.09% / (no bar); ZYS 100.00% / 96.69% / (no bar)
+
+=== 2025-04-29T13:12:46.660Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1366764150210166816
+@here
+[image]
+[transcribed from image] DAY | 28 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 6,149,979.00 | 355,515.00 | 956,426.00 | 184,647.00
+[transcribed from image] Change | 534,507.00 | 1,779.00 | 104,134.00 | 1,419.00
+[transcribed from image] In Reserve | 2,166,570.00 | 268,545.00 | (blank) | (blank)
+[transcribed from image] User Audited | 3,983,409.00 | 86,970.00 | 956,426.00 | 184,647.00
+[transcribed from image] Reported | 7,330,107.93 | 473,014.91 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 83.90% / 29.56%; ZSD 100.00% / 75.16% / 56.77%; ZRS 100.00% / 82.02% / (no bar); ZYS 100.00% / 97.44% / (no bar)
+
+=== 2025-05-02T14:00:10.474Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1367863241627406357
+@here
+[image]
+[transcribed from image] DAY | 31 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 6,294,555.00 | 356,341.00 | 968,592.00 | 184,715.00
+[transcribed from image] Change | 144,576.00 | 826.00 | 12,166.00 | 68.00
+[transcribed from image] In Reserve | 2,174,695.00 | 269,267.00 | (blank) | (blank)
+[transcribed from image] User Audited | 4,119,860.00 | 87,074.00 | 968,592.00 | 184,715.00
+[transcribed from image] Reported | 7,353,301.29 | 473,736.06 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 85.60% / 29.57%; ZSD 100.00% / 75.22% / 56.84%; ZRS 100.00% / 83.07% / (no bar); ZYS 100.00% / 97.47% / (no bar)
+
+=== 2025-05-03T13:06:30.093Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1368212122236096554
+@here
+[image]
+[transcribed from image] DAY | 32 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 6,391,117.00 | 356,602.00 | 976,511.00 | 184,762.00
+[transcribed from image] Change | 96,562.00 | 261.00 | 7,919.00 | 47.00
+[transcribed from image] In Reserve | 2,177,238.00 | 269,507.00 | (blank) | (blank)
+[transcribed from image] User Audited | 4,213,879.00 | 87,095.00 | 976,511.00 | 184,762.00
+[transcribed from image] Reported | 7,360,588.16 | 473,976.71 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 86.83% / 29.58%; ZSD 100.00% / 75.24% / 56.86%; ZRS 100.00% / 83.75% / (no bar); ZYS 100.00% / 97.50% / (no bar)
+
+=== 2025-05-05T10:04:54.899Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1368891200211259432
+@here
+[image]
+[transcribed from image] DAY | 34 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 6,679,338.00 | 357,085.00 | 991,400.00 | 184,964.00
+[transcribed from image] Change | 288,221.00 | 483.00 | 14,889.00 | 202.00
+[transcribed from image] In Reserve | 2,182,238.00 | 269,991.00 | (blank) | (blank)
+[transcribed from image] User Audited | 4,497,100.00 | 87,094.00 | 991,400.00 | 184,964.00
+[transcribed from image] Reported | 7,374,872.82 | 474,460.30 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 90.57% / 29.59%; ZSD 100.00% / 75.26% / 56.90%; ZRS 100.00% / 85.02% / (no bar); ZYS 100.00% / 97.61% / (no bar)
+
+=== 2025-05-06T10:00:18.092Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1369252427064283277
+@here
+[image]
+[transcribed from image] DAY | 35 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 6,702,555.00 | 357,309.00 | 992,621.00 | 184,964.00
+[transcribed from image] Change | 23,217.00 | 224.00 | 1,221.00 | 0.00
+[transcribed from image] In Reserve | 2,184,883.00 | 270,249.00 | (blank) | (blank)
+[transcribed from image] User Audited | 4,517,672.00 | 87,060.00 | 992,621.00 | 184,964.00
+[transcribed from image] Reported | 7,382,430.45 | 474,718.89 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 90.79% / 29.60%; ZSD 100.00% / 75.27% / 56.93%; ZRS 100.00% / 85.13% / (no bar); ZYS 100.00% / 97.61% / (no bar)
+
+=== 2025-05-07T07:53:25.886Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1369582887023677512
+@here
+[image]
+[transcribed from image] DAY | 36 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 7,282,822.00 | 357,888.00 | 1,002,792.00 | 185,011.00
+[transcribed from image] Change | 580,267.00 | 579.00 | 10,171.00 | 47.00
+[transcribed from image] In Reserve | 2,187,279.00 | 270,481.00 | (blank) | (blank)
+[transcribed from image] User Audited | 5,095,543.00 | 87,407.00 | 1,002,792.00 | 185,011.00
+[transcribed from image] Reported | 7,389,276.28 | 474,951.40 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 98.56% / 29.60%; ZSD 100.00% / 75.35% / 56.95%; ZRS 100.00% / 86.00% / (no bar); ZYS 100.00% / 97.63% / (no bar)
+
+=== 2025-05-12T11:34:10.240Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1371450377198768210
+@here
+[image]
+[transcribed from image] DAY | Ext1 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 7,346,983.00 | 359,441.00 | 1,008,030.00 | 185,022.00
+[transcribed from image] Change | 50,537.00 | 1,354.00 | 2,301.00 | 11.00
+[transcribed from image] In Reserve | 2,187,899.00 | 270,541.00 | (blank) | (blank)
+[transcribed from image] User Audited | 5,159,084.00 | 88,900.00 | 1,008,030.00 | 185,022.00
+[transcribed from image] Reported | 7,428,371.91 | 475,010.68 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 98.90% / 29.45%; ZSD 100.00% / 75.67% / 56.95%; ZRS 100.00% / 86.45% / (no bar); ZYS 100.00% / 97.64% / (no bar)
+
+=== 2025-05-13T11:16:06.846Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1371808220980707408
+@here
+[image]
+[transcribed from image] DAY | Ext2 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 7,385,319.00 | 359,696.00 | 1,013,873.00 | 185,022.00
+[transcribed from image] Change | 38,336.00 | 255.00 | 5,843.00 | 0.00
+[transcribed from image] In Reserve | 2,187,899.00 | 270,541.00 | (blank) | (blank)
+[transcribed from image] User Audited | 5,197,420.00 | 89,155.00 | 1,013,873.00 | 185,022.00
+[transcribed from image] Reported | 7,435,630.44 | 475,010.68 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 99.32% / 29.42%; ZSD 100.00% / 75.72% / 56.95%; ZRS 100.00% / 86.95% / (no bar); ZYS 100.00% / 97.64% / (no bar)
+
+=== 2025-05-14T10:54:58.704Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1372165289872982066
+@here
+[image]
+[transcribed from image] DAY | Ext3 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 7,418,305.00 | 359,959.00 | 1,013,873.00 | 185,022.00
+[transcribed from image] Change | 32,986.00 | 263.00 | 0.00 | 0.00
+[transcribed from image] In Reserve | 2,187,899.00 | 270,541.00 | (blank) | (blank)
+[transcribed from image] User Audited | 5,230,406.00 | 89,418.00 | 1,013,873.00 | 185,022.00
+[transcribed from image] Reported | 7,443,199.06 | 475,010.68 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 99.67% / 29.39%; ZSD 100.00% / 75.78% / 56.95%; ZRS 100.00% / 86.95% / (no bar); ZYS 100.00% / 97.64% / (no bar)
+
+=== 2025-05-15T11:05:01.515Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1372530206111432734
+@here
+[image]
+[transcribed from image] DAY | Ext4 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 7,428,251.00 | 360,255.00 | 1,014,128.00 | 185,182.00
+[transcribed from image] Change | 9,946.00 | 296.00 | 255.00 | 160.00
+[transcribed from image] In Reserve | 2,187,899.00 | 270,541.00 | (blank) | (blank)
+[transcribed from image] User Audited | 5,240,352.00 | 89,714.00 | 1,014,128.00 | 185,182.00
+[transcribed from image] Reported | 7,450,835.90 | 475,010.68 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 99.70% / 29.36%; ZSD 100.00% / 75.84% / 56.95%; ZRS 100.00% / 86.97% / (no bar); ZYS 100.00% / 97.72% / (no bar)
+
+=== 2025-05-16T10:50:48.186Z | fennzar | https://discord.com/channels/1112605073948819559/1359471488364970104/1372889014855663696
+@here
+[image]
+[transcribed from image] DAY | Ext5 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 7,439,432.00 | 360,504.00 | 1,014,245.00 | 185,182.00
+[transcribed from image] Change | 11,181.00 | 249.00 | 117.00 | 0.00
+[transcribed from image] In Reserve | 2,187,899.00 | 270,541.00 | (blank) | (blank)
+[transcribed from image] User Audited | 5,251,533.00 | 89,963.00 | 1,014,245.00 | 185,182.00
+[transcribed from image] Reported | 7,458,205.45 | 475,010.68 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 99.75% / 29.34%; ZSD 100.00% / 75.89% / 56.95%; ZRS 100.00% / 86.98% / (no bar); ZYS 100.00% / 97.72% / (no bar)
+
+
+##### PART B: minor-announcements (2024-12-10 to 2025-07-31) #####
+
+Range note: the channel's first message is dated 2025-04-02T10:20:41.796Z (Discord shows the channel's welcome header directly above it), so nothing in the channel exists between 2024-12-10 and 2025-04-02.
+
+=== 2025-04-02T10:20:41.796Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1356936372220330034
+@here
+
+
+## Audit Progress Update: Day 2
+
+```
+Height:             481717
+
+Audit Info
+ZEPH:               2,283,455 ƶeph (+118,033)    [2,093,644 in reserve]    user audited: 189,811 ƶeph 
+ZSD:                273,735 ƶsd    (+6,492)      [262,100 in reserve]      user audited: 11,635 ƶsd   
+ZRS:                222,732 ƶrs    (+169,235)
+ZYS:                48,767 ƶys     (+43,634)
+```
+
+*^figures produced from the `audit_info` command in the cli wallet and `reserve_info` in zephyrd*
+*note: New ZEPH and ZSD are being emitted from the mining rewards and are automatically the new asset types and are therefore included*
+
+ZEPH in the DJED Reserve and ZSD in the Yield Reserve was automatically audited.
+
+=== 2025-04-03T09:43:44.813Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1357289461385531487
+@here
+
+
+## Audit Progress Update: Day 3
+
+```
+Height:             483491
+
+Audit Info
+ZEPH:               2,313,219 ƶeph (+29,764)   [2,096,429 in reserve]    user audited: 216,790 ƶeph 
+ZSD:                274,034 ƶsd    (+299)      [262,398 in reserve]      user audited: 11,636 ƶsd   
+ZRS:                239,903 ƶrs    (+17,171)
+ZYS:                50,041 ƶys     (+1,274)
+```
+
+*^figures produced from the `audit_info` command in the cli wallet and `reserve_info` in zephyrd*
+*note: New ZEPH and ZSD are being emitted from the mining rewards and are automatically the new asset types and are therefore included*
+
+ZEPH in the DJED Reserve and ZSD in the Yield Reserve was automatically audited.
+
+=== 2025-04-03T10:09:26.328Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1357295926968057996
+@here
+
+If you have an X account, would be appreciated if you can report this **FAKE** zephyr account, save some people from getting scammed 
+
+FAKE ACCOUNT: 🚨  https://x.com/zephyrchain 🚨 
+
+Thanks ❤️ 
+[edited]
+
+=== 2025-04-04T10:26:33.527Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1357662623218536548
+@here
+
+
+## Audit Progress Update: Day 4
+
+```
+Height:             484189
+
+Audit Info
+ZEPH:               2,347,899 ƶeph (+34,680)   [2,099,027 in reserve]    user audited: 248,872 ƶeph 
+ZSD:                274,295 ƶsd    (+261)      [262,659 in reserve]      user audited: 11,636 ƶsd   
+ZRS:                269,035 ƶrs    (+29,132)
+ZYS:                65,531 ƶys     (+15,490)
+```
+
+*^figures produced from the `audit_info` command in the cli wallet and `reserve_info` in zephyrd*
+*note: New ZEPH and ZSD are being emitted from the mining rewards and are automatically the new asset types and are therefore included*
+
+ZEPH in the DJED Reserve and ZSD in the Yield Reserve was automatically audited.
+
+=== 2025-04-05T08:07:44.374Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1357990076084260954
+@here
+
+
+## Audit Progress Update: Day 5
+
+```
+Height:             484839
+
+Audit Info
+ZEPH:               2,358,750 ƶeph (+10,851)   [2,101,480 in reserve]    user audited: 257,270 ƶeph 
+ZSD:                274,536 ƶsd    (+241)      [262,897 in reserve]      user audited: 11,639 ƶsd   
+ZRS:                270,822 ƶrs    (+1,787)
+ZYS:                65,565 ƶys     (+34)
+```
+
+*^figures produced from the `audit_info` command in the cli wallet and `reserve_info` in zephyrd*
+*note: New ZEPH and ZSD are being emitted from the mining rewards and are automatically the new asset types and are therefore included*
+
+ZEPH in the DJED Reserve and ZSD in the Yield Reserve was automatically audited.
+
+=== 2025-04-07T05:06:44.350Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1358669301573226507
+@here
+
+*No update from me on day 6, change amounts are from the last update*
+
+
+## Audit Progress Update: Day 7
+
+```
+Height:             486182
+
+Audit Info
+ZEPH:               2,542,689 ƶeph (+183,939)    [2,106,543 in reserve]    user audited: 436,146 ƶeph 
+ZSD:                276,089 ƶsd    (+1,553)      [263,391 in reserve]      user audited: 12,698 ƶsd   
+ZRS:                273,409 ƶrs    (+2,587)
+ZYS:                65,565 ƶys     (+0)
+```
+
+*^figures produced from the `audit_info` command in the cli wallet and `reserve_info` in zephyrd*
+*note: New ZEPH and ZSD are being emitted from the mining rewards and are automatically the new asset types and are therefore included*
+
+ZEPH in the DJED Reserve and ZSD in the Yield Reserve was automatically audited. 
+[edited]
+
+=== 2025-04-09T04:17:01.298Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1359381565477748827
+@here
+
+*No update from me on day 8, change amounts are from the last update*
+
+
+## Audit Progress Update: Day 9
+Pre GUI/Webwallet announcement
+
+
+```
+Height:             487593
+
+Audit Info
+ZEPH:               2,583,787 ƶeph (+41,098)   [2,111,860 in reserve]    user audited: 471,927 ƶeph 
+ZSD:                346,517 ƶsd    (+69,969)   [263,850 in reserve]      user audited: 82,667 ƶsd   
+ZRS:                276,661 ƶrs    (+3,252)
+ZYS:                65,624 ƶys     (+59)
+```
+
+*^figures produced from the `audit_info` command in the cli wallet and `reserve_info` in zephyrd*
+*note: New ZEPH and ZSD are being emitted from the mining rewards and are automatically the new asset types and are therefore included*
+
+ZEPH in the DJED Reserve and ZSD in the Yield Reserve was automatically audited. 
+[edited]
+
+=== 2025-05-05T10:23:57.004Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1368895990546825338
+@everyone
+
+Not long to go until our audit period has been completed!
+
+If you have coins on XT, it's high time to message their live support chat and tell them that they are about to lose your coins because the people I have tried to talk to about this have all been completely useless and uninterested. Constantly misunderstanding me and then proceeding to simply say that's not my job, email this account. which is insane. I'm in telegram chats with these guys (who message me to list ZEPH btw, even though ZEPH IS ALREADY LISTED ON XT) and they refuse to drag me into a chat with anyone above them
+
+=== 2025-05-21T07:43:19.480Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1374653773690966110
+@everyone 
+
+
+## MEXC AUDIT UPDATE
+I've just come off a meeting with MEXC, and I have been in communications with them daily. 
+I can confirm that they are actively trying to do the audit, and from what I can see it seems like they have some environment limitation because I can see they have been running the `audit_all` command for over 24 hours (and we can see it still running in tailing out the logs from the wallet)
+
+The command is running, just slowly, which means there is some limitation in their server environment, either slow single core performance and/or network throttling between the cli wallet and the daemon. 
+
+I've told them (basically begged them) that the best thing to do is to run the command outside of their current setup/environment. They need to just run in on their local machine. I gave them a deadline for the 28th, but I know that if they just tried it on their local machine it almost certainly will be done and dusted in 30 mins tops!
+
+I'll keep the pressure up, I really want them to complete the audit in this on-chain, clear way. Otherwise the options we have left are not ideal. The "big" one being to simply mint the coins they can't audit in the next update and send them to MEXC but it's self evident just how much of a mess that is, it would be a last resort. 
+
+Idk team, I'm frustrated, as is everyone else. I just want to put this saga behind us once and for all.
+
+=== 2025-05-27T11:45:37.365Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1376889077193769122
+@everyone
+
+We are reaching the cutoff with MEXC and it looks like we are going to have to move to the last resort option of minting them their difference in the next hardfork.
+
+We are and will be working on the code+builds and getting all the pieces together over the next few days. 
+
+I know that there is a vocal group that thinks we should not work with them to honor their balance but that will result in a bad outcome for ZEPH. We need to move on from this first and foremost - which is in motion. But if we were not to:
+
+1: We'd lose our biggest exchange, and only "top tier" exchange when it comes to users+volume
+2: MEXC doesn't lose, is ZEPH investors - just like you - who would be the ones to lose. 
+
+We have to do what is best for Zephyr and thus for Zephyr investors, and that mantra is at the forefront of my mind. 
+
+In order for us to go through with this with MEXC we still a few things in support from them, it's not impossible that for whatever reason this support is not given and in that case we'd have no choice but to move on without them. I hope it doesn't come to that, but if so we will move on to a bigger and brighter future regardless.
+
+Overall it's a tough position to be in, I'm not going to sugarcoat it!
+
+I'm not going to give up on the dream of Zephyr, no matter the outcome from this. What we have built and yet to improve upon is too important. 
+
+Thank you for your support during this difficult period for us. The only way is up! 💪 🔥
+
+=== 2025-06-01T02:48:32.854Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1378565857126387773
+@everyone 
+Over the last few days we have come to an agreement with MEXC in regards to how we can facilitate minting their balance difference in the next hardfork.
+
+It's been a... challenging process due to some language barrier issues and just dealing with a large org like MEXC is. They have strict OpSec restrictions which has caused issues with them not being able to take action on some of my suggestions that would enable them to complete their audit in the first place. I wish they'd have made that clear a month ago naturally.
+
+Regardless of any of this, we have the power in this chain to make them whole so they are forced to comply with us moving forward. The foot is coming down!
+
+We've already started development on HF v11 - but doing this process is adding on more development and testing time than we'd otherwise have to do. Once I have a clearer idea of our timeline I'll officially announce the hardfork with a set ETA. 
+
+Going to be a big week coming, thats for sure! 🫡 💪 
+
+:zephyr: :zephyr: :zephyr: :zephyr: :zephyr: :zephyr: :zephyr: :zephyr:
+
+=== 2025-06-17T23:19:29.472Z | fennzar | https://discord.com/channels/1112605073948819559/1179739666434498570/1384673840084418620
+@here
+
+
+# MEXC Mint Update
+Over the last 24 hours I have been in touch and working with MEXC. I received their exchange wallet seed to confirm the balance. I have now done so and paid them to their new exchange wallet. Hopefully they will be back online soon, but this also means that they have all the new ZEPH they need! 🔥
+[image]
+[transcribed from image] [wallet ZEPHYR2D4]: refresh
+[transcribed from image] Starting refresh...
+[transcribed from image] Refresh done, blocks received: 0
+[transcribed from image] Currently selected account: [0] Primary account
+[transcribed from image] Tag: (No tag assigned)
+[transcribed from image] Balance: 1921649.728246938366, unlocked balance: 1921649.728246938366 ZEPH (unaudited)
+UNSURE: the image is cut off at its top edge in Discord; only a sliver of a possible earlier line is visible and it cannot be read.
+
+=== 2025-07-23T15:18:24.782Z | hydratedGoose | https://discord.com/channels/1112605073948819559/1179739666434498570/1397598735961293001
+@everyone 
+
+New post is live on our X page 🔥 
+https://x.com/zephyr_org/status/1948038228029722823
+Comparing Zephyr to the big boys in DeFi.
+(Spoiler: it blows them out of the water 😉 )
+
+Give it some love and push it amongst your networks!
+
+=== 2025-07-28T16:39:48.195Z | hydratedGoose | https://discord.com/channels/1112605073948819559/1179739666434498570/1399431157807976530
+@here
+
+As requested, we've published our first Article on X 🔥 
+
+Zephyr Protocol - A Foundational Overview:
+https://x.com/zephyr_org/status/1949871420651270146
+
+This serves as a solid interim update between the original whitepaper, and now.
+Do give it a read and share it around!
+
+
+(Part B range summary: 14 messages, 12 by fennzar and 2 by hydratedGoose. Timestamps run from 2025-04-02T10:20:41.796Z to 2025-07-28T16:39:48.195Z with no gap in the loaded message list. There is no neighbouring message before the range (it is the channel's first message). The neighbouring message after the range is 2025-08-06T13:42:32.734Z by hydratedGoose, id 1402648040241889312, text "@everyone ... Our new VIDEO EXPLAINER is LIVE!" and it carries the edited marker; it is outside the range and not part of this part.)
+
+
+##### PART C: messages by fennzar in other channels that the reports cite #####
+Found with the server search (terms: MEXC, unauditable, "range proof", morph, blacklist).
+The search returned further messages that the reports do not cite; they are left out here.
+
+=== 2025-05-24T10:08:52.397Z | fennzar | https://discord.com/channels/1112605073948819559/1112605075416817686/1375777565796466790 | channel: 💬・general
+[reply to a message that could not be loaded]
+MEXC has been running the `audit_all` command for the past 48 hours, on a new environment. We can see it's still working. We are hoping this method works for them, I've provided them with a few more options to try too
+
+=== 2025-04-14T10:42:43.088Z | fennzar | https://discord.com/channels/1112605073948819559/1112605075416817686/1361290568507985970 | channel: 💬・general
+[reply to a message that could not be loaded]
+Too soon to tell, but possibly. I think Mexc has less than 3M but they didn't share with me exact figures.
+
+=== 2025-04-14T10:19:45.184Z | fennzar | https://discord.com/channels/1112605073948819559/1112605075416817686/1361284789159858207 | channel: 💬・general
+You can track the audit process in ⁠📢audit-log-updates. Nothing to really get from that just yet really. 
+We are still waiting on MEXC to complete their audit, we are helping them, they have a decent chunk as far as we know. As it stands at the moment once they put theirs through we will be in the ballpark of the expected amount, but we still have a fair bit coming through daily from regular users
+
+=== 2025-01-20T10:26:25.520Z | fennzar | https://discord.com/channels/1112605073948819559/1112605075416817686/1330845887580340264 | channel: 💬・general
+Exchanges don't want their figures public for obvious reasons, I'm already pushing it with what I've said, but I think this gives a good picture and it's justified you guys know some info.
+MEXC & TO figures are on the highside, but you can make some assumptions about the rest and it tallies up to reasonable levels. 
+If exchanges had like 10M in wallets then the scope would be self evident 
+[edited]
+
+=== 2025-01-20T10:18:40.620Z | fennzar | https://discord.com/channels/1112605073948819559/1112605075416817686/1330843937648410635 | channel: 💬・general
+[reply to a message that could not be loaded]
+MEXC did give me a range, but they were not overly forthcoming with providing the information (for some reason). its 2-3M
+
+=== 2025-01-13T04:23:37.604Z | fennzar | https://discord.com/channels/1112605073948819559/1112605075416817686/1328217871263731722 | channel: 💬・general
+[reply to a message that could not be loaded]
+> What makes them stand out/when:
+
+The 3 transactions from 6 months ago (July 7 2024) stand out because they fail an updated range proofs check relating to bulletproofs/bulletproofs+ that was introduced in Zephyr v2.0.0 as we refactored that section of the code with our Zephyr specific requirements due to ZYS implementation based on Moneros current implementation. These proofs and the relevant sections of code, very simply, allow for the amount sent from a constructed transaction to be verified as correct without knowledge of the actual amount sent. The way the check was implemented prior to Zephyr v2.0.0 was incorrect, an oversight on our part. Because these transactions fail the new corrected check it's implies that an exploit attempt was made. 
+
+> if the team is being honest about reported exchange supply being far lower than expected max supply, that should imply exploit did not happen or was limited. but only the audit can clarify that:
+
+Yes correct, it does point strongly that the exploit attempt was either unsuccessful or that the impact of the exploit is limited in scope. However, we can't rule out the possibility conclusively that a large amount of ZEPH was minted as a result and there has been an effect of slow selling this limited "under the radar" amount. It's hard to know for certain what if any amount was minted from these transactions but there has been more evidence as we and others investigate that increases the likelihood of this - and we certainly feel that we would rather be safe than sorry. A comprehensive and careful audit process will be the only way we can know for certain the impact, and eliminate all doubts and possibilities too of a large amount existing unbeknownst to us.
+
+.
+
+=== 2024-12-30T01:31:37.013Z | fennzar | https://discord.com/channels/1112605073948819559/1112605075416817686/1323101153449480293 | channel: 💬・general
+The reason why the Haven team were made aware was because of the absolutely INSANE amount of coins on TradeOgre.
+We see nothing out of the ordinary.. Haven had been exploited in so so many different ways over the years, It's likely that this specific identified Range Proofs issue is not the cause
+

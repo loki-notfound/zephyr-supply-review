@@ -1,0 +1,3 @@
+height 300002 hf 5 tx 4f9693d5b598435f33f00b15ba62c3a433caae2c9108dd73d994bf6161504e89 outputs 2
+original proof : bulletproof_plus_VERIFY=1  verRctSemanticsSimple(pre-HF6 path)=1  verRctSemanticsZeph(HF6+ path)=1
+corrupted proof: bulletproof_plus_VERIFY=0  verRctSemanticsSimple(pre-HF6 path)=1  verRctSemanticsZeph(HF6+ path)=0

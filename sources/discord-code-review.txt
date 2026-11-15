@@ -1,0 +1,17 @@
+TRANSCRIPT OF CODE REVIEW REFERENCES (read-only capture, session date 2026-11-14)
+This copy holds the one item that the reports cite. The full transcript also holds the other
+messages by project and moderator accounts that the searches returned, and counts of the
+messages by other members, which were not copied.
+
+=== 2026-07-08T18:29:20Z | hydratedGoose | https://discord.com/channels/1112605073948819559/1112605075416817686/1524482538028925000 | channel: general
+[reply to: Is the audit only going to focus on the bridge or also on the L1 protocol. You never know, there might be some bug there too...]
+[author of the message replied to: [member]]
+Scoped to the EVM bridge only: the smart contracts plus the off-chain bridge API/watchers. Not the L1.
+
+Reasoning: the bridge is genuinely new code. Contracts, relayers, cross-chain state syncing =  the new attack surface we've introduced by going cross-chain.
+
+The L1 is built on Minimal Djed (the formally verified Cardano/IOHK) sitting on top of Monero's cryptography (ring sigs, stealth addresses, bulletproofs), which has years of production hardening behind it already.
+
+So, different risk profile/priority right now (new code gets audited first).
+
+That's not to say we'll never look at the L1... as the protocol scales, a dedicated L1-focused review is a reasonable step. Right now the bridge is where the actual new risk lives, so that's where the audit spend goes first.

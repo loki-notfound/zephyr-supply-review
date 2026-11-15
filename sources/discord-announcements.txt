@@ -1,0 +1,1263 @@
+ZEPHYR PROTOCOL DISCORD #announcements - READ-ONLY TRANSCRIPT
+Channel: https://discord.com/channels/1112605073948819559/1112605856488493176
+Capture date: 2026-11-14
+
+METHOD NOTE: Discord does not expose the raw message source, so text is taken from the rendered page.
+Formatting is reconstructed from the rendered page: headings as "#", "##", "###"; bold as **...**; list items as "- ".
+Custom emoji are shown by their name between colons. Where Discord shows an "(edited)" label,
+it is recorded as a separate line "[edited label shown]" and is not part of the message text.
+Timestamps come from the datetime attribute of the <time> element (UTC). Message ids come from the element ids.
+
+##### RANGE 1: 2024-12-10 to 2025-02-20 #####
+
+=== 2024-12-29T09:29:09.990Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1322858944879792189
+@everyone
+
+Let's address the ongoing discussions and concerns regarding the recent exploits on Haven—and whether anything similar could have impacted Zephyr, and if so, to what extent.
+
+There’s been a lot of speculation and conflicting information provided to us. It's been a series of wild goose chases! We take every claim seriously and have been running our own investigations to verify what's been reported to us and any potential vulnerabilities.
+
+Key Points:
+
+**Suspicious Transactions**
+We’ve identified three transactions in Zephyr that align with suspicious activity also confirmed by @Kayaba. This does not mean Zephyr was successfully exploited. There’s still much we simply don’t—and in some cases can’t—know, such as:
+
+
+- The specific exploit methods or their outcomes.
+- Whether the invalid range-proof issue that affected 50 Haven transactions is exactly the same in kind as what occurred with the 3 transactions on Zephyr.
+- Whether these transactions are solely responsible for Haven’s inflation or if other previous or novel exploits were at play.
+**Impact & Observations**
+If a major exploit had truly succeeded on Zephyr, we would almost certainly see catastrophic effects:
+
+
+- A price crash to $0.
+- Unexpected amounts in exchange books or balances.
+- Breakdowns in our stablecoin mechanics (ZEPH Reserve drained etc).
+None of these signs have appeared, despite all the increasing scrutiny.
+Moreover, our protocol relies on differing mechanics (namely DJED) and was written by the Zephyr team—it diverges significantly from Haven’s implementation. If there are other exploits at play it is unlikely that they would effect Zephyr - at least in the same way.
+
+.
+
+=== 2024-12-29T09:29:12.222Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1322858954241478678
+**Next Steps**
+
+
+- We are continuing to analyze the three transactions to understand their origin, nature, and any possible implications.
+- We are considering potential measures ultimately to ensure confidence in the chain—likely including a hardfork.** Our highest priority is to achieve piece of mind and finality on this matter.**
+- We will proceed carefully and responsibly, maintaining “high alert” for any threats/unusual/unexpected activity, to preserve integrity and avoid unnecessary disruption for our community and particularly our exchange partners.
+**Prepared for a Worst-Case Scenario**
+Even though a large-scale exploit seems unlikely, we’re still treating this with due caution. We want to be both thorough and careful with the steps we take. If significant unauthorized minting of ZEPH or other assets did occur (which we do not believe is the case), we have options to address and rectify it.
+
+We understand the uncertainty can be frustrating. Rest assured, we do not see this as a protocol-ending threat. There are multiple levers we can pull to ensure chain integrity, and we’ll do whatever it takes to maintain that.
+
+We’ll continue to update you as we learn more and develop a definitive plan. Until then, thank you for your patience and support. Whatever we decide on, it's more than likely going to encompass significant effort - But I do believe that it is worth doing for the reassurance and longevity of the project.
+
+Stay tuned for further updates!
+
+=== 2025-01-02T00:14:25.637Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1324168891647397948
+@everyone
+
+
+# Zephyr Protocol – 2024 Wrap-Up and looking ahead to 2025!
+2024 was a massive year for Zephyr Protocol, with lots of ups and downs throughout.
+Big shoutout to everyone in this community, Happy New Year to all!
+It's been a bit hectic recently so this is coming a little bit later than antipicated 😄
+Hope everyone has had/is having a good Christmas/Holiday period!
+
+Here is a rundown of what we achieved last year:
+
+
+## Q1 2024
+**Community & Growth**
+- Surpassed 20,000 followers on Twitter/X.
+- Highlighted ZSD’s over-collateralization (2000%+), seldom dropping below 800%.
+- Recorded a 152.9% rise in ZRS (in ZEPH terms) since v1 launch.
+
+**New Website **
+- Teased then officially launched the new Zephyr Protocol website.
+- Revealed an updated network page at zephyrprotocol.com/network.
+- Continuious further updates throughout the year
+
+**Hardfork Pre-Announcement**
+- Previewed the next major protocol update.
+- Confirmed latest Monero changes + p2pool support.
+- Revealed plans to reduce ZSD minting fees to boost adoption.
+.
+
+=== 2025-01-02T00:14:34.675Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1324168929555513405
+
+## Q2 2024
+**DEX Drama “inadvertent protocol stress test” (ZephyrSwap)**
+- Published a recap article on recent FUD, emphasizing Zephyr’s resilience.
+- https://medium.com/@zephyrcurrencyprotocol/zephyr-protocol-update-may-2024-2f847868faf0
+- The result of this was a users who deposited funds into the LP were rugged, including Zephyr core team members.
+- A powerplay to drive attention to a fork that never materialized.
+
+**Zephyr Protocol V1.1.0 Hardfork**
+- Investigated network syncing issues tied to pricing_record discrepancies.
+- Fixed root cause: reserve rewards not removed correctly during block rollbacks.
+- Issued a required update (v1.1.0) to resolve stuck blocks.
+
+**Website Expansion**
+- Rolled out dark mode, an updated roadmap, additional documentation, and a blog.
+- Released a new article discussing strategies to overcome stablecoin competition (e.g., USDT).
+- Technical Hurdles & Solutions
+
+**Artemis v1.2.0 Announcement**
+- Introduced fee cuts (ZSD mint/redeem at 0.1%; ZRS mint at 1%, redeem at 1%).
+- Incorporated fresh Monero updates and refined Reserve Ratio MA.
+- Scheduled two hardforks (v4 & v5) with updated fee structures.
+- Rebased Reserve Ratio calculations via a new pricing record format.
+
+## Q3 2024
+**Hardfork Progress**
+- Successfully executed hardfork v4, followed by v5 (Artemis v1.2.0) with a refined fee system.
+**Marketing & Education**
+- Unveiled a Zephyr Protocol explainer video (produced by @hydratedGoose).
+- Published an article outlining the upcoming ZSD Yield Mechanism.
+**ZSD Yield Mechanism Development**
+- Explored multiple approaches; settled on a ZRS-style model with ZSD payouts.
+- Emphasized simpler implementation, consistent returns, and broader user appeal.
+**Building Momentum**
+- Released a “Resilience” video highlighting how ZSD maintained its $1 peg.
+- Announced v2.0.0 (ZSD Yield) targeting block 360,000 (~2 weeks out).
+- Introduced Zephyr Yield Shares (ZYS) at a 5% block-reward allocation.
+.
+
+=== 2025-01-02T00:14:37.449Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1324168941190254664
+
+## Q4 2024
+**ZSD Yield Launch**
+- Completed the v2.0.0 hardfork with ZYS in circulation and promising early yield returns.
+- Deployed updated website tools to showcase yield metrics in real time.
+**Yield Uptake & Market Response**
+- ZYS price increased by ~1% within days, climbing to ~2.58% a week later (~150% APY).
+- Corrected explorer supply data for more accurate market-cap tracking.
+**Network Resilience**
+- Encountered a large transaction flood causing node memory spikes.
+- Resolved by upgrading server capacities; network remained stable and secure.
+**Continued Yield Growth**
+- ZYS rose to +5% over ~2.5 weeks (~60% annualized).
+- Attracted significant community excitement for ZSD Yield’s ongoing success.
+**Security & Integrity**
+- Investigated suspicious transactions similar to Haven’s exploit.
+- Considering a hardfork and thorough review to ensure utmost chain security and integrity
+- Ready to adopt any measures necessary to protect the protocol and the community.
+
+=== 2025-01-02T00:15:45.979Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1324169228626165872
+
+# Looking Ahead to 2025
+
+## Development
+
+### Chain Integrity:
+The foremost priority is ensuring our chain intergrity due to the idenfied suspicious transactions.
+Work is underway to faciltiate conducting a comprehensive chain audit to resolve any lingering doubts around supply integrity.
+The scope of our apporach here is subject to change, potentially significantly - But it is important to keep everyone in the loop as this evolves due to the nature of this.
+Users and exchanges will be able to confirm their holdings in a verifiable manner, bringing transparancy and finality to the recent discussions. This will likely encompass the next four weeks, plus adequete time to allow everyone to particupate in the audit.
+Throughout the process, the team will issue regular updates, ensuring everyone remains informed.
+
+Beyond the audit, we intend to refine the protocol’s moving average (MA) pricing to align it more closely with spot price in a minor version update. While the current dual price mechanism is effective for preventing manipulation, a slightly more responsive MA should lower conversion costs and improve user experience. The ultimate goal is to strike the right balance: maintain the security advantages of our anti-manipulation measures while easing friction and disincentive for everyday geniune swaps.
+
+Finally, work continues toward our ultimate goal of “Oracle V2,” a fully decentralized solution. Time was taken from this endeviour in 2024 as more pressing adoption drives and efforts became apparent. This update will be a major leap in achieving true trustlessness within Zephyr Protocol. We’re setting an ambitious target to deliver Oracle V2 by the end of 2025, at which point the protocol should stand even stronger as the most advanced, decentralized system in BOTH the privacy & stablecoin ecosystems.
+
+=== 2025-01-02T00:15:49.883Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1324169245000466452
+
+## Marketing:
+The very talented @hydratedGoose is taking on the mantle of our Marketing Lead. You have likely already started to see the results of this! We are very excited to have @hydratedGoose onboard in this major way.
+
+
+---
+
+Certainly, we have had some major up and downs last year. But despite the challenges we have managed to achieve so much. We do have a mountian to climb this year, but I am looking forward to the challenge!
+I say bring on 2025!
+
+:zephyr: :ZSD: :ZRS: :ZYS:
+[edited label shown]
+
+=== 2025-01-06T05:04:36.014Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1325691467523686452
+@everyone
+
+
+# ZEPH Exchange Deposits Disabled & Upcoming Chain Audit
+We've made the decision to request all exchanges disable their ZEPH deposits for the time being, until our Audit can commence and be completed. As of time of announcement, most if not all exchanges have confirmed that they have disabled their deposits and or withdrawals.
+
+This was a difficult decision, but we hope this this action will serve to be more potential damage mitigating than damage inducing. I've been very close to issuing this request earlier over the last few weeks but held off until now. Instead we opted to enter a state of high alert.
+
+As internal and external investigations are continuing, as well as development for our Audit process, we simply can't *definitively* rule out any possibilities of the result of the three suspect transactions from 6 months ago - until a final resolution and result is determined by the Audit process.
+
+As it stands, especially by the effect of exchanges disabling their deposits, we can know that it is NOT possible that millions of excess ZEPH has been sold off on exchanges and thus in the hands of legitimate users. Our DJED mechanics would've been drastically effected as these legitimate users would've minted ZSD, ZRS and ZYS leading to unexpected amounts of ZEPH in the reserve. As it stands, only 30% of ZEPH is in the reserve which is very much in line with what we would expect, especially considering that now 35% of the ZEPH block reward goes directly into the reserve.
+
+In addition, we know from exchanges that their wallet balances are expected and reasonable, all totaling to well under our reported supply of 6.4M - as well as their books, trading activity etc.
+
+It is for those reasons that we have been and are confident we can maintain and restore the integrity of our chain.
+
+.
+
+=== 2025-01-06T05:04:39.287Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1325691481251512331
+Best case scenario: Whatever was attempted was not successful, and no unauthorized ZEPH was minted and thus sold off on exchanges.
+
+Worse case scenario: The transactions did result in unauthorized ZEPH minting, and a necessarily limited amount of ZEPH has been slowly sold off over the last 6 months, that has flown "under the radar", now in legitimate users hands. With the exchanges disabling deposits, this flow has been stopped but there will be an inflationary effect post audit. Any large amounts audited will need to be investigated and if we believe that any amounts were a direct result of the 3 transactions, we will effectively blacklist them. Any damaged caused is now done.
+
+
+## Audit
+We have been working as fast as we can behind the scenes to prepare for our next steps.
+Our Auditing code HF/update and process will be announced. We are going to make this as painless as possible for everyone, and will simply involve sending a special type of transfer to yourself. Coins not audited will be rendered null and void. Exchanges will participate and therefore coins you have on exchanges will be audited for you.
+
+All of this is far from ideal and very unfortunate. We apologize for the drastic measures we are taking, but we assure you that these measures must be undertaken.
+
+Thanks everyone ❤️
+
+=== 2025-01-21T05:42:45.873Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1331136889872191541
+@everyone
+
+
+# Zephyr Protocol v2.0.2 - ZSD Yield (Hotfix)
+This release is a required update for @Mining Pool Operator and others like @Community Contributors
+Please update ASAP. **We have set the time for the fork to be <40 hours time from this post.**
+
+Exchanges: Please remain in an "offline" state with suspended deposits and withdrawals.
+
+If any wish to keep their nodes online, then it is important to update to this version.
+
+Regular Desktop Users (non web): We aren't planning on releasing other platform binaries for this release, as we are going to be updating again soon with our chain audit release. Web wallet will be updated.
+
+NOTE:
+This is NOT the chain audit hardfork. An issue was uncovered that necessitates this pre-emptive fork ahead of the audit update.
+
+Hardfork v7
+(Activated at block 433000)
+
+Key Changes:
+This is an important security update, and contains an important hotfix.
+Further details TBA post fork to v7 due to the nature of the hotfix.
+
+GitHub Link: https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.0.2
+
+---
+
+There will be another in depth announcement about this after the fork has gone live.
+I am in the process of updating the explorer & website tools
+Thanks everyone!
+[edited label shown]
+[link preview embed shown: GitHub | Release Zephyr Protocol v2.0.2 - ZSD Yield (Hotfix) · ZephyrProtoco... | Zephyr Protocol v2.0.2 Hotfix | This release is a required update for Mining Pools | Exchanges: Please remain in an "offline" state with suspended deposits and withdrawals. If you wish to kee...]
+
+=== 2025-01-23T04:43:41.820Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1331846800767713281
+@everyone
+
+# Post-Fork Update — Zephyr Protocol v2.0.2 (Hotfix)
+**Block Height:** 433000 (HF7)
+
+
+### Summary
+We have successfully executed a **hotfix hard fork (v2.0.2)** at block 433000 to address an issue that allowed transactions to **spend outputs of a different asset type** without proper enforcement. In short, this bug made it possible for one asset (e.g., ZSD, ZRS, ZYS) to be **spent** as if it were another asset (e.g., ZEPH), with wallet code modifications. We have now **closed** this loophole by enforcing that ring members must strictly match on `asset_type`.
+
+A huge thank you goes to the anonymous developer and contributor who first discovered and alerted us to this issue. They went above and beyond in investigating and helping us resolve it.
+
+.
+[edited label shown]
+
+=== 2025-01-23T04:43:48.968Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1331846830748864512
+
+### Impact
+
+- **30 transactions** have been identified with cross-asset ring members, starting soon after our v1.0.0 launch (Sep 2023), which introduced ZSD and ZRS.
+- In these cases, it appears likely that some ZRS and ZSD were “morphed” at a 1:1 rate into ZEPH.
+- As a result, there is more ZEPH in circulation than normally accounted for, and correspondingly less ZSD and ZRS.
+- The anonymous developer was able to estimate that in 10 out of these 30 transactions (due to specific patterns), roughly **95,000 ZSD** were morphed into ZEPH. For the other 20 transactions, we do not have a way to determine the total amount morphed.
+- All these transactions were recorded as “ZEPH” transfers, most of which morphed ZSD → ZEPH.
+- Any ZSD morphed into ZEPH is no longer exists. This bypasses the normal `redeem_stable` process which reduces the total circulation figure.
+- Currently, the total reported ZSD supply is ~580,000 ZSD. The Yield Reserve holds ~370,000 ZSD, leaving ~210,000 ZSD in circulation outside the Reserve.
+- Based on our understanding, the total morphed ZSD → ZEPH is likely between the 95,000 proven and up to ~210,000 not accounted for in the Yield Reserve, minus any ZSD held by the team and on exchanges.
+- There are fewer transactions involving ZRS → ZEPH, and the rate difference between ZRS and ZEPH has been smaller than for ZSD and ZEPH, which makes sense as to why the focus as been morphing ZSD -> ZEPH.
+Overall, we estimate ~200,000 ZEPH in “inflation” (and an equal amount of ZSD + ZRS total number in “deflation”) from this exploit—this is our **best educated guess** and not a confirmed figure. Further investigation may refine these numbers.
+
+.
+[edited label shown]
+
+=== 2025-01-23T04:43:56.608Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1331846862793084959
+
+### Is the Issue Fixed?
+Yes. As of **v2.0.2 (HF7)**, the daemon **enforces** consistent ring-member asset types. Any future transaction that attempts to mix asset types in its ring will be rejected by consensus and the code will be published shortly.
+
+**Important note:** This issue is **distinct** from the “range proofs” issue mentioned in previous announcements, which involves three suspect transactions that fail the updated range proofs code.
+
+
+### Next Steps & Further Audit
+
+- Our ongoing **in-depth chain audit** continues, aiming to quantify both this exploit’s impact and any implications from the range proofs issue.
+- Unfortunately, this discovery has delayed our audit timeline. We remain committed to thorough testing and ensuring no unknown vulnerabilities remain in our codebase.
+- Restoring user confidence is crucial to Zephyr’s future success, so we apologize for this situation and appreciate your patience as we work diligently on a more robust protocol.
+
+### Instructions for Nodes & Pools
+
+- **Miners and Pool Operators**: Please update immediately to v2.0.2.
+- **Regular Desktop Users**: If you run a local node, upgrade to v2.0.2 or wait for our upcoming audit release.
+- **Exchanges**: Remain offline for deposits/withdrawals.
+---
+
+Stay tuned for more details as our audit progresses. Thank you for your continued support of Zephyr Protocol.
+[edited label shown]
+
+=== 2025-02-19T08:22:24.092Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1341686311936987176
+@everyone
+
+
+# Upcoming Audit Hardfork (v8)
+We’re rolling out our Auditing HF on the 31st March as a critical milestone for our chain audit and commitment to maintaining chain integrity!
+
+
+## Key Details:
+
+- Hardfork Date: 31st March
+
+Updated downloads will be available ahead of time and will be announced when ready!
+
+
+- Audit Window:
+
+Throughout the month of April, all users will have the opportunity to audit their coins. This process is essential to confirm the integrity of your assets and our overall supply.
+
+
+- GUI Wallet Functionality:
+
+Our GUI wallets (web, Windows, and OSX) will be updated with streamlined auditing functionality – designed to be as close to a “one-click” process as possible – to make this as painless as we can for everyone.
+
+
+- Mandatory Audit:
+
+All assets on the network will require auditing (ZEPH, ZSD, ZRS, ZYS). Please ensure you follow the instructions once the update is available! But as mentioned, this will be made to be as painless as possible!
+
+We recognize that this development and process has taken longer than we initially anticipated. We apologize for the delays. Our approach has evolved significantly over time, and in addition; the necessary emergency Hardfork v7 to fix the morphing assets bug has ultimately set us back. But we’ve been working hard (and still working hard!) behind the scenes in order to bring this update for Zephyr as soon as we can, while being as rigorous as we can.
+
+We remain fully committed to providing a robust and secure protocol, and for us to move on from this and work on much more exciting features and developments!
+Thank you for your continued support!
+[edited label shown]
+
+(Range 1 summary: 14 messages, all by fennzar; neighbouring messages outside the range are 2024-10-30T09:03:49Z and 2025-03-31T01:42:24Z.)
+
+##### RANGE 2: 2025-05-01 to 2025-06-25 #####
+
+=== 2025-05-07T11:16:45.167Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1369634054516899870
+@everyone 
+
+
+# AUDIT/SUPPLY UPDATE
+Last few hours to get your coins audited team!!
+
+I have had confirmation from most exchanges that they have completed their audit, including XT although indirectly. However and significantly, we have had confirmation that MEXC has yet to audit all of their coins. We hope they can get them all in by the deadline but if not we are going to have to open a second auditing window to allow for this. It is a shame as its delaying this whole process by a few weeks undoubtedly. I think it is more likely than not that we will have do this, but 🤞 
+
+However we will just be keeping the window open for MEXC for the minimum amount of time, as soon as they are done we will publish new binary's and HF to complete the switch and effectively go back to normal, likely a 48 hours after publishing the updates.
+
+
+## What we know about supply
+Because of MEXC not being done yet, and our audited amount being very close to our circulating, we know that we will end with a higher reported circulating amount than the ~7.4M we would have had if it had not been for any exploit(s). The estimated circulating supply for ZEPH is going to be ~9.5M, given the information I have been provided. I don't want to sugar coat anything, this is unfortunate, but all things considered it's a manageable result. Painful, yes, but we have the strength to come back from this, stronger than ever! 💪 The value in going through this painful process, is providing much needed clarity. Now we know what we are dealing with, in an unequivocal way - we can move forward
+[edited label shown]
+
+=== 2025-05-07T11:16:46.747Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1369634061143900181
+In response to this we will likely adjust our emission schedule to reflect the new supply and we will be in the same spot now as we would've been anyway at the end of Year 3 for ZEPH, and is far below the 18.4M Max supply of ZEPH (before tail emission) - but this is not decided 100% yet, just been transparent with what our thinking is.
+
+The other assets look like they will come in under expected, and we know that some of those assets were likely morphed into ZEPH.
+
+⁠📢audit-log-updates
+
+=== 2025-05-09T04:55:49.223Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1370262965470629978
+@everyone 
+
+
+# Audit Extension
+Hardfork v10 - Activated at block 511000
+
+Download Link:
+https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.2.0
+
+This extension has been granted to ensure that critical services and partners that support the Zephyr Ecosystem have been able to get all of their assets audited successfully. 
+
+It is frustrating that we have had to do this, and I am not denying that, but I have seen some discussion in the general chat that have missed the mark. Everyone has had ample time and ample opportunity to audit their coins by now, which includes MEXC. However, MEXC has the largest wallet, with the most amount of coins to audit which was always going to be more challenging than regular users, and the coins that are contained in their wallet are user funds - aka Zephyr Investors. If we don't give some grace (said grace is limited mind you) we are just hurting ourselves. 
+
+As soon as we have confirmation that all coins are Audited we will be pushing an update for our v11 hardfork that will complete the switch-over to the audited assets and restore normal functionality. We won't be held in limbo forever by MEXC and I suspect that this update will be pushed only a few days after block 511000.
+
+Thanks everyone! 
+So close to the end of this saga 🙏
+[image]
+[transcribed from image] DAY 37 | ZEPH | ZSD | ZRS | ZYS
+[transcribed from image] Audited | 7,296,446.00 | 358,087.00 | 1,005,729.00 | 185,011.00
+[transcribed from image] Change | 13,624.00 | 199.00 | 2,937.00 | 0.00
+[transcribed from image] In Reserve | 2,187,899.00 | 270,541.00 | (blank) | (blank)
+[transcribed from image] User Audited | 5,108,547.00 | 87,546.00 | 1,005,729.00 | 185,011.00
+[transcribed from image] Reported | 7,395,569.99 | 475,010.68 | 1,166,020.32 | 189,500.28
+[transcribed from image] Chart title: "Zephyr Audit Progress". Legend: Reported % / Total Audited % / Reserve %. Horizontal axis: 0.00%, 25.00%, 50.00%, 75.00%.
+[transcribed from image] Chart values (Reported % / Total Audited % / Reserve %): ZEPH 100.00% / 98.66% / 29.58%; ZSD 100.00% / 75.39% / 56.95%; ZRS 100.00% / 86.25% / (no bar); ZYS 100.00% / 97.63% / (no bar)
+
+=== 2025-05-12T03:27:11.396Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1371327824484499508
+@everyone 
+
+
+# Audit Extension (HF v10) Now live!
+Last chance to audit your coins!
+Existing version of the wallet will work pointing to an updated daemon.
+
+Webwallet now online: https://wallet.zephyrprotocol.com/
+GUI wallet download from here (older version): https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.1.0
+And use a remote node: https://zeph.network/nodes
+
+
+## How long will the window be open for?
+Once we have confirmation on MEXC's audit we will create new v11 builds and set the hardfork height to 48-72 hours ahead.
+Therefore we haven't got a set date, we will be hardforking to v11 asap!
+
+Will be keeping everyone updated with the progress as done previously
+Thanks everyone! 🙂
+
+=== 2025-06-11T03:54:22.285Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1382206300896628746
+@everyone
+
+
+# Zephyr Protocol v2.3.0 (HF v11) - Audit Completion
+Download Link: https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.3.0
+Desktop GUI/Web wallet will be available soon!
+
+
+## **Hardfork v11**
+(*Activated at block 536000*)
+
+
+- Restoring normal network functionality
+- Supply figures are switched to the new asset_types
+- Old (unaudited) asset types are no longer considered valid Zephyr Protocol Assets
+
+
+Due to MEXC being unable to audit their entire wallet balance, we are including a mint for their unauditable balance (1,921,650 ZEPH) in this Hardfork.
+
+Our est. new supply figures:
+
+ZEPH: 9,706,880*
+ZSD:  368,690*
+ZRS:  1,019,810
+ZYS:  185,397
+
+*plus mining and yield rewards between now and HF activation, or last minute audits
+
+Est. supply change from current reported:
+
+ZEPH: +2,056,803
+ZSD:  -106,320.68
+ZRS:  -146,210.32
+ZYS:  -4,103.28
+
+To account for the new additional ZEPH in circulation compared to what was expected to be in circulation based on our emission curve at this time we are adjusting our emission schedule to reflect this. Our emission and new emission rate will be effectively at the end of Year 3 for ZEPH. This was done to ensure that the 18.4M Max supply of ZEPH (before tail emission) remains. 
+
+We know this has been a long and at times frustrating journey for everyone involved. Your patience, feedback, and unwavering support throughout this process have been invaluable. This hardfork marks a major turning point for the Zephyr Protocol. This is in effect our relaunch; restoring clarity and allowing us to move forward with renewed focus and strength. Thank you for standing with us. Let’s keep pushing forward. 💪
+[edited label shown]
+[link preview embed shown: GitHub | Release Zephyr Protocol v2.3.0 - Audit Completion   ZephyrProtocol... | Zephyr Protocol v2.3.0 - Audit Completion | This release is a required update for everyone | Hardfork v11 | (Activated at block 536000) | (blank line) | Restoring normal network functionality | Supply figures are switched...]
+[image: link preview thumbnail]
+[transcribed from image] New Release v2.3.0 / Zephyr Protocol v2.3.0 – Audit Completion / This release is a required update for everyone / 1 Contributor
+
+=== 2025-06-15T12:15:16.701Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1383781909716271154
+@everyone
+
+
+# Hardfork v11 - Audit Completion Success!! 🔥
+The time has arrived! It's been a long road but we are back in action!
+
+
+- Main explorer has had an issue, currently its resyncing up which should resolve the issue. In the meantime you can use https://zeph.network/
+- Web wallet + GUI wallets coming ASAP (hopefully in the next 24 hours!)
+- Website data and discord stats rely on explorer, so figures reported there will be updating soon!
+
+
+
+
+# Supply
+You can use the `supply_info` command in the cli wallet to get the current figures:
+
+
+```
+Height:             536010
+
+Supply Info
+ZEPH:               9750021.390589177146 ƶeph
+ZSD:                419218.231024497127 ƶsd
+ZRS:                1028603.221075447961 ƶrs
+ZYS:                185474.354977384066 ƶys
+
+Djed Reserve:       2339897.346230536280 ƶeph
+Yield Reserve:      282410.979309427686 ƶzd
+```
+
+
+
+# Reserve info
+
+```
+Height:             536012
+
+Reserve Info
+Reserve:            2339903.237935520521 ƶeph
+ZSD circ:           419219.252269005011 ƶsd
+ZRS circ:           1028603.221075447961 ƶrs
+
+Assets:             $2909937.267707110073
+Liabilities:        $419219.252269005011
+Equity:             $2490718.015438105062
+
+Reserve ratio:      6.94
+Reserve ratio (MA): 5.62
+
+Yield reserve:      282412.000553935570 ƶzd
+ZYS circ:           185474.354977384066 ƶys
+
+Exchange Rates
+Spot:               $1.243614360000
+Moving average:     $1.215200280000
+Stable:             0.804107790000 ƶeph
+Stable (MA):        0.823303270000 ƶeph
+Reserve:            1.947109620000 ƶeph
+Reserve (MA):       1.547620890000 ƶeph
+Yield price:        1.522644400000 ƶzd
+```
+
+
+Thanks everyone!
+[edited label shown]
+[link preview embed shown: ZEPH.network (Zephyr Protocol) | A Blockchain Explorer for the cryptocurrency Zephyr (ZEPH, ZRS, ZSD).]
+
+=== 2025-06-16T02:13:26.153Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1383992838965952655
+@everyone 
+
+
+# Zephyr Protocol v2.3.0 GUI & Webwallet Ready!
+Windows and Mac downloads now available:
+https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.3.0
+
+Webwallet updated and online:
+https://wallet.zephyrprotocol.com/
+
+Main explorer is back up!
+https://explorer.zephyrprotocol.com/
+
+
+# Fixes TODO:
+
+- ~~API issue on the explorer, resulting in incorrect figures on the Discord Statistics~~ ✅
+- ~~These API issues also effect the main website, and a bit more other work there to better reflect the update better is needed~~ ✅
+
+
+
+# Exchanges
+Working with MEXC to get them online ASAP! Other exchanges should be online. Please share in ⁠💬・general if you can confirm whether or not they are online!
+[edited label shown]
+[link preview embed shown: GitHub | Release Zephyr Protocol v2.3.0 - Audit Completion   ZephyrProtocol... | Zephyr Protocol v2.3.0 - Audit Completion | This release is a required update for everyone | Hardfork v11 | (Activated at block 536000) | (blank line) | Restoring normal network functionality | Supply figures are switched...]
+
+(Range 2 summary: 7 messages, all by fennzar; neighbouring messages outside the range are 2025-04-09T04:59:36Z and 2025-07-18T20:59:39Z.)
+
+##### RANGE 3: 2025-03-20 to 2025-04-30 #####
+
+=== 2025-03-31T01:42:24.919Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1356081166733807727
+@everyone 
+
+
+# Zephyr Protocol v2.1.0 - AUDIT
+The time is finally upon us! 
+Thank you everyone for your patience and support ❤️
+
+https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.1.0
+
+Key TBA Details
+
+- **Web wallet and GUI wallets: **Updates coming and a new announcement will be made when they are ready, along with instructions.
+- Audit period runs from now until May 7th - plenty of time to audit your coins!** No need for panic or rush!**
+
+
+EXCHANGES:
+Please remain in an "offline" state with suspended deposits and withdrawals during this period
+
+Mining pools/local node users:
+This update requires the blockchain to be completely resynced.
+Delete your existing lmdb database and then start zephyrd.
+
+In linux this is in your .zephyr folder by default
+windows is C:\ProgramData\zephyr\ by default
+
+
+## **Hardfork v8**
+(*Activated at block 481500*)
+
+Audit hardfork. All regular transfers and conversion are disabled from this block.
+Only audit transaction types are available until Hardfork v9:
+
+Wallet-cli commands for audit transactions:
+
+- `audit <wallet_address> <amount>` //ZEPH
+- `audit_stable <wallet_address> <amount>` //ZSD
+- `audit_reserve <wallet_address> <amount>` //ZRS
+- `audit_yield <wallet_address> <amount>` //ZYS
+
+or
+
+- `audit_all <wallet_address>` //ZEPH
+- `audit_stable_all <wallet_address>` //ZSD
+- `audit_reserve_all <wallet_address>` //ZRS
+- `audit_yield_all <wallet_address>` //ZYS
+
+
+**ANY COINS THAT ARE NOT AUDITED BEFORE HARDFORK V9 (apx. May 7th) WILL BE INVALIDATED.**
+This is a mandatory process for every user.
+
+
+## **Hardfork v9**
+(*Activated at block 508000*)
+
+All transactions on the network are paused while the results of the audit are analyzed.
+Hardfork v10 (TBA) will restore normal functionality.
+[edited label shown]
+[link preview embed shown: GitHub | Release Zephyr Protocol v2.1.0 - Audit   ZephyrProtocol/zephyr | Zephyr Protocol v2.1.0 - Audit | This release is a required update for everyone | Exchanges: Please remain in an "offline" state with suspended deposits and withdrawals. | TBA: GUI wallets and ...]
+[image: link preview thumbnail]
+[transcribed from image] New Release v2.1.0 / Zephyr Protocol v2.1.1 - Audit / This release is a required update for everyone / Exchanges: Please remain in an "offline" state with suspended... / 1 Contributor  (UNSURE: the title line in the thumbnail read "v2.1.1" in a screenshot taken while the image was cross-fading, with the small header reading "v2.1.0")
+
+=== 2025-03-31T23:57:57.984Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1356417269168607546
+@everyone 
+
+
+# ADUIT HARDFORK V8 SUCCESS
+After months of waiting (and hard work!) we have entered our audit period! 🔥 
+
+**GUI WALLETS WITH INSTRUCTIONS ARE COMING**
+**IF YOU ARE NOT COMFORTABLE WITH USING THE CLI WALLET - PLEASE WAIT**
+**AUDIT RUNS UNTIL MAY 7th - YOU HAVE PLENTY OF TIME**
+
+
+## Audit Progress Update: Day 1
+
+```
+Height:             481717
+
+Audit Info
+ZEPH:               2,165,422.90 ƶeph   (2,089,700.03 in reserve)     user audited: 75,722.86 ƶeph 
+ZSD:                267,243.14 ƶsd      (261,658.86 in reserve)       user audited: 5,584.27 ƶsd   
+ZRS:                53,497.30 ƶrs
+ZYS:                5,132.37 ƶys
+```
+
+*^figures produced from the `audit_info` command in the cli wallet*
+
+ZEPH in the DJED Reserve and ZSD in the Yield Reserve was automatically audited.
+
+Exchanges are receiving instructions and will be conducting their audit transactions. 
+**If your funds are on an exchange, the exchange will be doing the audit for you - you don't have to do anything**
+We will keep everyone up to date on the audit process periodically!
+
+Thanks everyone!
+
+=== 2025-04-07T05:28:36.851Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1358674806601547917
+@everyone 
+
+
+# AUDIT UPDATE - 7/37 DAYS Remaining
+The first week of our audit has been completed! 🥳 🔥 
+Still 30 days to go until the deadline team!
+
+Check in on the ⁠📢minor-announcements channel to see periodic updates from me on the progress of the audit.
+
+Our focus has been to assist with exchanges and mining pools. We are working with them to push an update to make the process smoother for them, namely removing the restrictions on splitting conversion transactions (in this context audit transactions). 
+
+**Web wallet/GUI wallets are still in progress** Our aim was to have this available by today, and it is almost there, but our focus has had to be on the above ^^. We want to iron out all issues with cli audits to hopefully make the GUI process clean! We will **announce when ready**, along with instructions! If you aren't comfortable with using the CLI then please just wait for the GUI 🙏 keep it simple guys!
+
+ After May 7th, we enter into a "paused" state for the network. If people have not had a chance to audit their coins we have the ability to open the window for audits again, if need be! So **we will absolutely ensure that all exchanges have audited their coins** (and get confirmation from them) and that self-custody holders will have ample opportunity to have audited their coins.
+
+I don't foresee this as being necessary, but I want to reassure everyone that we have that option if we need it!
+
+For CLI users:
+If you want to audit your coins, and not wait for updates the workarounds for errors are to manually split up your audit transactions.
+E.g. `audit <address> <some_amount>` 
+The amount you can submit will depend on the size of the inputs you have. So you can try smaller and smaller amounts until the transactions are accepted, and do that several times until all your coins are audited. If you have lots of small mining payments you likely are to run into this issue. Not ideal, so feel free to wait until updates!
+
+Thanks!
+
+=== 2025-04-09T04:59:36.803Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1359392284042330193
+@everyone 
+
+
+# WEB WALLET AND GUI WALLETS AVAILABLE (v2.1.1)
+Download: https://github.com/ZephyrProtocol/zephyr/releases
+Web Wallet: https://wallet.zephyrprotocol.com/
+
+Quick Guide: https://medium.com/@zephyrcurrencyprotocol/zephyr-audit-quick-guide-b6b987caa0ae
+
+Issue: `Daemon response did not include the requested real output`
+Rescan your wallet: [unresolved channel mention]
+
+If you have any other issues with submitting the audit transactions, try auditing several audits will smaller amounts!
+
+Video Guide: https://x.com/zephyr_org/status/1910069705068749286
+[edited label shown]
+
+(Range 3 summary: 4 messages, all by fennzar; neighbouring messages outside the range are 2025-02-19T08:22:24Z and 2025-05-07T11:16:45Z.)
+
+##### RANGE 4: 2025-07-01 to 2025-10-31 (twelve announcements, none of them cited; left out) #####
+
+##### RANGE 5: 2024-09-15 to 2024-10-25 #####
+
+=== 2024-09-28T02:32:14.475Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1289414338569834527
+@everyone
+
+
+# 🔥 Zephyr Protocol - RESILIENCE 🔥
+How has Zephyr's Stablecoin $ZSD maintained its $1USD peg? 👀💪
+
+Discover Zephyr's Battle Tested History and the crucial mechanisms at play! 🌀🔁
+
+
+- produced by
+
+@hydratedGoose 
+ 
+https://x.com/zephyr_org/status/1839855086769713527
+ 
+More announcements to follow regarding Zephyr Protocol v2.0.0 - ZSD Yield.
+Release is very soon 😉 Official announcement date and details tomorrow
+[link preview embed shown: Zephyr Protocol (@zephyr_org) on X | Zephyr Protocol - RESILIENCE | How has Zephyr's Stablecoin $ZSD maintained its $1USD peg? | Discover Zephyr's Battle Tested History and the crucial mechanisms at play! | produced by @HydratedGoose | Part 1/2 (emoji not captured in this text)]
+
+=== 2024-09-29T05:48:09.449Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1289826030370029640
+@everyone
+
+
+# 🚨 Zephyr Protocol v2.0.0 Announcement — ZSD Yield! 🚨
+We are excited to announce the upcoming Zephyr Protocol v2.0.0 update, featuring the ZSD Yield Mechanism—a key development aimed at driving adoption and bringing more utility to Zephyr Stable Dollar (ZSD).
+
+🗓️ Hardfork Block 360,000 (Approx. 2 Weeks)
+Stay tuned as we approach this key milestone 👀 
+
+🔹 What’s Coming in v2.0.0?
+
+
+## ZSD Yield Mechanism
+We’re introducing an innovative yield mechanism for ZSD holders that will reward users who stake their ZSD and in return receive Zephyr Yield Shares (ZYS)—a new native asset designed to track your share in the ZSD Yield Reserve. By staking your ZSD, you’ll earn a portion of the block reward, boosting your returns while contributing to the protocol’s growth.
+
+Key Changes:
+
+
+- 5% block reward allocated to ZSD Yield
+- 🆕  Zephyr Yield Shares (ZYS) – to track the value of your stake of the Yield Reserve and the value of the ZSD Yield Reserve as a whole
+
+
+
+This update solidifies ZSD as a truly compelling Store of Stable Value while rewarding those who contribute to its circulation through providing additional incentives
+
+.
+[edited label shown]
+
+=== 2024-09-29T05:48:31.006Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1289826120786640897
+🔹 Why ZSD Yield?
+
+We need to hone in on the Store of Stable Value concept, crucial to our stablecoins success as the first key pillar of adoption.
+Yield will make ZSD completive in this space as other stablecoins on lending platforms give APY rewards. Yield also gives a level of investment returns to those participating in growing the ecosystem which not only makes sense but also help to curtail the effects of a inflation to serve as a "true" store of "real" value.
+
+The ZSD Yield Mechanism is also powerful tool to break the "chicken and egg" problem of further adoption. By incentivizing users to hold and "stake" ZSD, we increase ZSD circulation, making it more attractive for exchanges and real-world use cases. More demand, more liquidity, more adoption!
+
+We have a lot of information on ZSD Yield here in the discord from previous ⁠📢・announcements  and in the ⁠[unresolved channel mention] channels, for those seeking more information!
+With this approach we have a Flexible entry/exit – No lock-up periods, redeem your ZYS for ZSD anytime!
+
+🔹 Key Block Reward Changes:
+
+
+- Miner reward reduced from 75% -> 65%
+- Reserve reward increased from 20% -> 30%
+- ZSD Yield reward – New 5% allocation
+- Governance reward – 5% -> 0% (Removed)
+
+
+=== 2024-09-29T05:48:32.899Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1289826128726593617
+
+## Reserve Reward and Yield Reward logic and effects on Reserve Ratio:
+5% of the block reward is allocated for the ZSD Yield Mechanism. The ZEPH from the block reward is used to mint new ZSD, which is then placed into the Yield Reserve, while the ZEPH itself is added to the Reserve, backing these newly minted stablecoins. The amount of ZSD minted fluctuates based on ZEPH’s price at the time. The mechanism operates similarly to our proven ZRS model.
+
+The Reserve Ratio which is defined as the total value of ZEPH backing all ZSDs. The value of ZEPH in the Reserve are our Assets, and the total circulation of ZSD is our Liabilities.”
+
+`Reserve Ratio = Assets / Liabilities`
+`Reserve Ratio = ZEPH Value in Reserve / Total ZSD Circulation`
+
+The new block rewards will send 30% (Reserve Reward) + 5% (Yield Reward) of the ZEPH block reward to the DJED based Reserve.
+The 5% Yield reward portion is used to mint the equivalent value in ZSD for the new Yield reserve.
+
+This means there is a 7:1 Ratio of new assets to new liabilities generated from our block reward. This means that for every unit of ZSD minted as a yield reward, 7 units of ZEPH are added to the reserve. This balance ensures the reserve ratio will naturally normalize at 700% - all else equal.
+
+As a extra precaution, ZSD Minting (for the yield reserve) will be halted below 200% Reserve Ratio, to help speed up natural protocol recovery.
+[edited label shown]
+
+=== 2024-09-29T05:48:40.196Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1289826159332163656
+
+## Removal of Governance Reward
+As part of our ongoing efforts and vision to decentralize Zephyr Protocol and ensure a community-driven future, we are removing the governance reward from the block reward allocation. This decision aligns with our commitment to foster a more decentralized, community-oriented environment. The development team will participate just like everyone else, by using the Zephyr Reserve Share and Zephyr Yield Share systems, aligning our incentives with the broader community. We also plan to use some of the Treasury funds to participate in these mechanisms gradually post-launch (as to not compete on day 1 with everyone) to help grow and cover other expenses and investments, like the videos produced by @hydratedGoose. This shift places even greater emphasis on user engagement and participation, and reinforces the long-term vision of a truly decentralized protocol!
+
+Also on a personal note, I think this is the right move for Zephyr, especially given the market conditions that we have experienced and where we are now at this point in time. There is enough with the allocation of now 35% to go around to make use of and to finally to quell any concerns about our alignment with the success of the protocol (even though it was always only 5% compared to 75% going to the miners!). I think even on optics alone this is well worth doing. Balancing project funding and the fears of insiders selling is always extremely challenging, I hope this is received well team ❤️ 
+
+🔹 Other Updates:
+We are working on an explainer video for ZSD Yield, as well as a new webpage and other website updates to display and host information about ZSD Yield. 
+Still cooking on those changes, and updates for tools to power this new information!
+
+
+🔗 DOWNLOAD LINKS: TBA, we a finalizing a code push and compiling binaries for mining pools and exchanges that will be released soon! As well as the new GUI wallet. This is a required update!
+
+=== 2024-09-30T04:27:19.127Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1290168074510532618
+@everyone
+
+I've collated all information on ZSD Yield in this announcement article:
+https://zephyrprotocol.com/blog/2024-09-30-Zephyr-Protocol-v2-0-0-ZSD-Yield-Hardfork-Annoucement
+
+Tweet:
+https://x.com/zephyr_org/status/1840607612880232469
+
+Download links available now!
+https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.0.0
+
+If you are running a local wallet and/or your own node, you will need to update!
+@Mining Pool Operator
+https://github.com/ZephyrProtocol/zephyr-cryptoforknote-util
+[edited label shown]
+
+=== 2024-10-13T12:39:21.112Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1295002940943372319
+@everyone
+
+
+# 🚨 Zephyr Protocol v2.0.0 Announcement 🚨
+
+# HARDFORK SUCCESS!
+Woo! 🚀 
+It's been a long road, but the hotly anticipated ZSD Yield Mechanism is now live!
+
+Core network is working beautifully!
+Already I see we have:
+
+ZYS circulation: `238,690.24` 
+ZSD in Yield Reserve: `238,938.33`
+
+Meaning we have a current ZYS price of `1.001` ZSD 😉
+
+Still have some teething issues to sort out, I'm battling with the website tools right now for the new dedicated Yield page
+
+:ZYS:
+[image]
+[transcribed from image] Protocol Info / Reserve 1,722,205.97 / Stable Dollar Circulation 454,133.33 / Reserve Share Circulation 1,094,676.3 / $2,439,109.3 Assets / $1,984,975.97 Equity / 537.09% Reserve ratio / 508.79% Reserve ratio (MA) / Yield Info / $1 ZYS price / 238,690.24 ZYS ZYS Circulation / 238,939.14 ZSD Yield Reserve  (the image is cropped on its right-hand side; the three cards beyond the third column are not visible)
+
+=== 2024-10-13T13:53:35.431Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1295021623711236218
+@everyone 
+
+
+# ZSD Yield Explainer video & Website updates
+https://x.com/zephyr_org/status/1845454120502931888
+
+Thank you to @hydratedGoose for putting this together!
+
+-
+
+Also @Drakuf - BuyBoosting.com put in some **serious work on the website!**
+We are still fixing things up here and there, and some of my backend stuff isn't perfect right now so we are still manically pushing new changes! 😅 
+
+-
+
+We have had reports of wallet issues.
+I can confirm that the webwallet is working! ✅ 
+
+We will be investigating the issues with the GUI desktop wallet ASAP.
+We hopefully will be able to have a simple guide to resolve - failing that we will push an update in the next few days!
+
+Thank you to everyone 🫡 
+
+ENJOY YOUR YIELD :ZYS:
+[edited label shown]
+[link preview embed shown: Zephyr Protocol (@zephyr_org) on X | ZEPHYR PROTOCOL v2.0.0 - ZSD Yield | Harkfork success!!! | Watch this explainer video to learn all about it! | - produced by @HydratedGoose]
+
+=== 2024-10-13T13:54:07.443Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1295021757979168841
+Website links you NEED to check out: 😉 
+https://zephyrprotocol.com/
+https://zephyrprotocol.com/network
+https://zephyrprotocol.com/yield
+
+=== 2024-10-14T03:27:57.832Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1295226567475073097
+@everyone
+
+
+## V2.0.0 Desktop GUI wallet fixes:
+~~V2.0.0a
+
+Windows: https://github.com/ZephyrProtocol/zephyr/releases/download/v2.0.0/Zephyr-Wallet-v2.0.0a-windows.zip
+Mac: https://github.com/ZephyrProtocol/zephyr/releases/download/v2.0.0/Zephyr-Wallet-v2.0.0a-osx-arm64.dmg.zip~~
+*outdated*
+
+Known Issue:
+We have discovered an issue when it comes to swapping ZYS -> ZSD when using a **remote node** (redeeming yield shares)
+This is also prevalent in the web wallet. We are working on a fix for this but be aware that you will not be able to redeem your yield shares unless you can connect to a locally hosted node.
+
+It would be unlikely that the fix for this will require another wallet update, we should just be able to update the remote nodes themselves to fix 🫡
+[edited label shown]
+
+=== 2024-10-15T00:10:30.892Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1295539265673101435
+@everyone 
+
+
+# v2.0.1 Desktop wallet fix
+Fixes the issue described above ^ when redeeming ZYS. Recommended for regular users to update.
+Web wallet has been updated
+Not required for exchanges/pools
+
+https://github.com/ZephyrProtocol/zephyr/releases/tag/v2.0.0
+
+Also working on website updates still and a bunch of little things here and there. 
+ZYS Price is already 1.0047 ZSD 😉 +0.47% after 36 hours or so - meaning after the 0.1 % mint and 0.1% redeeming fees stakers are already net profit 💰 
+
+Hope everyone is enjoying their YIELD 🫡
+[link preview embed shown: GitHub | Release Zephyr Protocol v2.0.0 - ZSD Yield   ZephyrProtocol/zephyr | Zephyr Protocol v2.0.0 - ZSD Yield Release | This release is a required update for everyone running their own node or local wallet (CLI and GUI). | Hardfork v6 | (Activated at block 360000) | ZSD Yield M... (emoji not captured in this text)]
+
+=== 2024-10-17T04:01:28.745Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1296322165452443649
+@everyone 
+
+
+# $ZYS Returns📈 Update!
+Price: $1.00 -> **$1.01 (+1%)**
+In just over 3.5 days!
+
+Zephyr Protocol v2.0.0 - ZSD Yield has been an amazing success thus far! 🔥
+[image]
+[transcribed from image] ZSD YIELD / ZSD YIELD MECHANISM / Stake your ZSD to earn yield through Zephyr's innovative ZSD Yield system. Exchange your ZSD for Zephyr Yield Shares (ZYS) and watch your stake grow as new ZSD is added to the Yield Reserve. No lock-ups, no hassle—redeem your ZYS for ZSD anytime. / Yield Reserve / TOTAL ZSD IN RESERVE $276,853.89 / 56.66% / ZYS Zephyr Yield Shares / Circulation 274,085.92 / +1969.254 (24h) / $1.0101 ZSD
+
+=== 2024-10-17T04:01:41.622Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1296322219462623306
+
+## Historical Returns Breakdown:
+So far ~1600 ZEPH from the 5% block reward allocation has been used to mint +2400 ZSD
+[edited label shown]
+[image]
+[transcribed from image] Historical % Returns / Last Block 0.0003% / +0.97 ZSD / 1 Day 0.25% / +692 ZSD / 1 Week 1.01% / +2436 ZSD / 1 Month 1.01% / +2436 ZSD (greyed out) / 3 Month 1.01% / +2436 ZSD (greyed out) / 1 Year 1.01% / +2436 ZSD (greyed out) / All time 1.01% / +2436 ZSD
+
+=== 2024-10-17T04:02:17.583Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1296322370293862435
+
+## Projected Returns:
+Projecting future returns is difficult, as competition for the yield is a major factor. 
+
+> Future Projections: Explore estimated yield returns based on different ZEPH price scenarios and staking levels. Our projections cover a range of potential outcomes, including high and low yield rates, as well as projections based on the current network state. While our approach aims to provide a realistic range, the nature of the mechanism means future return rates aren't knowable. However, we will continue to refine our projections over time to ensure they remain as accurate as we practically are able to.
+
+These are our current projections based on different scenarios:
+[edited label shown]
+[image]
+[transcribed from image] Projected Returns / 1 Week: LOW 0.05% / SIMPLE 0.25% / HIGH 0.39% / 1 Month: LOW 1.45% / SIMPLE 7.42% / HIGH 11.61% / 3 Months: LOW 4.27% / SIMPLE 21.81% / HIGH 34.14% / 6 Months: LOW 8.28% / SIMPLE 42.31% / HIGH 66.23% / 1 Year: LOW 15.59% / SIMPLE 79.71% / HIGH 124.76%
+
+=== 2024-10-17T04:02:58.050Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1296322540024889385
+X post: https://x.com/zephyr_org/status/1846763144968130907
+[link preview embed shown: Zephyr Protocol (@zephyr_org) on X | $ZYS Returns | Price: $1.01 (+1%) | In just over 3.5 days | Zephyr Protocol v2.0.0 - ZSD Yield has been an amazing success thus far! | Twitter (date/time line cut off in my capture); the embed also shows a preview image, apparently the same "ZSD YIELD MECHANISM" graphic as in the 2024-10-17T04:01:28Z message]
+
+=== 2024-10-22T05:48:58.686Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1298161157793644599
+@everyone
+
+Massive week for all of us in the Zephyr Community!
+As suspected, there has been really great interest in ZSD Yield and we are seeing the market respond accordingly (finally might I add!)
+
+**ZSD Yield/ZYS**
+To date, ZYS has appreciated **2.58%** (just over 1 week!) and simple projections are extremely high at over 150% APY.
+It's not super realistic to expect that we will see these returns in practice in a years time, fyi!
+Yielders, Enjoy your high returns in the meantime 😉 It is practical to see returns at anywhere from 30-50% but time will tell, it comes down to competition for the yield
+
+Seems for now many either don't fully know about it as it's still under the radar, or they are looking for higher risky returns by holding ZEPH 👀 
+All in all, great to see ❤️
+
+**ZEPH Circulation Figures/CMC Marketcap etc**
+Thanks to a tip from @MARENGO EIGHT, we have investigated an issue where we discovered an oversight in the explorer api returning the current ZEPH in circulation.
+The ZEPH that has been added to the reserve was not correctly accounted for, this now has been updated and triple checked!
+
+For those interested, 770K/1.8M ZEPH in the Reserve is from the Reserve Reward - and it was this 770k that was not accounted for.
+Without the reserve reward ZRS price which started at 0.5 ZEPH would only be 0.79 ZEPH today. Instead we are sitting at 1.51 ZEPH, an ATH! 🥳 
+Our innovations that we have introduced to DJED do really make the Zephyr Ecosystem unbeatable 😉 
+
+CMC and CoinGecko market caps have been broken for a long time. Seems they have just taken a snapshot of our supply. 
+I'm reaching out to them to get this corrected. At time of writing our Market Cap is $22.9M which would put us at around #791 - 
+
+Thank you to all that have stuck with us, we have tried our best to create the ultimate stablecoin protocol ❤️
+But also a warm welcome to any newcomers!
+I hope that we see sustainable growth of the ecosystem from here on out, metrics are looking good!
+[image 1 of 2]
+[transcribed from image] ZEPHYR PROTOCOL STATE / THE PRIVATE UNTRACEABLE STABLECOIN / 1371.7% Reserve Ratio / 1218.1% Reserve Ratio (ma) / Reserve: TOTAL ZEPH IN RESERVE 1,833,435.60 / ZEPH / $7,268,472.09 / ZEPH Zephyr: Circulation 5,791,335.41 (+8,715.21 (24h)) $3.96 USD / ZSD Zephyr Stable Dollars: Circulation 529,884.11 (+21,259.27 (24h)) $1.00 (0.25 ZEPH) / ZRS Zephyr Reserve Shares: Circulation 1,127,966.63 (-1,565.09 (24h)) 1.51 ZEPH ($5.97)  (UNSURE: the small line under "TOTAL ZEPH IN RESERVE" was read as "ZEPH / $7,268,472.09")
+[image 2 of 2]
+[transcribed from image] ZSD YIELD / ZSD YIELD MECHANISM / Stake your ZSD to earn yield through Zephyr's innovative ZSD Yield system. Exchange your ZSD for Zephyr Yield Shares (ZYS) and watch your stake grow as new ZSD is added to the Yield Reserve. No lock-ups, no hassle—redeem your ZYS for ZSD anytime. / Yield Reserve: TOTAL ZSD IN RESERVE $324,441.26, 61.23% / ZYS Zephyr Yield Shares: Circulation 316,251.04, +18,594.63 (24h), $1.0259 ZSD / ZYS Price (tabs: 1 Week, 1 Month, 3 Month, 6 Month, 1 Year, All Time; 1 Week selected): ZYS / ZSD chart, last value tag 1.0257, x-axis 17 18 19 20 21 22 / ZYS Circulation And Yield Reserve (same tabs): legend "ZYS Circulation", "ZSD in Yield Reserve"; value tags 325016.73 and 316240.93; y-axis 270000.00 to 330000.00; x-axis 16 17 18 19 20 21 22
+
+=== 2024-10-23T10:59:20.299Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1298601650365403178
+@everyone 
+
+
+## Node issues:
+We have had a big stress test of our services today so far! 
+Happy to report that the network itself had no issues 
+
+But almost everything went down at some point
+Website, Nodes, Webwallet, Explorer - It was like playing whack-a-mole!
+
+The cause of this is a massive flood of transcations were submitted to the pool. 
+We have been made aware that this was more than likely an exchange consolidating their outputs to help with sending transactions.
+But due to the flood, it caused many nodes to run out of memory.
+
+I've upgraded I think 5 servers and am monitoring might still have some more crashes and subsequent upgrading to do 😅 
+Right now as far as I can tell everything is working... once all these transactions clear in about 12 hours we should be nice and stable again.
+In the meantime it has served as a nice test!
+
+
+## Massive ZSD & ZYS mint!
+ZSD Yield has attracted a big player. 
++168,192.91 ZSD
++161,739.71 ZYS
+
+It looks like this came from a ZRS redeem.
+ZRS >> ZEPH >> ZSD >> ZYS.
+
+Love seeing this in-protocol action!
+
+https://x.com/zephyr_org/status/1848965777225027975
+[image 1 of 2]
+[transcribed from image] ZYS Circulation And Yield Reserve / tabs: 1 Week, 1 Month, 3 Months, 6 Months, 1 Year, All Time (1 Week selected) / legend: ZYS Circulation, ZSD in Yield Reserve / value tags 493516.94 and 477980.63 / y-axis 250000.00 to 500000.00 in steps of 25000.00 / x-axis 17 18 19 20 21 22 23
+[image 2 of 2]
+[transcribed from image] ZSD CIRCULATION / tabs: 1D 1W 1M 3M 6M 1Y ALL / value tag 691.10K / y-axis 440.00K to 760.00K in steps of 40.00K / x-axis 24 Oct 6 11 16 21
+
+=== 2024-10-23T11:09:09.475Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1298604121548390450
+@everyone
+
+
+## Spot/MA pricing - Newcomers please read!
+I would imagine that a lot of us here in the discord are well aware of the spot/ma interaction.
+**Please do your part** in ensuring that new users aren't surprised by this interaction if people talk about wanting to swap!
+
+**For the uninitiated:**
+It's important to remember that when swapping between assets (like ZEPH -> ZSD) you use the ***worst rate between the spot and ma price ***
+This is an anti price manipulation measure to ensure it is not possible to game the system for profit...
+
+But as a genuine user, you do need to be careful of swapping during times when there is a high divergence between the spot and ma price.
+You can check this on the website or in your wallet!
+
+E.G. (using prices from a little while ago)
+
+Swapping 100 ZEPH for ZSD may be less than you expect:
+ma = $4.36
+spot = $4.57
+
+This would net 433 ZSD using a moving average of $4.36 
+As Apposed to 455 ZSD at a spot price of $4.57 for example
+
+After 0.1% conversion fees.
+Be sure to keep this in mind! 🫡
+
+We have had cases of $4 spot vs $3 ma which could result in a bit of nasty surprise!
+It's really a problem at the moment due to big swings in the market, when they calm down the divergence is usually not too bad
+
+I would love in the future to adjust the moving average calc so that it is more aligned/weighted to the current price to minimize this effect, but its a tricky one because we need to ensure that the market can't be manipulated for purposes of gaming the protocol
+
+(Range 5 summary: 18 messages, all by fennzar; neighbouring messages outside the range are 2024-08-30T08:28:09Z (previous) and 2024-10-30T09:03:30Z (next).)
+
+##### RANGE 6: 2024-06-10 to 2024-07-31 #####
+
+=== 2024-06-17T09:51:59.761Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1252199056323772438
+@everyone 
+
+**We are currently experiencing a network syncing issue**
+
+TL;DR - We need to work on a fix, test and release ASAP - we are targeting to complete this over the next 24 hours.
+
+
+**Nature of the issue:**
+Many nodes are struggling to sync to the top height.
+Although we are still investigating, it seems the issue can be traced to small discrepancies produced in the native asset prices in the pricing_record.
+
+For instance - Height `274226` a common stuck point
+
+
+```
+2024-06-17 05:29:31.825 D bl.pricing_record.stable: 395144550000 bl.pricing_record.stable_ma: 385425440000 bl.pricing_record.reserve: 1248532590000 bl.pricing_record.reserve_ma: 1254829100000
+2024-06-17 05:29:31.825 D stable_price: 395144550000 stable_price_ma: 385425440000 reserve_price: 1248532590000 reserve_price_ma: 1254829110000
+2024-06-17 05:29:31.825 E Block with id: <23982e0750ba3709b3ebb0a666af47efd79527ed2c8f3b7f5026aa718abc8e36>
+2024-06-17 05:29:31.825 E has invalid pricing record values!
+```
+
+In this case - the `bl.pricing_record.reserve_ma` value (from the block what we are trying to sync, generated from the pool) is different from what the nodes calculate this to be in `reserve_price_ma` and thus the block is rejected, resulting in us being stuck here.
+
+
+```
+bl.pricing_record.reserve_ma: 1254829100000
+reserve_price_ma:             1254829110000 //difference of 10000
+```
+
+This check is done to ensure that the block added is acceptable, and the values aren't able to be manipulated.
+In my testing thus far, **I was able to add a tolerance to allow these small differences, which does work!** But it isn't likely to be the root cause itself.
+
+.
+
+=== 2024-06-17T09:52:12.010Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1252199107699806309
+It is possible that calculations and type conversions done in different environments could result in small discrepancies like this and it may be ok to simply have some allowance like what works for me in my testing.
+
+Ideally though we'd like to eliminate these discrepancies, so we have decided to have a deeper dive, take the extra time to ensure that we put out a more robust fix!
+Naturally, this part of the code was tested extensively, and has been working as expected up to this point which does provide us an additional challenge to uncovering the trigger now!
+
+**Testing Process**
+I attempted to sync from scratch to an exclusive node that was reporting the highest height, but got stuck at the same `274226` block.
+Which points to the calculation discrepancy described above ^ in the `handle_block_to_main_chain` function, on the `get_stable_coin_price` and `get_reserve_coin_price` calls.
+
+However, once adding in a tolerance allowance, syncing up, popping blocks and resyncing, I got stuck at a different earlier block, with the same issue.
+Which points to something working unexpectedly when trying to perform the rollback 🤔 
+I'm still investigating down this thread now! Could be a combination of things which makes this process a bit more tedious!
+
+>>>> *update* ^^ seems the issue is likely to do with the rollback/pop_blocks section on further testing...
+
+**Final thoughts**
+We have been here before, in the early days of Zephyr we had a few instances that stopped our network from progressing which we were able to resolve.
+
+I'm confident that as we have done in the past, we will be able to knock out a fix for this; and fast!
+We already have a solution that appears to work (allowing for some tolerance) but we aren't going to put out something half baked and rushed. We ought to dig a bit deeper first!
+
+We are still going to be on track with our v1.1.0 update despite this hiccup, never a dull moment!!!
+
+Time to get back to it for me 🫡
+[edited label shown]
+
+=== 2024-06-18T07:29:03.287Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1252525471850172486
+**24 hr UPDATE ** - We have identified the root cause of the problem, and the fix is deep in the works. Still more to do.
+ 
+The issue is caused on rollback/pop_blocks. The reserve reward is not being removed correctly but only for blocks with a unusually large weight (lots of transactions). This results in different reported circulating amounts causing the pricing record discrepancy described above ^^
+
+Explains why the issue has been so allusive - and why we didn't come across it in original testing, our retest earlier today on a private test chain and why it has not been an issue up until now!
+
+Will keep everyone updated but we need another day to sort it out!!
+
+=== 2024-06-18T22:34:25.661Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1252753316400857099
+@here
+
+**GOOD PROGRESS** 🥳 
+
+We have a fix for which caused the issue above ^^
+Still some edge cases to test though! Leaving no stone unturned.
+
+Next challenge we are starting to work on is accounting for any changes that we may need to make in order to keep the current longest chain - ideally we can do this! and thus allowing all nodes to sync up 🫡
+
+=== 2024-06-19T09:26:12.407Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1252917341981769748
+@everyone
+
+**BETTER PROGRESS** 📢 🎉 
+
+In short - our fix is working!!!
+
+Also we have made accommodations to sync to the current longest chain, allowing clean chains to sync past the weird 274662 block, which all going well means that we will be able to keep it.
+
+Need to do some more syncing from scratch, and syncing/popping blocks from a variety of dbs that are stuck at different places/in different states.
+
+New downloads will be available for mining pools/exchanges after we get some rest so **12 hours** at the earliest from this post. 
+
+This also means we will be able to be online for ~12 hours after the release to monitor the chain and help with any required support and if there are still issues we can be ready to identify/rectify them as they occur 👀 
+
+Thanks for bearing with us team ❤️ 
+Can't wait to put this to bed and get on with the fun stuff 🔥
+
+=== 2024-06-19T23:48:08.279Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1253134254070825042
+@everyone
+
+
+# FIXED - UPDATE AVAILABLE NOW FOR DOWNLOAD (v1.1.0)
+https://github.com/ZephyrProtocol/zephyr/releases/tag/v1.1.0
+
+> This release is a required update for everyone running their own node.
+
+If your daemon is stuck on block 274662 simply running the updated daemon will fix the sync issue. If your daemon is stuck after this point, you will also have to use the pop_blocks command to go back to block 274662 or earlier to continue syncing. Alternatively deleting your existing chain and resyncing from scratch will resolve.
+
+Bug Fixes
+Fix reserve reward removal after popped block with block weight greater than median weight and patch reserve supply at height 274662. This fixes the sync issues after reorgs.
+
+@Mining Pool Operator
+
+Messaging exchanges now 🙂
+
+
+### Version naming update
+Due to this being a required update for all nodes, not just the mining pools, we have decided to use the `v1.1.0` tag, 
+meaning that we will need to update our convention for our planned updates, so this info will be updated soon to avoid confusion 
+
+I'll be around to help anyone if needed
+[edited label shown]
+[link preview embed shown: GitHub | Release Zephyr Protocol - Osiris v1.1.0   ZephyrProtocol/zephyr | This release is a required update for everyone running their own node. | If your daemon is stuck on block 274662 simply running the updated daemon will fix the sync issue. If your daemon is stuck aft...]
+
+=== 2024-06-27T07:58:38.827Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1255794409795227720
+@everyone
+
+
+# 🚀 Zephyr Protocol - Artemis v1.2.0 Release 🚀
+We are excited to announce the release of Zephyr Protocol - Artemis v1.2.0, introducing major enhancements to improve functionality, user adoption, and security. This update includes critical protocol changes, fee adjustments, and the latest Monero developments.
+
+The Artemis v1.2.0 update comprises two hardforks; v4 and v5.
+
+
+## Download:
+https://github.com/ZephyrProtocol/zephyr/releases/tag/v1.2.0
+
+**Hardfork v4**
+*Activated at block 294000 - July 13th, 2024 15:00 UTC (approx)*
+
+Activates the new pricing record format to save previous reserve ratio values in the pricing record.
+
+**Hardfork v5**
+*Activated at block 295000 - July 15th, 2024 00:00 UTC (approx)*
+
+The reserve ratio moving average is now derived from an average of previous reserve ratio values over a 24-hour period, made possible from the pricing record changes in Hardfork v4. This method smooths out fluctuations and prevents manipulation of the reserve ratio by minting/redeeming ZSD.
+
+**Fee Adjustments:**
+
+
+- Mint ZSD: 2% → 0.1%
+- Redeem ZSD: 2% → 0.1%
+- Mint ZRS: 0% → 1%
+- Redeem ZRS: 2% → 1%
+
+
+These changes lower barriers to entry, increase ZSD circulation, and make it easier to maintain the arbitrage peg on exchanges.
+
+Future Development:
+Our next mission is to add a yield mechanism for ZSD holders. Our early concept is outlined here:
+https://zephyrprotocol.com/blog/2024-05-30-Zephyr-Protocol-ZSD-Adoption-Chicken-and-Egg
+
+We are eager to get to work on this exciting and groundbreaking update to Zephyr Protocol!
+
+
+## Twitter/X post here: https://x.com/zephyr_org/status/1806235411515314505
+
+## Read the full article here: https://zephyrprotocol.com/blog/2024-05-22-Zephyr-Protocol-Artemis-v1-2-0-Release
+[image]
+[transcribed from image] ARTEMIS / v1.2.0 RELEASE / ZEPHYR PROTOCOL
+
+=== 2024-07-14T01:05:08.463Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1261850941301325914
+@everyone 
+
+
+# Hardfork v4 Success! 🥳
+Under 24 hours until Hardfork v5 👀 
+Looking forward to the fee adjustments that this brings!
+[image]
+[transcribed from image] ARTEMIS / v1.2.0 RELEASE / ZEPHYR PROTOCOL
+
+=== 2024-07-15T00:57:50.963Z | fennzar | https://discord.com/channels/1112605073948819559/1112605856488493176/1262211494158925864
+@everyone
+
+
+# 🚀ZEPHYR PROTOCOL v1.2.0 ARTEMIS 🚀
+
+## HARFORK NOW COMPLETED!
+The notable fee changes:
+▶️ Mint $ZSD: 2% → 0.1% 
+▶️ Redeem $ZSD: 2% → 0.1% 
+▶️ Mint $ZRS: 0% → 1%
+▶️ Redeem $ZRS: 2% → 1%
+
+Download:
+https://github.com/ZephyrProtocol/zephyr/releases/tag/v1.2.0
+
+ALSO:
+Have a read of this in gen chat: ⁠💬・general⁠
+
+https://x.com/zephyr_org/status/1812652544549949452
+[edited label shown]
+[image]
+[transcribed from image] ARTEMIS / v1.2.0 COMPLETE / ZEPHYR PROTOCOL
+
+(Range 6 summary: 9 messages, all by fennzar; neighbouring messages outside the range are 2024-05-31T07:01:03Z (previous) and 2024-08-06T08:22:44Z (next).)
+
+
+##### END OF TRANSCRIPT #####

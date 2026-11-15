@@ -1,0 +1,1903 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is Zephyr&#x27;s supply right? Full report</title>
+<meta name="description" content="A review of the Zephyr Protocol supply after the 2025 chain audit: what the public code and the public chain show.">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="full">
+<a class="skip" href="#content">Skip to the text</a>
+<header class="site">
+<a class="name" href="index.html">Zephyr supply review</a>
+<nav aria-label="Pages"><a href="index.html">Summary</a><a href="full.html" aria-current="page">Full report</a><a href="verify.html">Check it yourself</a><a href="https://github.com/loki-notfound/zephyr-supply-review">Repository</a></nav>
+</header>
+<div class="layout">
+<aside>
+<details class="toc"><summary>On this page</summary><p class="part">Part 1 · Question and findings</p><ol><li><a href="#s1">1. The question and the answer</a></li><li><a href="#s1a">1a. Evidence register</a></li><li><a href="#s1b">1b. What this report does not establish</a></li></ol><p class="part">Part 2 · Method and origin</p><ol><li><a href="#s2">2. Method and limits</a></li><li><a href="#s3">3. Where the code comes from</a></li></ol><p class="part">Part 3 · The defects and the chain</p><ol><li><a href="#s4">4. The two defects</a><ol><li><a href="#s4-1">4.1 Defect A: range proofs not verified (launch to hard fork 6)</a></li><li><a href="#s4-2">4.2 Defect B: ring members of another asset type (hard fork 3 to hard fork 7)</a></li></ol></li><li><a href="#s5">5. What the chain shows</a><ol><li><a href="#s5-1">5.1 Three transactions with invalid range proofs</a></li><li><a href="#s5-2">5.2 Fourteen transactions whose ZEPH input has a ring of stable-coin outputs</a></li><li><a href="#s5-3">5.3 Sixteen transactions with one or two foreign ring members</a></li><li><a href="#s5-4">5.4 Controls: the whole chain re-checked</a></li></ol></li></ol><p class="part">Part 4 · The audit and the supply</p><ol><li><a href="#s6">6. The audit and the supply</a><ol><li><a href="#s6-1">6.1 Timeline</a></li><li><a href="#s6-1a">6.1a What the project said before the audit</a></li><li><a href="#s6-2">6.2 How the audit worked</a></li><li><a href="#s6-3">6.3 Reconciliation of ZEPH</a></li><li><a href="#s6-3a">6.3a The reserve and the other assets, rebuilt from genesis</a></li><li><a href="#s6-4">6.4 The one-time mint</a></li><li><a href="#s6-5">6.5 The other assets</a></li></ol></li></ol><p class="part">Part 5 · Context and handling</p><ol><li><a href="#s7">7. Haven, where the code came from</a></li><li><a href="#s8">8. How the incident was handled</a></li><li><a href="#s9">9. State of the code on 2026-11-14</a></li></ol><p class="part">Part 6 · Reproduction and sources</p><ol><li><a href="#s10">10. Reproducing this report</a></li><li><a href="#s11">11. Sources</a></li></ol></details>
+<nav class="toc" aria-label="On this page"><p class="label">On this page</p><p class="part">Part 1 · Question and findings</p><ol><li><a href="#s1">1. The question and the answer</a></li><li><a href="#s1a">1a. Evidence register</a></li><li><a href="#s1b">1b. What this report does not establish</a></li></ol><p class="part">Part 2 · Method and origin</p><ol><li><a href="#s2">2. Method and limits</a></li><li><a href="#s3">3. Where the code comes from</a></li></ol><p class="part">Part 3 · The defects and the chain</p><ol><li><a href="#s4">4. The two defects</a><ol><li><a href="#s4-1">4.1 Defect A: range proofs not verified (launch to hard fork 6)</a></li><li><a href="#s4-2">4.2 Defect B: ring members of another asset type (hard fork 3 to hard fork 7)</a></li></ol></li><li><a href="#s5">5. What the chain shows</a><ol><li><a href="#s5-1">5.1 Three transactions with invalid range proofs</a></li><li><a href="#s5-2">5.2 Fourteen transactions whose ZEPH input has a ring of stable-coin outputs</a></li><li><a href="#s5-3">5.3 Sixteen transactions with one or two foreign ring members</a></li><li><a href="#s5-4">5.4 Controls: the whole chain re-checked</a></li></ol></li></ol><p class="part">Part 4 · The audit and the supply</p><ol><li><a href="#s6">6. The audit and the supply</a><ol><li><a href="#s6-1">6.1 Timeline</a></li><li><a href="#s6-1a">6.1a What the project said before the audit</a></li><li><a href="#s6-2">6.2 How the audit worked</a></li><li><a href="#s6-3">6.3 Reconciliation of ZEPH</a></li><li><a href="#s6-3a">6.3a The reserve and the other assets, rebuilt from genesis</a></li><li><a href="#s6-4">6.4 The one-time mint</a></li><li><a href="#s6-5">6.5 The other assets</a></li></ol></li></ol><p class="part">Part 5 · Context and handling</p><ol><li><a href="#s7">7. Haven, where the code came from</a></li><li><a href="#s8">8. How the incident was handled</a></li><li><a href="#s9">9. State of the code on 2026-11-14</a></li></ol><p class="part">Part 6 · Reproduction and sources</p><ol><li><a href="#s10">10. Reproducing this report</a></li><li><a href="#s11">11. Sources</a></li></ol></nav>
+</aside>
+<main id="content">
+<h1>Is Zephyr's supply right? Full report</h1>
+<p><em>Version 1.0, 2026-11-14. The supply incident of 2023 to 2025, its cause, the audit and the chain
+since. An independent review, made on the author's own initiative for the Zephyr community.</em></p>
+<p><strong>Rule of this report: nothing is claimed that cannot be checked.</strong> Every finding names its
+basis and, where possible, the command or file that reproduces it (<a class="ref" href="#s10">§10</a>, and the evidence
+register in <a class="ref" href="#s1a">§1a</a>). Inferences are labelled as inferences. What we could not establish is listed
+in <a class="ref" href="#s1b">§1b</a>.</p>
+<p>This report separates three kinds of statement and marks each:</p>
+<ul>
+<li><strong><span class="basis">chain</span></strong> read from a full copy of the Zephyr main chain, or from a synced node, on 2026-11-14;</li>
+<li><strong><span class="basis">code</span></strong> read from the public source repositories, with commit and line;</li>
+<li><strong><span class="basis">stated</span></strong> said by the project, an exchange or a mining service, quoted from a text we read
+in full: release notes, notices and pages on the web, the project's Discord, read from
+transcripts of four of its channels and searches of the rest and cited as <span class="basis">stated, Discord</span>
+with the date, and the project's posts on X, read from transcripts of selected posts and of
+searches of the account and cited as <span class="basis">stated, X</span>. All of them are listed in <a class="ref" href="#s11">§11</a>.</li>
+</ul>
+<p>Nothing in this report rests on a text that was not read in full.</p>
+<p>Where the evidence allows more than one explanation, all are given. Times are in UTC where the
+source gives one; a commit is dated by its author date in UTC, and a web page that shows only a
+date keeps that date (<a class="ref" href="#s11">§11</a>).</p>
+<nav class="parts" aria-label="Parts of this report"><section><p class="part">Part 1</p><h3>Question and findings</h3><p>The question, the answer in short, the evidence behind each finding, and what stays open.</p><ul><li><a href="#s1">1. The question and the answer</a></li><li><a href="#s1a">1a. Evidence register</a></li><li><a href="#s1b">1b. What this report does not establish</a></li></ul></section><section><p class="part">Part 2</p><h3>Method and origin</h3><p>How the checks were made, their limits, and where the code comes from.</p><ul><li><a href="#s2">2. Method and limits</a></li><li><a href="#s3">3. Where the code comes from</a></li></ul></section><section><p class="part">Part 3</p><h3>The defects and the chain</h3><p>The two defects in the code and the transactions that used them.</p><ul><li><a href="#s4">4. The two defects</a></li><li><a href="#s5">5. What the chain shows</a></li></ul></section><section><p class="part">Part 4</p><h3>The audit and the supply</h3><p>Timeline, how the audit worked, the reconciliation and the one-time mint.</p><ul><li><a href="#s6">6. The audit and the supply</a></li></ul></section><section><p class="part">Part 5</p><h3>Context and handling</h3><p>Haven, how the incident was handled, and the code today.</p><ul><li><a href="#s7">7. Haven, where the code came from</a></li><li><a href="#s8">8. How the incident was handled</a></li><li><a href="#s9">9. State of the code on 2026-11-14</a></li></ul></section><section><p class="part">Part 6</p><h3>Reproduction and sources</h3><p>The tools, their results, and every text that is quoted.</p><ul><li><a href="#s10">10. Reproducing this report</a></li><li><a href="#s11">11. Sources</a></li></ul></section></nav><h2 id="s1">1. The question and the answer</h2>
+<p><strong>The question.</strong> Is the supply of ZEPH right? Taken apart, that is five questions that public
+data can answer. This review establishes what happened and what the supply is; it does not judge
+who is to blame.</p>
+<ol>
+<li><strong>Can the number the chain shows be relied on?</strong> Yes, as a count, up to block 902083
+(2026-11-07), where our copy of the chain ends. Up to that block
+every transaction passes the checks that keep a transaction from creating coins (range proof
+and balance, conversion amount, ring signatures), no key image occurs twice, and no block pays
+out more than the reward formula and the fees allow (<a class="ref" href="#s5-4">§5.4</a>). The totals of all four assets
+agree with the coins generated and the public conversions at both points where they can be
+compared, right after the audit and at that last block (<a class="ref" href="#s6-3">§6.3</a>, <a class="ref" href="#s6-3a">§6.3a</a>). What such checks cannot exclude is a flaw in the rules themselves that nobody knows of
+(question 5).</li>
+<li><strong>What went wrong before the audit?</strong> Two defects in consensus code that Zephyr took over
+from Haven Protocol (<a class="ref" href="#s3">§3</a>, <a class="ref" href="#s4">§4</a>). Range proofs were not verified until 2024-10-13, so a
+transaction could create coins; ring members could be of another asset until 2025-01-23, so
+one asset could be spent as another. Both were used: three transactions with invalid range
+proofs and fourteen that spent a stable-coin output as ZEPH are on the chain (<a class="ref" href="#s5">§5</a>). Both
+defects are closed.</li>
+<li><strong>What could the audit do, and what could it not?</strong> It made the supply countable for the
+first time: every holder moved each asset once with the amount in the open (<a class="ref" href="#s6-2">§6.2</a>). It could
+not separate coins that had been emitted from coins that had not, because amounts and
+histories are hidden and the chain offers no way to tell them apart. After the audit the
+supply table held 2,067,576 ZEPH more than had been emitted: 1,921,650 minted once for an
+exchange balance that was not audited in time, and 145,926 inside the audited supply (<a class="ref" href="#s6-3">§6.3</a>,
+<a class="ref" href="#s6-4">§6.4</a>). The project announced the mint and how it is offset: it was booked as emission, so
+block rewards are about 18 % lower for as long as they follow the emission curve, about ten
+more years. By a projection that offsets all but about 124,000 ZEPH of the mint before the
+fixed tail reward takes over. The 145,926 are not offset.</li>
+<li><strong>What stays unknown?</strong> How many coins each defect produced, who made the transactions, and
+whether the unaudited exchange balance consisted of emitted coins (<a class="ref" href="#s1b">§1b</a>). On the accounting of
+<a class="ref" href="#s6-5">§6.5</a>, defect B can account for at most about 262,688 ZEPH of the excess. For the rest the project's own report
+says: &quot;We were not able to determine if or how much net chain-wide inflation originated from
+this vector&quot; <span class="basis">stated, X, 2025-09-06</span>.</li>
+<li><strong>Has anyone outside the project reviewed the node's code?</strong> Not that we could find. In 2025
+the project said no third-party review was planned; the audit by the firm Sherlock that it
+commissioned in 2026 covers its EVM bridge, by the scope it published, not the node; in the
+project's words, &quot;Scoped to the EVM bridge only ... Not the L1&quot; (<a class="ref" href="#s8">§8</a>).
+This review is not a code audit either: it checks the chain against the rules as they are
+written.</li>
+</ol>
+<p><strong>In short.</strong> Up to the block we checked, the number the chain shows is a sound count. At the
+end of the audit (block 536000) it was 2,067,576 ZEPH higher than ordinary emission to that
+block: 1,921,650 that the project minted for an exchange balance that was not audited, for the
+larger part offset by lower block rewards in the years after, and 145,926 among the audited
+coins, which the audit had no way to tell from the rest.</p>
+<p><strong>The findings in summary.</strong></p>
+<ol>
+<li>Zephyr's multi-asset code was taken from Haven Protocol in May 2023 <span class="basis">code</span>. Two defects in the
+consensus rules came with it or were made in adapting it; the project wrote in August 2025
+that &quot;both Zephyr exploits were inherited from &quot;audited&quot; Haven code portions&quot; <span class="basis">stated, X</span>:
+<ul>
+<li><strong>A. Range proofs of transactions were not verified</strong> from the launch (2023-05-29) until hard
+fork 6 (block 360000, 2024-10-13). A range proof is what prevents a transaction from
+creating coins. Haven's fix of 2024-12-11, titled &quot;fix range proof exploit&quot;, adds the
+missing verification to the same function. <span class="basis">code, executed test</span></li>
+<li><strong>B. Ring members were not required to have the asset type the input claimed</strong> until hard
+fork 7 (block 433000, 2025-01-23). An output of one asset could be spent as another asset
+with the same amount (&quot;asset morphing&quot;). <span class="basis">code</span></li>
+</ul>
+</li>
+<li>Transactions that only these defects made possible are on the main chain <span class="basis">chain</span>:
+<ul>
+<li>A: exactly <strong>three</strong> transactions with invalid range proofs were accepted, in blocks 289260
+and 289262 (2024-07-07, six minutes apart). No other transaction up to block 902083 (<a class="ref" href="#s5-4">§5.4</a>) has
+an invalid proof. The project itself wrote on 2025-01-23 of &quot;three suspect transactions that
+fail the updated range proofs code&quot; <span class="basis">stated, Discord</span>.</li>
+<li>B: <strong>14</strong> transactions in which an input claiming ZEPH has a ring made up entirely of
+stable-coin (ZSD) outputs, from 2023-10-29 to 2024-09-30, so that a stable-coin output was
+necessarily spent as ZEPH; and <strong>16</strong> further transactions (35 inputs) with one or two ring
+members of another asset, which admit two readings, a decoy or a real spend; the rings do
+not decide between them (<a class="ref" href="#s5-3">§5.3</a>). Together that is 30
+transactions, the number the project gave on 2025-01-23 for &quot;transactions ... with
+cross-asset ring members&quot; <span class="basis">stated, Discord</span>.
+The amounts are hidden by design. The chain does not show how many coins these transactions
+created, nor who made them.</li>
+</ul>
+</li>
+<li>The project closed B with a hotfix (v2.0.2), then ran a chain-wide audit (hard forks 8 to 11,
+2025-03-31 to 2025-06-15) in which every holder had to move each asset once with a public
+amount. Coins not moved became invalid.</li>
+<li>Result, reconciled by us against the coins the node recorded as generated <span class="basis">chain, code</span>: after the audit the
+node's supply table records <strong>9,749,946 ZEPH</strong> where <strong>7,682,370</strong> had been emitted:
+<strong>2,067,576 more than was emitted</strong>. The project's own estimate of 2025-06-11 is +2,056,803
+<span class="basis">stated, Discord</span>.
+Of that, <strong>1,921,650 ZEPH</strong> is a one-time mint in block 536000 which the release notes
+and the project's announcements attribute to an exchange balance that was not audited (MEXC)
+<span class="basis">stated</span>; <strong>145,926 ZEPH</strong> is
+excess inside the audited supply itself (audited coins plus the recorded reserve). Coins
+that exist beyond what was generated were not emitted; genuine coins that were never audited reduce
+the visible excess, so the amount of non-emitted coins honoured is at least this figure.
+The reserve it depends on was rebuilt from genesis and agrees with the node's record to within
+0.001 ZEPH (<a class="ref" href="#s6-3a">§6.3a</a>).</li>
+<li>By the project's estimate the other assets came in 256,634 units short in total (ZSD, ZRS,
+ZYS); rebuilt from the chain, 262,688 units are missing (<a class="ref" href="#s6-3a">§6.3a</a>). Defect B turns one unit of
+another asset into one ZEPH, so it cannot account for more than about that much of the ZEPH
+excess; the project's own estimate for it is about 200,000.
+At least about 1.8 million of the excess is therefore not explained by defect B. Defect A is
+the only other known cause, but nothing shows how much the three transactions created (<a class="ref" href="#s6-5">§6.5</a>).
+The project's post-audit report says the same of that cause: &quot;We were not able to determine if
+or how much net chain-wide inflation originated from this vector&quot; <span class="basis">stated, X, 2025-09-06</span>.</li>
+<li>The one-time mint was booked as emission. The parameter that sets the emission curve is
+unchanged, so block rewards are about 18 % lower than on the original schedule until the
+fixed tail reward is reached <span class="basis">code, chain</span>. By a projection without penalties that offsets
+about 1.8 million ZEPH of the mint; about 124,000 of it, and the 145,926, stay above the
+original schedule (<a class="ref" href="#s6-4">§6.4</a>). The lower rewards are borne by miners, the reserve share and the
+yield share.</li>
+<li>Both defects are closed in the current release (v2.3.0, published 2025-06-11). The public
+repository's only branch still ends at the commit of that release (checked 2026-11-14) <span class="basis">code</span>.</li>
+</ol>
+<h2 id="s1a">1a. Evidence register</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Finding</th>
+<th>Basis</th>
+<th>Check it yourself</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="nw">1</td>
+<td>38 % of the non-Monero lines of Zephyr's first commit occur verbatim in Haven (1,042 of 2,710)</td>
+<td>code comparison</td>
+<td><code>heritage.py</code>; <a class="ref" href="#s2">§2</a>; both repositories are public</td>
+</tr>
+<tr>
+<td class="nw">2</td>
+<td>The pre-fork-6 function does not verify Bulletproof+ proofs</td>
+<td>code, and an executed test</td>
+<td><code>gaptest.cpp</code>; the quoted lines in <a class="ref" href="#s4-1">§4.1</a></td>
+</tr>
+<tr>
+<td class="nw">3</td>
+<td>The same omission is in Haven's code of the fork date and first appears there on 2023-04-25</td>
+<td>code</td>
+<td>Haven commits <code>211ddae93</code>, <code>141d4a359</code>, tag v3.0.8</td>
+</tr>
+<tr>
+<td class="nw">4</td>
+<td>Until fork 7 the ring-member asset check compared the input's claim with itself</td>
+<td>code</td>
+<td>the quoted lines in <a class="ref" href="#s4-2">§4.2</a></td>
+</tr>
+<tr>
+<td class="nw">5</td>
+<td>Three accepted transactions have invalid range proofs; none other in blocks 0 to 902083</td>
+<td>chain scan</td>
+<td><code>chainscan.cpp</code>; ids in <a class="ref" href="#s5-1">§5.1</a>; present on a second node</td>
+</tr>
+<tr>
+<td class="nw">6</td>
+<td>Fourteen ZEPH inputs have rings consisting only of ZSD outputs</td>
+<td>chain scan; two of them re-checked output by output on a second node</td>
+<td><code>chainscan.cpp</code>, <code>ringdetail.tsv</code>; ids in <a class="ref" href="#s5-2">§5.2</a></td>
+</tr>
+<tr>
+<td class="nw">7</td>
+<td>Thirty-five further inputs have one or two foreign ring members; in 32 of them no ring member is newer than a few blocks after a hard fork, and in ten of the transactions that holds for every input</td>
+<td>chain scan</td>
+<td><code>ringdetail.tsv</code>, <code>origin.tsv</code>, <code>ring-ages.tsv</code>; <a class="ref" href="#s5-3">§5.3</a></td>
+</tr>
+<tr>
+<td class="nw">8</td>
+<td>15,040 audit transactions; amounts per asset</td>
+<td>node RPC</td>
+<td><code>audit_sum.py</code></td>
+</tr>
+<tr>
+<td class="nw">9</td>
+<td>Emission schedule; one-time mint of 1,921,650 ZEPH in block 536000, booked as emission</td>
+<td>code, block 536000, block headers</td>
+<td><code>supply.py</code>; <a class="ref" href="#s6-4">§6.4</a></td>
+</tr>
+<tr>
+<td class="nw">10</td>
+<td>2,067,576 ZEPH more recorded than emitted at block 536000</td>
+<td>derived from 8 and 9, the node's supply table and its record of coins generated</td>
+<td><code>ledger.cpp</code>, <code>supply.py</code></td>
+</tr>
+<tr>
+<td class="nw">11</td>
+<td>The reserve counter agrees with a rebuild from genesis to 0.001 ZEPH at each of five points of comparison; 262,688 units of the other assets are missing after the audit</td>
+<td>rebuilt from genesis from public conversion amounts</td>
+<td><code>ledger.cpp</code>, <code>ledger.tsv</code></td>
+</tr>
+<tr>
+<td class="nw">12</td>
+<td>The mint is for MEXC's unaudited balance; why it was not audited; the balance was checked from the wallet seed and paid out</td>
+<td>the project's statements on Discord and in the release notes; not verifiable on chain</td>
+<td><a class="ref" href="#s6-4">§6.4</a></td>
+</tr>
+<tr>
+<td class="nw">13</td>
+<td>Both defects are closed in v2.3.0; the public repository has no commit after that release</td>
+<td>code</td>
+<td><a class="ref" href="#s4">§4</a>, <a class="ref" href="#s9">§9</a></td>
+</tr>
+<tr>
+<td class="nw">14</td>
+<td>30 transactions with cross-asset ring members; three that fail the range-proof check</td>
+<td>the project's Discord post of 2025-01-23, independently of our scan</td>
+<td><a class="ref" href="#s5">§5</a>, <a class="ref" href="#s11">§11</a></td>
+</tr>
+<tr>
+<td class="nw">15</td>
+<td>The project's own supply figures at height 536010 give the same excess (145,925.75 by both routes) and the same reserve</td>
+<td>the project's Discord announcement of hard fork 11; the node's record of coins generated</td>
+<td><a class="ref" href="#s6-3">§6.3</a>, <a class="ref" href="#s6-3a">§6.3a</a></td>
+</tr>
+<tr>
+<td class="nw">16</td>
+<td>Every transaction in blocks 0 to 902083 passes the released code's semantics, minted-amount and ring-signature checks for its height; no key image occurs twice</td>
+<td>re-validation of the whole chain</td>
+<td><code>revalidate.cpp</code>, <code>revalidate-stats.tsv</code>, <code>keyimages.cpp</code>, <code>keyimages.tsv</code>; <a class="ref" href="#s5-4">§5.4</a></td>
+</tr>
+<tr>
+<td class="nw">17</td>
+<td>Both defects were inherited from Haven code; no third-party review of the code is planned</td>
+<td>the project's AMA article on X of 2025-08-25</td>
+<td><a class="ref" href="#s3">§3</a>, <a class="ref" href="#s8">§8</a>, <a class="ref" href="#s11">§11</a></td>
+</tr>
+<tr>
+<td class="nw">18</td>
+<td>Every block's miner transaction pays out, per asset, exactly reward minus shares plus fees, and no block's reward is above the emission formula</td>
+<td>re-check of all 902,083 blocks after genesis</td>
+<td><code>coinbase.cpp</code>, <code>coinbase.tsv</code>; <a class="ref" href="#s5-4">§5.4</a></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s1b">1b. What this report does not establish</h2>
+<ul>
+<li>How many coins the three invalid-proof transactions or the morphing transactions created.</li>
+<li>Who made them, and whether one party or several.</li>
+<li>Which defect accounts for how much of the excess.</li>
+<li>Whether the coins in the unaudited exchange balance had been emitted or not. (Why they were
+not audited, how the balance was checked and that it was paid out are stated by the project,
+<a class="ref" href="#s6-4">§6.4</a>; we cannot verify those statements on chain.)</li>
+<li>Whether the sixteen partial-ring transactions are abuse (<a class="ref" href="#s5-3">§5.3</a>).</li>
+<li>The intent behind the correction of defect A in v2.0.0. The project says it was a by-product
+of refactoring and that the earlier check was an oversight (<a class="ref" href="#s4-1">§4.1</a>); the code is consistent with
+that.</li>
+<li>How many genuine coins were lost because their holders did not audit them.</li>
+<li>That no third defect existed. Every transaction passes the checks of the released code that we
+re-ran (<a class="ref" href="#s5-4">§5.4</a>), but a defect in those checks themselves, as A and B were, would not show that
+way, and not every consensus rule was re-run (<a class="ref" href="#s2">§2</a>).</li>
+<li>What the project said on Medium, or in the parts of its website, its Discord and its X account
+we did not read (<a class="ref" href="#s11">§11</a>). None of that is used here.</li>
+</ul>
+<h2 id="s2">2. Method and limits</h2>
+<p>This review was made with AI assistance (Claude Fable 5.2, Anthropic); the
+<a href="verify.html#how-this-was-made">README</a> says how. The programs and their results are published so
+that no finding depends on trusting the author or the model.</p>
+<p><strong>Sources.</strong> The repositories <code>ZephyrProtocol/zephyr</code> (tag v2.3.0, <code>67c5f53b</code>),
+<code>haven-protocol-org/haven-main</code> (tip of the main branch <code>70d01079</code>, 2024-12-11), the release notes of all
+Zephyr releases (GitHub API), Zephyr's whitepaper, a full Zephyr chain database synced from
+genesis, and a second, separately synced node for RPC queries and cross-checks.</p>
+<p>The node that synced the database was built from the zephyr-backports fork, tag <code>v2.3.0-sec.2</code>
+(https://github.com/zephyr-backports/zephyr): v2.3.0 with security fixes taken over from Monero
+(memory safety, denial of service, dependency updates). These fixes do not change which blocks or
+transactions are valid. That the database holds the
+same chain as the original software was checked directly: its block hashes at heights 289262,
+360000, 433000, 481500, 536000 and at its last block, 902083
+(<code>c2e6d09f5eeb37453fe34a1245fc6bb92a137441375256acf120da8ef1338eba</code>), are identical to those of a
+separately synced node running the official v2.3.0 binary. A block hash commits to every earlier
+block and every transaction in them, so the two chains are identical up to that block. The scan
+programs were built against the libraries of an unmodified v2.3.0 build. Anyone can repeat the
+scan on a database synced with the stock release and compare the hash above first.</p>
+<p><strong>Code comparison.</strong> A script (<code>heritage.py</code>) takes the lines that Zephyr's first own commit adds
+to the C and C++ sources, collapses whitespace, leaves out lines shorter than 25 characters,
+comment lines and lines that already occur in the commit's parent (Monero), and counts how many of
+the rest occur anywhere in Haven's sources of the same day (<code>211ddae93</code>).</p>
+<p><strong>Executed test of defect A.</strong> A program linked against the libraries built from v2.3.0 takes a
+real transfer from block 300002, calls both verification functions, flips one bit in the range
+proof and calls them again:</p>
+<pre><code>height 300002 hf 5 tx 4f9693d5b598435f33f00b15ba62c3a433caae2c9108dd73d994bf6161504e89 outputs 2
+original proof : bulletproof_plus_VERIFY=1  verRctSemanticsSimple(pre-HF6 path)=1  verRctSemanticsZeph(HF6+ path)=1
+corrupted proof: bulletproof_plus_VERIFY=0  verRctSemanticsSimple(pre-HF6 path)=1  verRctSemanticsZeph(HF6+ path)=0
+</code></pre>
+<p><strong>Chain scan.</strong> A read-only program walks every block, parses every non-coinbase transaction
+and (1) looks up, for each ring member of each input, the asset type stored with that output and
+compares it with the asset type the input claims; (2) verifies the Bulletproof+ range proofs with
+the library's own verifier. Below block 435000, the scan's first range boundary after hard
+fork 7 (block 433000): 837,680 transactions,
+4,842,712 inputs, 77,483,392 ring members, 837,680 proofs. The rest of the chain is scanned as a
+control (<a class="ref" href="#s5-4">§5.4</a>). The asset type of a ring member is the one the node stored when the output was
+created; for two of the fourteen full-ring transactions all sixteen members were looked up again
+on the second node through the transactions that created them, with the same result.</p>
+<p><strong>Re-validation.</strong> A second read-only program re-runs, for every non-coinbase transaction, the
+checks the released code applies at the transaction's height: the semantics check
+(<code>verRctSemanticsSimple</code> below hard fork 6, <code>verRctSemanticsZeph</code> from it; for conversions with
+the pricing record of the block the transaction names), the minted amount of conversions below
+hard fork 6 (<code>validateMintedAmount</code>), and the ring signatures and commitments
+(<code>verRctNonSemanticsSimple</code>) with the rings read from the chain. A transaction that fails the
+semantics check under its block's fork version is tried once more under the previous version and
+would be reported with a note, and so would a minted amount that passes only under the previous
+version; no such case occurred. Key images and miner transactions have their own checks, below.
+Not re-checked at all: unlock times and the minimum age of spent outputs, the validity of the
+pricing record a conversion names, the reserve-ratio conditions under which conversions are
+allowed, and the restriction of transaction types during the audit forks.</p>
+<p><strong>Key images.</strong> A further program collects the key image of every input on the chain and reports
+any that occurs twice. A key image is derived from the output that is spent, whatever asset the
+input claims, so a second spend of one output would show up.</p>
+<p><strong>Miner payouts.</strong> A third read-only program applies the rule of the node's
+<code>validate_miner_transaction</code> to the miner transaction of every block after genesis: its outputs
+in the base coin must equal the block's reward minus the reserve share and the yield share, plus
+the fees paid in the base coin (plus the one-time amount in block 536000), and its outputs in any
+other asset must equal the fees paid in that asset. The reward of a block is taken from the
+node's counter of coins generated and is held against the node's reward formula without a
+block-weight penalty, which is the most a block may be given. The program checks amounts per
+asset; it does not check who receives them (the governance share and its key) or unlock times.</p>
+<p><strong>Origin of ring members.</strong> For the 49 flagged inputs a fourth program looks up, for every ring
+member, the transaction that created it, its kind and its public amounts (<a class="ref" href="#s5-2">§5.2</a>, <a class="ref" href="#s5-3">§5.3</a>).</p>
+<p><strong>Supply.</strong> The emission schedule was recomputed from <code>get_block_reward</code> (cap 2^64 − 1 atomic
+units, genesis reward 500,000 ZEPH, then (cap − generated) &gt;&gt; 20 per block), and compared with
+the coins generated per block as the node stored them (<a class="ref" href="#s6-3a">§6.3a</a>). The reconciliation of <a class="ref" href="#s6-3">§6.3</a> uses
+the database (to block 902083); the one later figure in <a class="ref" href="#s6-4">§6.4</a> comes from a node's
+<code>get_circulating_supply</code> at height 907724 (<code>supply.txt</code>). All 15,040 transactions of blocks
+481500 to 535999 were read and their public <code>amount_burnt</code> / <code>amount_minted</code> summed per asset
+(<code>audit-transactions.tsv</code>, <code>audit-summary.txt</code>).</p>
+<p><strong>Limits.</strong></p>
+<ul>
+<li>Amounts in transactions are hidden. The scan shows <em>that</em> a defect was used and <em>when</em>, never
+<em>how much</em>.</li>
+<li>The real spend inside a ring cannot be identified. Where only some ring members have a foreign
+asset type, neither a spend through defect B nor a harmless decoy is proven (<a class="ref" href="#s5-3">§5.3</a>).</li>
+<li>A scan can only find forms of abuse it looks for. The chain scan checks the two known defects.
+The re-validation shows that every transaction passes the checks as they are coded, which a
+transaction exploiting a defect in the checks themselves, as A and B were, passes as well.
+Neither is a proof that no third defect existed.</li>
+<li>Of the project's posts on X and of its website we read what is listed in <a class="ref" href="#s11">§11</a>. Its articles on
+Medium were not read and are not used.</li>
+<li>No historical supply table is stored. The reserve and the asset totals at earlier heights were
+rebuilt from genesis (<a class="ref" href="#s6-3a">§6.3a</a>) and agree with every figure they can be compared with.</li>
+</ul>
+<h2 id="s3">3. Where the code comes from <span class="basis">code</span></h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Origin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base</td>
+<td>Monero master up to 2024-03-12 (replayed by Zephyr; last shared commit <code>a2e8d1d42</code>, 2023-04-26)</td>
+</tr>
+<tr>
+<td>Multi-asset mechanics</td>
+<td>Haven Protocol, <code>haven-main</code> as of 2023-05-26 (v3.1.9e, <code>211ddae93</code>), a development branch rebased onto Monero v0.18.1.2; Haven's own hard-fork table has its next main-net forks on 2023-08-29</td>
+</tr>
+<tr>
+<td>Stable-coin rules</td>
+<td>Zephyr's own code after the Djed design (reserve ratio 4.0 to 8.0, spot and moving-average price)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Of the substantive, non-Monero lines that Zephyr's first own commit
+<a href="https://github.com/ZephyrProtocol/zephyr/commit/1f3b2f496cc4fe195e45112e4147e59de85fc963"><code>1f3b2f496</code></a>
+(&quot;init Zephyr code&quot;, 2023-05-26) adds to the sources, 38 % occur verbatim in Haven (1,042 of
+2,710 lines in 85 files; <code>rctSigs.cpp</code> 54 %, <code>blockchain.cpp</code> 41 %, <code>db_lmdb.cpp</code> 83 %;
+<code>heritage.py</code>); renamed identifiers do not
+match, so the real share is higher. Five files still carry Haven's copyright notice. Zephyr went
+live three days later (genesis 2023-05-29).</p>
+<p>The project has said so itself. Asked in its community AMA whether there would be a third-party
+review of the code, it answered (<a href="https://x.com/zephyr_org/status/1960023215444488459">article of 2025-08-25</a>)
+<span class="basis">stated, X</span>: &quot;Frankly, we did place trust the Haven audits and that turned out to be a massive
+mistake for us; both Zephyr exploits were inherited from &quot;audited&quot; Haven code portions - No
+Zephyr specific implementations/code (Djed &amp; ZYS etc) has ever been exploited&quot;. For the two
+defects of <a class="ref" href="#s4">§4</a> the code shows the same.</p>
+<h2 id="s4">4. The two defects</h2>
+<h3 id="s4-1">4.1 Defect A: range proofs not verified (launch to hard fork 6)</h3>
+<p>A range proof shows that a hidden amount is not negative. Without it, a transaction can have one
+output of a huge amount and one of a &quot;negative&quot; amount that cancel in the balance check.</p>
+<p>Zephyr's verification function, as launched
+(<a href="https://github.com/ZephyrProtocol/zephyr/blob/1f3b2f496cc4fe195e45112e4147e59de85fc963/src/ringct/rctSigs.cpp#L1645-L1652"><code>1f3b2f496</code>, <code>rctSigs.cpp</code> L1645-L1652</a>)
+and unchanged in v2.3.0 for blocks below hard fork 6
+(<a href="https://github.com/ZephyrProtocol/zephyr/blob/v2.3.0/src/ringct/rctSigs.cpp#L1763-L1770">v2.3.0, L1588-L1590 and L1763-L1770</a>):</p>
+<pre><code class="language-cpp">const bool bulletproof_plus = is_rct_bulletproof_plus(rv.type);
+CHECK_AND_ASSERT_MES(bulletproof_plus, false, &quot;Only bulletproofs supported for Stablero&quot;);
+CHECK_AND_ASSERT_MES(rv.outPk.size() == n_bulletproof_plus_amounts(rv.p.bulletproofs_plus), false, &quot;Mismatched sizes of outPk and bulletproofs_plus&quot;);
+...
+for (size_t i = 0; i &lt; rv.p.bulletproofs.size(); i++)
+  proofs.push_back(&amp;rv.p.bulletproofs[i]);
+
+if (!proofs.empty() &amp;&amp; !verBulletproof(proofs))
+</code></pre>
+<p>The function requires the Bulletproof+ type, whose proofs are in <code>rv.p.bulletproofs_plus</code>, and
+then verifies the other vector, <code>rv.p.bulletproofs</code>, which is empty for such a transaction. It was
+the only semantics check on all three paths (mempool, block, pool re-check).</p>
+<p><strong>Origin.</strong> Haven's function of the same name and structure at Zephyr's fork date
+(<a href="https://github.com/haven-protocol-org/haven-main/blob/211ddae93e545d7bea4c0985c0ce457d80f176ab/src/ringct/rctSigs.cpp#L1983"><code>211ddae93</code>, L1667-L1668 and L1983</a>).
+In Haven's history the function first accepts Bulletproof+ types, while still verifying only the
+old vector, in commit <code>141d4a359ce50001b35df83aa2a26314af4b73cf</code> (2023-04-25, the rebase work onto
+Monero v0.18); before the rebase (tag v3.0.8) the function required the old Bulletproof type and
+verified it, which was correct. The omission is therefore present in Haven's rebase work one month before Zephyr's first commit
+contains it. From which block Haven's own main net ran this function was not established by us.</p>
+<p><strong>Fix in Zephyr.</strong> Commit
+<a href="https://github.com/ZephyrProtocol/zephyr/commit/427277f7df11ead579f4f3a50ee9f0bee3d218db"><code>427277f7d</code></a>
+(2024-09-29, &quot;Add Zephyr Yield Shares (ZYS) for version 2.0.0 (hardfork v6)&quot;) adds a new function
+<code>verRctSemanticsZeph</code>, used from hard fork 6, which verifies the right vector
+(<a href="https://github.com/ZephyrProtocol/zephyr/blob/v2.3.0/src/ringct/rctSigs.cpp#L1935-L1943">v2.3.0, L1935-L1943</a>).
+The release notes of v2.0.0 describe the yield feature and do not mention range proofs or a
+security fix; neither does the announcement of the release on the project's website
+(<a href="https://zephyrprotocol.com/blog/2024-09-30-Zephyr-Protocol-v2-0-0-ZSD-Yield-Hardfork-Annoucement">2024-09-30</a>). The project's own account, given in its Discord on 2025-01-13
+(<a href="https://discord.com/channels/1112605073948819559/1112605075416817686/1328217871263731722">message</a>) <span class="basis">stated, Discord</span>:</p>
+<blockquote>
+<p>The 3 transactions from 6 months ago (July 7 2024) stand out because they fail an updated range
+proofs check relating to bulletproofs/bulletproofs+ that was introduced in Zephyr v2.0.0 as we
+refactored that section of the code with our Zephyr specific requirements due to ZYS
+implementation based on Moneros current implementation. [...] The way the check was implemented
+prior to Zephyr v2.0.0 was incorrect, an oversight on our part. Because these transactions fail
+the new corrected check it's implies that an exploit attempt was made.</p>
+</blockquote>
+<p>This agrees with the code on every point we can test: the date, the incorrect check before
+v2.0.0, and the corrected check in the function added for the yield feature. By this account the
+correction was a by-product of refactoring, not a fix made in the knowledge of the defect, and
+the three transactions were noticed later (the first announcement is of 2024-12-29, after Haven's
+exploit; <a class="ref" href="#s6-1a">§6.1a</a>). Intent cannot be verified from code, but nothing we found contradicts it.</p>
+<p>Two further statements on X <span class="basis">stated, X</span>. On 2025-01-06
+(<a href="https://x.com/zephyr_org/status/1876209588460249297">post</a>): &quot;In our current version, it is no longer possible to
+submit transactions using the same method that allowed those suspicious transactions to be
+accepted.&quot; In the post-audit report of 2025-09-06
+(<a href="https://x.com/zephyr_org/status/1964371016303407282">article</a>): &quot;we overhauled our codebase and refactored our
+range-proofs implementation. When these new stricter checks were applied to our historical chain
+during the audit investigation, the three pre-existing transactions did not validate under the
+new rules.&quot; The report speaks of &quot;stricter&quot; checks; it does not repeat the statement of
+2025-01-13 that the earlier check was incorrect.</p>
+<p><strong>Fix in Haven.</strong> Commit
+<a href="https://github.com/haven-protocol-org/haven-main/commit/6f361aadf3f6b4f0307dc79bb2f2b7a938bce22a"><code>6f361aadf</code></a>
+(&quot;fix range proof exploit&quot;, 2024-12-11), ten weeks after Zephyr's.</p>
+<h3 id="s4-2">4.2 Defect B: ring members of another asset type (hard fork 3 to hard fork 7)</h3>
+<p>Each input names an asset type and a ring of earlier outputs, one of which is really spent. The
+check that every ring member has the input's asset type
+(<a href="https://github.com/ZephyrProtocol/zephyr/blob/v2.3.0/src/cryptonote_core/blockchain.cpp#L4133-L4136">v2.3.0, <code>blockchain.cpp</code> L4133-L4136</a>)
+was fed, until hard fork 7, with the asset type claimed by the input itself, so it compared the
+claim with the claim. The fix, commit
+<a href="https://github.com/ZephyrProtocol/zephyr/commit/13a7e9f94ba96a1f322986634ac5115f603e7458"><code>13a7e9f94</code></a>
+(dated 2025-02-03, &quot;Hardfork v7, v2.0.2&quot;; <a href="https://github.com/ZephyrProtocol/zephyr/blob/v2.3.0/src/cryptonote_core/blockchain.cpp#L233-L245">v2.3.0, L233-L245</a>):</p>
+<pre><code class="language-cpp">if (hf_version &gt;= HF_VERSION_V7) {
+  if (!vis.handle_output(output_index.unlock_time, output_index.asset_type, output_index.pubkey, output_index.commitment))
+  ...
+} else {
+  if (!vis.handle_output(output_index.unlock_time, tx_in_to_key.asset_type, output_index.pubkey, output_index.commitment))
+</code></pre>
+<p>The hotfix went out as binaries on 2025-01-21 and the fork was on 2025-01-23; the source commit is
+dated eleven days after the fork, and the tag <code>v2.0.2</code> in the repository points to a commit of
+2024-10-14 that does not contain it. The project had said the code &quot;will be published shortly&quot;
+(2025-01-23). Publishing the source of a fix for a live defect only after the fork is common
+practice. The tag was not moved afterwards, so anyone checking <code>v2.0.2</code> in the repository will
+not find the fix there.</p>
+<p>The project's description after the fork (2025-01-23) <span class="basis">stated, Discord</span>: &quot;an issue that allowed
+transactions to spend outputs of a different asset type without proper enforcement. In short,
+this bug made it possible for one asset (e.g., ZSD, ZRS, ZYS) to be spent as if it were another
+asset (e.g., ZEPH), with wallet code modifications.&quot; It credits &quot;the anonymous developer and
+contributor who first discovered and alerted us to this issue&quot;.</p>
+<p>The defect matters from hard fork 3 (block 89300, 2023-10-01), when a second asset first
+existed. The same call is in Haven's code at the fork date and at the tip of its main branch; whether Haven
+enforced the rule by another route was not established by us.</p>
+<p>What the defect permits: an output holding <em>n</em> units of the stable coin can be spent as <em>n</em>
+ZEPH. In the conversions of <a class="ref" href="#s5-2">§5.2</a> one ZEPH bought between 1.5 and 45 stable coins, so such a
+spend was worth that multiple, and the proceeds could be converted back into the stable coin
+through the protocol. Whether and how often this was repeated is not visible.</p>
+<h2 id="s5">5. What the chain shows <span class="basis">chain</span></h2>
+<h3 id="s5-1">5.1 Three transactions with invalid range proofs</h3>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Block</th>
+<th>Time (UTC)</th>
+<th>Transaction</th>
+<th>Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="nw">289260</td>
+<td class="nw">2024-07-07 00:53</td>
+<td><code>b17ef3d2e65ab980c8bd6cbe3210a8b3c9e417fb9621209380f7c1f756fcb2ed</code></td>
+<td>1 input, 2 outputs, ZEPH</td>
+</tr>
+<tr>
+<td class="nw">289262</td>
+<td class="nw">2024-07-07 00:59</td>
+<td><code>4e7ea2cc5484508bd17ff43f3fb8fbd69a22062f24a869794c513d89aee3eb6d</code></td>
+<td>1 input, 2 outputs, ZEPH</td>
+</tr>
+<tr>
+<td class="nw">289262</td>
+<td class="nw">2024-07-07 00:59</td>
+<td><code>d3abcf2bc0a173d6d8af19d88b2d7d610385abf258590d24ca82fc586017c6dd</code></td>
+<td>1 input, 2 outputs, ZEPH</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are the only transactions in blocks 0 to 902083 whose range proof fails. Number and date agree
+with the project's Discord announcement of 2025-01-06, which speaks of &quot;the three suspect
+transactions from 6 months ago&quot; and a week later gives the date itself, &quot;July 7 2024&quot; <span class="basis">stated,
+Discord</span>. On 2025-01-23 the project wrote that they &quot;fail the updated range
+proofs code&quot; <span class="basis">stated, Discord</span>, which is what the scan finds. An output of each transaction is referenced as one of the two newest ring members of another
+transaction within 12 to 36 blocks; beyond that the trail cannot be followed. How much was created
+is not visible; three outputs can carry any amount.</p>
+<h3 id="s5-2">5.2 Fourteen transactions whose ZEPH input has a ring of stable-coin outputs</h3>
+<p>In each, the single input claims ZEPH and all 16 ring members are ZEPHUSD (ZSD) outputs. A wallet
+that follows the protocol builds rings from outputs of the asset it spends, so such a ring means
+a stable-coin output was spent as ZEPH. Three are plain transfers; eleven are conversions back
+into the stable coin with a small public amount, the rest returning as ZEPH change of hidden size.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Block</th>
+<th>Date</th>
+<th>Transaction</th>
+<th>Public conversion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="nw">109160</td>
+<td class="nw">2023-10-29</td>
+<td><code>2eefb4f30e60d447d35311f37aae53822b94559ca4baf53154d5321d67657944</code></td>
+<td>transfer</td>
+</tr>
+<tr>
+<td class="nw">109771</td>
+<td class="nw">2023-10-30</td>
+<td><code>a6576052a91d5d0ec7b0ac7efae2ad4d04a8c84e2a6c197336b69157288ae919</code></td>
+<td>transfer</td>
+</tr>
+<tr>
+<td class="nw">110768</td>
+<td class="nw">2023-11-01</td>
+<td><code>3d6192dab6d83f3f561128d4911fb434c14a859743a17d40f0176a31a8e2b4a9</code></td>
+<td>transfer</td>
+</tr>
+<tr>
+<td class="nw">125921</td>
+<td class="nw">2023-11-22</td>
+<td><code>6ade0f71eec20e1d5e79051810cfe1235932a4bb5d5fc9136052427f0ba38e0d</code></td>
+<td>1 ZEPH to 41.86 ZSD</td>
+</tr>
+<tr>
+<td class="nw">125958</td>
+<td class="nw">2023-11-22</td>
+<td><code>4cabb05a1165d17a7d7428d2fcb28c7bbf844065f9a8c5e230716abc876b2a58</code></td>
+<td>1 ZEPH to 42.41 ZSD</td>
+</tr>
+<tr>
+<td class="nw">126176</td>
+<td class="nw">2023-11-23</td>
+<td><code>f8463dfd612b1a3d64ad8e885d9540ce15457e30df4bd52afe25d825862bde53</code></td>
+<td>0.2 ZEPH to 9.04 ZSD</td>
+</tr>
+<tr>
+<td class="nw">131262</td>
+<td class="nw">2023-11-30</td>
+<td><code>aad269a5eb651d186dec8ce6f3123197a8bfd54e24006793a7341ddd12a8003d</code></td>
+<td>30 ZEPH to 857.48 ZSD</td>
+</tr>
+<tr>
+<td class="nw">184308</td>
+<td class="nw">2024-02-12</td>
+<td><code>22bda20ad1a9f999759264cf3d87d75fa223a28c48d29e4351448b30f73a7784</code></td>
+<td>0.5 ZEPH to 8.84 ZSD</td>
+</tr>
+<tr>
+<td class="nw">231091</td>
+<td class="nw">2024-04-17</td>
+<td><code>8130dd967fcc1a244357e3a932309e6e08adecb98b391caa1da27cf6eca6d316</code></td>
+<td>2 ZEPH to 19.60 ZSD</td>
+</tr>
+<tr>
+<td class="nw">277611</td>
+<td class="nw">2024-06-20</td>
+<td><code>9ddfc42c903d4c73cb05c5096479119fab01b7bd5793bc7e848e322e406b6915</code></td>
+<td>0.5 ZEPH to 1.32 ZSD</td>
+</tr>
+<tr>
+<td class="nw">282759</td>
+<td class="nw">2024-06-28</td>
+<td><code>29dde085c95a9677ae1dfb93d5ec3ad6a24b1ba4e4209a63e39a57cee78faf62</code></td>
+<td>1 ZEPH to 3.83 ZSD</td>
+</tr>
+<tr>
+<td class="nw">294167</td>
+<td class="nw">2024-07-13</td>
+<td><code>6e5ea6d0695e541a7dacecdc7d6eb4d60f6827014f29840b5b59c4811cf957ea</code></td>
+<td>10 ZEPH to 27.99 ZSD</td>
+</tr>
+<tr>
+<td class="nw">295137</td>
+<td class="nw">2024-07-15</td>
+<td><code>78ebdc8427f8c44157ebe6ccc297a7e26802159a63214836de069850c6853877</code></td>
+<td>2 ZEPH to 6.04 ZSD</td>
+</tr>
+<tr>
+<td class="nw">350992</td>
+<td class="nw">2024-09-30</td>
+<td><code>1f3769a36d75a502a2774cae759ab25b460c151294e443d986a58a25c528feed</code></td>
+<td>3 ZEPH to 4.56 ZSD</td>
+</tr>
+</tbody>
+</table></div>
+<p>That a stable-coin output was spent as ZEPH in each of the fourteen follows from the rings.
+Why is not on the chain. Explanations: deliberate use of defect B with a modified wallet (the
+project's account: &quot;with wallet code modifications&quot;, &quot;most of which morphed ZSD → ZEPH&quot;
+<span class="basis">stated, Discord, 2025-01-23</span>);
+or a defect in some wallet software that mislabelled an input. We did not examine wallet
+releases for such a defect. The first such transaction is four weeks after the stable coin went
+live, the last eleven months later.</p>
+<p>The project's own count and estimate <span class="basis">stated, Discord, 2025-01-23</span>: &quot;30 transactions have been
+identified with cross-asset ring members&quot;; &quot;in 10 out of these 30 transactions (due to specific
+patterns), roughly 95,000 ZSD were morphed into ZEPH. For the other 20 transactions, we do not
+have a way to determine the total amount morphed&quot;; and &quot;we estimate ~200,000 ZEPH in 'inflation'
+(and an equal amount of ZSD + ZRS total number in 'deflation') from this exploit—this is our best
+educated guess and not a confirmed figure&quot;. Our scan finds 30 transactions as well (14 here, 16
+in <a class="ref" href="#s5-3">§5.3</a>). We could not reproduce the 95,000 figure: the public amounts in these transactions are
+the small conversions in the table above. The post-audit report of 2025-09-06 repeats it and adds
+a bound for the rest: &quot;Pattern analysis inferred ~95k ZSD morphed in 10 of those transactions and
+an upper bound in the low‑hundreds‑of‑thousands of ZSD/ZRS across the remainder&quot; <span class="basis">stated, X</span>.</p>
+<p>We looked for a pattern that would give amounts (<code>origin.cpp</code>, <code>origin.tsv</code>). For every ring
+member of the fourteen transactions we looked up the transaction that created it. Of the 224
+members, 69 come from conversions of ZEPH into the stable coin, 31 are stable-coin change of
+conversions back into ZEPH, 77 come from stable-coin transfers and 47 are fee outputs of miner
+transactions: the mix a wallet picking stable-coin decoys produces. A conversion states the
+amount it mints in the open, but each of these 100 conversions has two stable-coin outputs, so
+the amount of a single ring member is not public even there, and which member was spent is not
+visible. Three members were created by another of the fourteen: the ring of <code>4cabb05a…</code> (block
+125958) contains a stable-coin output of <code>6ade0f71…</code> (block 125921), and the ring of <code>78ebdc84…</code>
+(block 295137) contains both stable-coin outputs of <code>6e5ea6d0…</code> (block 294167). That ties these
+transactions to each other; it does not give an amount. The developer's figure rests on
+reasoning or data we do not have.</p>
+<h3 id="s5-3">5.3 Sixteen transactions with one or two foreign ring members</h3>
+<p>35 inputs in 16 transactions have a ring of the claimed asset with one (30 inputs) or two (5
+inputs) members of another asset: 27 inputs with reserve-coin (ZRS) members in ZEPH rings, 5 with
+ZSD members, 1 with both, 1 with a yield-coin member, and 1 ZSD input with a ZEPH member. In
+every case the foreign member is among the four newest of the ring, and it was created either in
+the first six blocks after a hard fork (89302 to 89306 after fork 3; 360002 to 360005 after
+fork 6) or 12 to 54 blocks before the spending transaction. One transaction (block 91669,
+<code>1975764671c5565220dd8764af9a3ecfab23cacd5f512b349a17bb6c665e30d6</code>, 38 inputs) has such a member
+in 13 inputs, all created in blocks 89302 to 89305.</p>
+<p>Looked at as whole rings (<code>origin.tsv</code>, <code>ring-ages.tsv</code>), these inputs fall into three groups:</p>
+<ul>
+<li><strong>29 inputs in 10 transactions, after hard fork 3.</strong> The foreign member was created in blocks
+89302 to 89306, and no member of any of these rings is newer than block 89321. Yet the
+transactions are in blocks 89697 to 113049, that is 397 to 23,749 blocks after the fork. The
+same holds for the other 43 inputs of these ten transactions, which have no foreign member:
+their rings, too, end by block 89321. A wallet normally takes most decoys from the most recent
+blocks; here every ring of the transaction was drawn from outputs that end a few blocks after
+the fork, which is where the first outputs of the new assets are.</li>
+<li><strong>3 inputs in 3 transactions, after hard fork 6</strong> (blocks 361396, 361463 and 362266). The
+foreign member, created in blocks 360002 to 360005, is the newest member of its ring. Two of
+these transactions have a second input, and its ring is an ordinary recent one (newest members
+in blocks 361447 and 362250).</li>
+<li><strong>3 inputs in 3 transactions</strong> (blocks 116489, 119074 and 353852). The ring is an ordinary
+recent one and the foreign member is its newest, created 54, 25 and 12 blocks earlier: twice a
+ZSD member in a ZEPH ring, once a ZEPH member in a ZSD ring.</li>
+</ul>
+<p>Two readings:</p>
+<ul>
+<li><strong>Decoys picked across assets</strong>, with no gain to anyone. In the first group nothing sets the
+flagged inputs apart from the other inputs of the same transactions except the foreign member
+itself: all 72 rings were drawn from the same bounded set of outputs, whose newest end holds
+the first reserve-coin and stable-coin outputs. We did not establish which software builds
+such rings. The wallet has selected decoys by asset type since commit <code>6e98722af</code>
+(2023-08-11), before hard fork 3, and the mechanism that Monero's wallet has for bounding
+decoys at a fork is not active in Zephyr's source (its fork height is set to 99999999).</li>
+<li><strong>Real spends through defect B.</strong> A ring can be built at will, so this cannot be excluded for
+any of the sixteen, and it had a motive: in the conversions that created these reserve-coin
+outputs, right after the fork, one ZEPH bought two reserve coins, so spending such an output
+as ZEPH would have doubled it. In the second and third group the foreign member is the newest
+of its ring, the position a real spend often has; that is a heuristic, not proof. The project
+reports &quot;fewer transactions involving ZRS → ZEPH&quot; <span class="basis">stated, Discord, 2025-01-23</span>.</li>
+</ul>
+<p>The ring ages show that the ten transactions of the first group share one way of selecting ring
+members. They do not tell a foreign decoy from a foreign real spend: a list of outputs that was
+cached at the fork, a transaction prepared then and sent later, a fault in a wallet's indexing
+and a deliberately built ring would all look the same. Neither reading is proven for any of the
+sixteen, and this report does not prefer one. The list is in the evidence files.</p>
+<h3 id="s5-4">5.4 Controls: the whole chain re-checked</h3>
+<p>The whole database was scanned: blocks 0 to 902083 (the copy ends on 2026-11-07), 1,265,146
+transactions, 8,028,931 inputs, 128,462,896 ring members, 1,265,146 range proofs checked, no
+parse errors. Findings in total: the 3 failing proofs of <a class="ref" href="#s5-1">§5.1</a> and the 49 inputs of <a class="ref" href="#s5-2">§5.2</a> and <a class="ref" href="#s5-3">§5.3</a>,
+nothing else. The last transaction with a foreign ring member is in block 362266; from hard
+fork 7 (block 433000) on there is none (427,466 transactions from block 435000 on alone), and
+none of the 604,107 proofs from hard fork 6 on fails. The
+two rules are enforced by consensus from those forks on, so this part checks the scanner, not
+the chain.</p>
+<p>The re-validation (<a class="ref" href="#s2">§2</a>) covered the same 1,265,146 transactions, 33,504 of them conversions
+(12,428 below hard fork 6). None fails the semantics check, the minted-amount check or the
+ring-signature check of its height, none passes only under the rules of the previous fork, and
+none could not be parsed or typed. Every transaction on the chain, the 33 of <a class="ref" href="#s5-1">§5.1</a> to <a class="ref" href="#s5-3">§5.3</a>
+included, therefore passes these checks as the released code applies them at its height: those
+33 were accepted because of what the checks did not cover, not because a check was bypassed. For these checks it also follows that no earlier version of the
+software accepted a transaction that v2.3.0 would refuse.</p>
+<p>The key images of all 8,028,931 inputs are distinct (<code>keyimages.cpp</code>, <a class="ref" href="#s2">§2</a>): no output was spent
+twice, under one asset name or under two.</p>
+<p>The miner transactions were checked separately (<code>coinbase.cpp</code>, <a class="ref" href="#s2">§2</a>). In each of the 902,083
+blocks after genesis the outputs equal, to the atomic unit and per asset, the block's reward
+minus the reserve and yield shares plus the fees; block 536000 carries the one-time 1,921,650
+ZEPH on top. No block's reward is above the emission formula; 5,412 blocks have a lower one,
+which is what the block-weight penalty does. So no block paid out more than reward and fees
+allow.</p>
+<p>What these controls leave out is listed in <a class="ref" href="#s2">§2</a>. They show that the chain follows the rules as
+they are coded for the things that decide how many coins exist; they are not a replay of every
+consensus rule.</p>
+<h2 id="s6">6. The audit and the supply</h2>
+<h3 id="s6-1">6.1 Timeline</h3>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Event</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="nw">2023-05-26 / 05-29</td>
+<td>First Zephyr commit with Haven's asset code; genesis</td>
+<td>code, chain</td>
+</tr>
+<tr>
+<td class="nw">2023-10-01</td>
+<td>Hard fork 3: stable coin and reserve coin go live</td>
+<td>chain</td>
+</tr>
+<tr>
+<td class="nw">2023-10-29</td>
+<td>First full-ring ZSD-as-ZEPH transaction</td>
+<td>chain</td>
+</tr>
+<tr>
+<td class="nw">2024-06-19</td>
+<td>v1.1.0: sync stall at block 274662 fixed; reserve counter set by hand (<a class="ref" href="#s6-3a">§6.3a</a>)</td>
+<td>release notes, code</td>
+</tr>
+<tr>
+<td class="nw">2024-07-07</td>
+<td>Three transactions with invalid range proofs</td>
+<td>chain</td>
+</tr>
+<tr>
+<td class="nw">2024-09-30</td>
+<td>Last full-ring ZSD-as-ZEPH transaction</td>
+<td>chain</td>
+</tr>
+<tr>
+<td class="nw">2024-10-13</td>
+<td>Hard fork 6 (v2.0.0): range proofs verified again, as a by-product of the yield feature by the project's later account</td>
+<td>code, release notes, Discord</td>
+</tr>
+<tr>
+<td class="nw">2024-11-19</td>
+<td>Haven starts its own supply audit (its hard fork 25)</td>
+<td>Haven code</td>
+</tr>
+<tr>
+<td class="nw">2024-12-11</td>
+<td>Haven's repository: commit &quot;fix range proof exploit&quot;, merged into the main branch the same day; no branch of that repository has a later commit</td>
+<td>Haven code</td>
+</tr>
+<tr>
+<td class="nw">2024-12-29</td>
+<td>Zephyr announces on Discord that it has identified three transactions &quot;that align with suspicious activity&quot;, refers to &quot;the invalid range-proof issue that affected 50 Haven transactions&quot;, and says this &quot;does not mean Zephyr was successfully exploited&quot; (<a class="ref" href="#s6-1a">§6.1a</a>)</td>
+<td>Discord</td>
+</tr>
+<tr>
+<td class="nw">2025-01-02</td>
+<td>Zephyr's year review: &quot;Work is underway to faciltiate conducting a comprehensive chain audit&quot;; expected to take &quot;the next four weeks, plus adequete time to allow everyone to particupate&quot;</td>
+<td>Discord</td>
+</tr>
+<tr>
+<td class="nw">2025-01-06 / 07</td>
+<td>Zephyr announces on Discord that it has asked all exchanges to disable ZEPH deposits until a chain audit is done, because of &quot;the three suspect transactions from 6 months ago&quot; (<a class="ref" href="#s6-1a">§6.1a</a>). A mining service reports deposits blocked at MEXC, XeggeX, CoinEx, NonKYC and TradeOgre</td>
+<td>Discord; Kryptex notice of 2025-01-07</td>
+</tr>
+<tr>
+<td class="nw">2025-01-13</td>
+<td>Project explains the three transactions: they &quot;fail an updated range proofs check ... introduced in Zephyr v2.0.0&quot;; the earlier check &quot;was incorrect, an oversight on our part&quot; (<a class="ref" href="#s4-1">§4.1</a>)</td>
+<td>Discord, general channel</td>
+</tr>
+<tr>
+<td class="nw">2025-01-20</td>
+<td>Project: &quot;MEXC did give me a range ... its 2-3M&quot;</td>
+<td>Discord, general channel</td>
+</tr>
+<tr>
+<td class="nw">2025-01-21</td>
+<td>v2.0.2 announced: &quot;An issue was uncovered that necessitates this pre-emptive fork ahead of the audit update&quot;; fork set less than 40 hours ahead</td>
+<td>Discord; release notes</td>
+</tr>
+<tr>
+<td class="nw">2025-01-22</td>
+<td>MEXC: &quot;As requested by the ZEPHYR (ZEPH) project team, MEXC suspended deposits of ZEPH&quot;</td>
+<td>MEXC announcement</td>
+</tr>
+<tr>
+<td class="nw">2025-01-23</td>
+<td>Hard fork 7. Post-fork update: defect B described, credited to an anonymous developer; 30 transactions; estimate of about 200,000 ZEPH; &quot;distinct from the 'range proofs' issue ... which involves three suspect transactions that fail the updated range proofs code&quot;</td>
+<td>Discord; code</td>
+</tr>
+<tr>
+<td class="nw">2025-02-19</td>
+<td>Audit fork announced for 2025-03-31; the hotfix &quot;has ultimately set us back&quot;</td>
+<td>Discord</td>
+</tr>
+<tr>
+<td class="nw">2025-03-31</td>
+<td>Hard fork 8: only audit transactions; full resync required</td>
+<td>release notes, chain</td>
+</tr>
+<tr>
+<td class="nw">2025-05-07</td>
+<td>Hard fork 9: all transactions paused. Project: most exchanges have finished, &quot;MEXC has yet to audit all of their coins&quot;; estimated supply &quot;~9.5M&quot; against &quot;the ~7.4M we would have had if it had not been for any exploit(s)&quot;</td>
+<td>chain; Discord</td>
+</tr>
+<tr>
+<td class="nw">2025-05-09</td>
+<td>Extension announced: &quot;MEXC has the largest wallet ... and the coins that are contained in their wallet are user funds&quot;. Published table (day 37): 7,296,446 ZEPH audited including 2,187,899 in the reserve, against 7,395,570 reported</td>
+<td>Discord</td>
+</tr>
+<tr>
+<td class="nw">2025-05-11</td>
+<td>Hard fork 10: audit window reopened &quot;to ensure that critical services and partners ... have been able to get all of their assets audited&quot;</td>
+<td>release notes</td>
+</tr>
+<tr>
+<td class="nw">2025-05-14</td>
+<td>MEXC: &quot;Due to the hard fork of ZEPHYR (ZEPH), MEXC suspended ZEPH deposits and withdrawals&quot;</td>
+<td>MEXC announcement</td>
+</tr>
+<tr>
+<td class="nw">2025-05-21</td>
+<td>Project: MEXC has &quot;been running the <code>audit_all</code> command for over 24 hours&quot;; &quot;some limitation in their server environment&quot;. Last resort named: &quot;to simply mint the coins they can't audit in the next update and send them to MEXC&quot;</td>
+<td>Discord, minor-announcements</td>
+</tr>
+<tr>
+<td class="nw">2025-05-27</td>
+<td>Project: &quot;we are going to have to move to the last resort option of minting them their difference in the next hardfork&quot;</td>
+<td>Discord, minor-announcements</td>
+</tr>
+<tr>
+<td class="nw">2025-06-01</td>
+<td>Project: agreement with MEXC on the mint; &quot;They have strict OpSec restrictions which has caused issues with them not being able to ... complete their audit&quot;</td>
+<td>Discord, minor-announcements</td>
+</tr>
+<tr>
+<td class="nw">2025-06-11</td>
+<td>v2.3.0 announced: &quot;a mint for their unauditable balance (1,921,650 ZEPH)&quot;; estimated change against the reported supply ZEPH +2,056,803, ZSD −106,320.68, ZRS −146,210.32, ZYS −4,103.28; &quot;we are adjusting our emission schedule to reflect this&quot; so that &quot;the 18.4M Max supply of ZEPH (before tail emission) remains&quot;</td>
+<td>Discord; release notes</td>
+</tr>
+<tr>
+<td class="nw">2025-06-15</td>
+<td>Hard fork 11 (v2.3.0): normal operation; old asset types invalid; one-time mint. Project publishes <code>supply_info</code> at height 536010</td>
+<td>chain; Discord</td>
+</tr>
+<tr>
+<td class="nw">2025-06-15</td>
+<td>Project on X: &quot;$ZEPH was underreported by +2.39M, bringing total circulating supply to 9.75M&quot; (<a class="ref" href="#s6-3">§6.3</a>)</td>
+<td>X</td>
+</tr>
+<tr>
+<td class="nw">2025-06-16</td>
+<td>&quot;Working with MEXC to get them online ASAP! Other exchanges should be online.&quot;</td>
+<td>Discord</td>
+</tr>
+<tr>
+<td class="nw">2025-06-17</td>
+<td>Project: &quot;I received their exchange wallet seed to confirm the balance. I have now done so and paid them to their new exchange wallet.&quot; Screenshot of the wallet: &quot;Balance: 1921649.728246938366 ... ZEPH (unaudited)&quot;</td>
+<td>Discord, minor-announcements</td>
+</tr>
+<tr>
+<td class="nw">2025-07-28</td>
+<td>Project's overview article: &quot;an inflation of ~2.39M $ZEPH compared to the expected emission schedule&quot; (<a class="ref" href="#s6-3">§6.3</a>)</td>
+<td>X</td>
+</tr>
+<tr>
+<td class="nw">2025-08-25</td>
+<td>Project's AMA article: no third-party review planned; &quot;both Zephyr exploits were inherited from &quot;audited&quot; Haven code portions&quot; (<a class="ref" href="#s3">§3</a>, <a class="ref" href="#s8">§8</a>)</td>
+<td>X</td>
+</tr>
+<tr>
+<td>2025-08-27 / 2025-09-06</td>
+<td>Project's post-audit report, on its website as &quot;Zephyr Audit – Postmortem&quot; and ten days later on X (<a class="ref" href="#s4-1">§4.1</a>, <a class="ref" href="#s5-2">§5.2</a>, <a class="ref" href="#s6-5">§6.5</a>, <a class="ref" href="#s8">§8</a>)</td>
+<td>website; X</td>
+</tr>
+<tr>
+<td>2026-07-14 / 2026-08-10</td>
+<td>Project selects the firm Sherlock for an external audit of its EVM bridge; first round reported complete (<a class="ref" href="#s8">§8</a>)</td>
+<td>Discord</td>
+</tr>
+</tbody>
+</table></div>
+<p>Normal transfers were not possible for 54,500 blocks, about eleven weeks. The post-audit report
+dates hard fork 10 to &quot;May 9, 2025&quot; and has hard fork 11 &quot;activated at block 536,000&quot; on &quot;Jun 11,
+2025&quot;; those are the days of the announcements. On the chain the two forks are on 2025-05-11 and
+2025-06-15, and the project's own post of 2025-06-11 says &quot;approx. June 15&quot; <span class="basis">stated, X</span>.</p>
+<p>Two more points where later summaries by the project differ from its own record, noted for
+readers who compare sources. The post-audit report's timeline has exchanges asked to disable
+deposits on 2024-12-29; the announcements of that request, on Discord and on X, are of
+2025-01-06. On 2026-04-13 the project wrote &quot;We disclosed the morphing bug publicly in Dec 2024&quot;
+(<a href="https://x.com/zephyr_org/status/2043732782224957593">reply</a>) <span class="basis">stated, X</span>; the announcement of
+2024-12-29 concerns the three range-proof transactions and does not mention ring members, and
+defect B was announced on 2025-01-23, two days after the hotfix release (<a class="ref" href="#s6-1a">§6.1a</a>).</p>
+<h3 id="s6-1a">6.1a What the project said before the audit <span class="basis">stated, Discord</span></h3>
+<p>All texts were posted in the project's Discord announcements channel by the account &quot;fennzar&quot;.</p>
+<p>2024-12-29 (<a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1322858944879792189">message</a>):</p>
+<blockquote>
+<p>We've identified three transactions in Zephyr that align with suspicious activity also confirmed
+by @Kayaba. This does not mean Zephyr was successfully exploited. There's still much we simply
+don't—and in some cases can't—know, such as:</p>
+<ul>
+<li>The specific exploit methods or their outcomes.</li>
+<li>Whether the invalid range-proof issue that affected 50 Haven transactions is exactly the same
+in kind as what occurred with the 3 transactions on Zephyr.</li>
+</ul>
+<p>[...] If a major exploit had truly succeeded on Zephyr, we would almost certainly see
+catastrophic effects: A price crash to $0. Unexpected amounts in exchange books or balances.
+Breakdowns in our stablecoin mechanics (ZEPH Reserve drained etc). None of these signs have
+appeared [...]</p>
+<p>Moreover, our protocol relies on differing mechanics (namely DJED) and was written by the Zephyr
+team—it diverges significantly from Haven's implementation.</p>
+</blockquote>
+<p>and in its second part (<a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1322858954241478678">message</a>):</p>
+<blockquote>
+<p>Even though a large-scale exploit seems unlikely, we're still treating this with due caution.
+[...] If significant unauthorized minting of ZEPH or other assets did occur (which we do not
+believe is the case), we have options to address and rectify it.</p>
+</blockquote>
+<p>2025-01-06, &quot;ZEPH Exchange Deposits Disabled &amp; Upcoming Chain Audit&quot; (<a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1325691467523686452">message</a>):</p>
+<blockquote>
+<p>we simply can't <em>definitively</em> rule out any possibilities of the result of the three suspect
+transactions from 6 months ago - until a final resolution and result is determined by the Audit
+process.</p>
+<p>As it stands, especially by the effect of exchanges disabling their deposits, we can know that
+it is NOT possible that millions of excess ZEPH has been sold off on exchanges and thus in the
+hands of legitimate users. [...] As it stands, only 30% of ZEPH is in the reserve which is very
+much in line with what we would expect [...]</p>
+<p>In addition, we know from exchanges that their wallet balances are expected and reasonable, all
+totaling to well under our reported supply of 6.4M - as well as their books, trading activity
+etc.</p>
+</blockquote>
+<p>and in its second part (<a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1325691481251512331">message</a>):</p>
+<blockquote>
+<p>Best case scenario: Whatever was attempted was not successful, and no unauthorized ZEPH was
+minted and thus sold off on exchanges.</p>
+<p>Worse case scenario: The transactions did result in unauthorized ZEPH minting, and a necessarily
+limited amount of ZEPH has been slowly sold off over the last 6 months, that has flown &quot;under
+the radar&quot;, now in legitimate users hands. With the exchanges disabling deposits, this flow has
+been stopped but there will be an inflationary effect post audit. Any large amounts audited will
+need to be investigated and if we believe that any amounts were a direct result of the 3
+transactions, we will effectively blacklist them.</p>
+<p>[...] Coins not audited will be rendered null and void. Exchanges will participate and therefore
+coins you have on exchanges will be audited for you.</p>
+</blockquote>
+<p>On X the project posted on the same subject that day
+(<a href="https://x.com/zephyr_org/status/1876209588460249297">2025-01-06</a>) <span class="basis">stated, X</span>, more directly on two points: &quot;the
+evidence suggests that these transactions could have led to the unauthorized minting of
+additional ZEPH&quot;, and &quot;The audit will have to be comprehensive and impossible amounts will be
+blacklisted. Post-audit, any coins not audited will be null and void.&quot;</p>
+<p>How this relates to what we measured:</p>
+<ul>
+<li>The question the project left open on 2024-12-29 can be answered from public data: the three
+transactions of 2024-07-07 have range proofs that do not verify, and the function that
+validated them did not check range proofs (<a class="ref" href="#s4-1">§4.1</a>, <a class="ref" href="#s5-1">§5.1</a>). That is the same omission, in the same
+function, as in Haven's code.</li>
+<li>That the protocol &quot;was written by the Zephyr team&quot; and &quot;diverges significantly from Haven's
+implementation&quot; holds for the Djed rules. It does not hold for the transaction verification concerned: that function is in
+Zephyr's first commit in Haven's form (<a class="ref" href="#s3">§3</a>, <a class="ref" href="#s4-1">§4.1</a>). Eight months later the project wrote that
+both exploits &quot;were inherited from &quot;audited&quot; Haven code portions&quot; (<a class="ref" href="#s3">§3</a>) <span class="basis">stated, X</span>.</li>
+<li>The announcement of 2024-12-29 does not mention ring members or asset types. Defect B was
+announced separately on 2025-01-23 as &quot;distinct from the 'range proofs' issue&quot;.</li>
+<li>The announcement of 2025-01-06 foresaw a blacklist for amounts traced to the three
+transactions. The released code contains none, and none was announced in the channel; whether
+any amount was traced is not stated in what we read.</li>
+<li>The &quot;reported supply of 6.4M&quot; equals the coins generated by that date (6,431,888 ZEPH through block
+420759). The supply the project reported before the audit was therefore the
+schedule, not a count of coins; no such count existed (<a class="ref" href="#s6-3">§6.3</a>).</li>
+<li>30 % of that is about 1.93 million ZEPH in the reserve; the reserve rebuilt from the chain was
+1,890,614 ZEPH at that block (29.4 %). The statement was accurate.</li>
+<li>Around the turn of the year the project did not believe significant unauthorized minting had
+occurred. Five months later the supply table held 2,067,576 ZEPH more than the schedule, 1,921,650 of it
+minted for an exchange balance that had not been audited (<a class="ref" href="#s6-3">§6.3</a>, <a class="ref" href="#s6-4">§6.4</a>). The statement of January
+concerns coins sold on exchanges to other users; the later figures do not say where the excess
+coins were, so the two are not directly comparable. We record both.</li>
+</ul>
+<h3 id="s6-2">6.2 How the audit worked <span class="basis">code, chain</span></h3>
+<p>Amounts cannot be audited from outside. The audit forks therefore accepted only &quot;audit
+transactions&quot;: a holder spends old-type outputs and receives new-type outputs, and the
+transaction states the amount in the open (<code>amount_burnt</code> of the old type equals <code>amount_minted</code>
+of the new type; this held for all 15,040). The supply tables were rebuilt from these statements.
+From hard fork 11 the old asset types are rejected.</p>
+<p>This establishes how many coins were <em>presented</em>. It does not establish which of them had been
+emitted: a coin that was never emitted and is moved through an audit transaction is an audited
+coin. With hidden amounts and histories no audit of this kind can do more.
+The project described the result in the same terms when asked how the numbers can be verified
+(<a href="https://x.com/zephyr_org/status/1932786647004840331">reply of 2025-06-11</a>) <span class="basis">stated, X</span>: &quot;Only balances that went
+through the audit process have been verified and migrated, these are now part of the official
+on-chain state. Yes Zephyr uses private transactions, we can't see individual histories - but we
+can define a clear, verified supply moving forward.&quot;</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Asset (old to new)</th>
+<th>Audit transactions</th>
+<th>Amount audited</th>
+<th>of which in the extension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ZEPH to ZPH</td>
+<td class="nw">13,300</td>
+<td class="nw">5,164,647.67</td>
+<td class="nw">245,009.22</td>
+</tr>
+<tr>
+<td>ZEPHRSV to ZRS</td>
+<td class="nw">1,318</td>
+<td class="nw">1,023,509.12</td>
+<td class="nw">17,781.93</td>
+</tr>
+<tr>
+<td>ZEPHUSD to ZSD</td>
+<td class="nw">262</td>
+<td class="nw">88,314.92</td>
+<td class="nw">908.19</td>
+</tr>
+<tr>
+<td>ZYIELD to ZYS</td>
+<td class="nw">160</td>
+<td class="nw">185,474.08</td>
+<td class="nw">462.58</td>
+</tr>
+</tbody>
+</table></div>
+<p>The largest single audit transaction is 323,181 ZEPH; the ten largest are 26.8 % and the hundred
+largest 60.3 % of the audited ZEPH (transactions, not holders).</p>
+<h3 id="s6-3">6.3 Reconciliation of ZEPH</h3>
+<p>Before the audit the chain kept no count of ZEPH in wallets (the old &quot;ZEPH&quot; tally is the
+reserve). Since hard fork 8 the node reports a total per asset; the ZEPH total includes the ZEPH
+held in the reserve.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Figure</th>
+<th>ZEPH</th>
+<th>Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coins generated through block 481499 (before hard fork 8), as recorded by the node</td>
+<td class="nw">7,108,089</td>
+<td>chain</td>
+</tr>
+<tr>
+<td>Coins generated through block 536000, without the one-time mint</td>
+<td class="nw">7,682,370</td>
+<td>chain</td>
+</tr>
+<tr>
+<td>Total ZEPH in the supply table at height 902084</td>
+<td class="nw">12,355,841</td>
+<td>chain</td>
+</tr>
+<tr>
+<td>minus coins generated in blocks 536001 to 902083</td>
+<td>−2,605,896</td>
+<td>chain</td>
+</tr>
+<tr>
+<td><strong>Total right after block 536000</strong></td>
+<td><strong>9,749,946</strong></td>
+<td>derived</td>
+</tr>
+<tr>
+<td><strong>Excess over emission at block 536000</strong></td>
+<td><strong>2,067,576</strong></td>
+<td>derived</td>
+</tr>
+<tr>
+<td>of which the one-time mint in block 536000</td>
+<td class="nw">1,921,650</td>
+<td>code, chain</td>
+</tr>
+<tr>
+<td>of which excess inside the audited supply</td>
+<td class="nw">145,926</td>
+<td>derived</td>
+</tr>
+<tr>
+<td>Reserve at hard fork 8, rebuilt from genesis (<a class="ref" href="#s6-3a">§6.3a</a>)</td>
+<td class="nw">2,088,864</td>
+<td>chain</td>
+</tr>
+<tr>
+<td>Most that could have been emitted into wallets by hard fork 8 (generated − reserve)</td>
+<td class="nw">5,019,225</td>
+<td>derived</td>
+</tr>
+<tr>
+<td>Holders' audit transactions, amounts plus fees</td>
+<td class="nw">5,165,151</td>
+<td>chain</td>
+</tr>
+<tr>
+<td>Wallet claims honoured (audited 5,164,648 + one-time mint 1,921,650)</td>
+<td class="nw">7,086,298</td>
+<td>chain</td>
+</tr>
+</tbody>
+</table></div>
+<p>All figures in this table come from one database (blocks 0 to 902083). The 145,926 can be reached
+two ways with the same result to the last digit shown: total minus coins generated, or audited
+amounts plus fees minus what could have been emitted into wallets. The table shows whole ZEPH,
+rounded from the exact figures; sums of the rounded entries can differ by one.</p>
+<p>What the total right after block 536000 consists of, as a check: 5,164,648 ZEPH from the audit
+transactions, 2,289,862 in the reserve, 373,779 paid to miners in blocks 481500 to 535999
+(<code>coinbase.tsv</code>), and 1,921,657 paid in block 536000 (the one-time mint and that block's
+reward). Together 9,749,946.</p>
+<p><strong>The project's own figures</strong> <span class="basis">stated, Discord</span>. On 2025-05-07: &quot;we will end with a higher
+reported circulating amount than the ~7.4M we would have had if it had not been for any
+exploit(s). The estimated circulating supply for ZEPH is going to be ~9.5M&quot;. On 2025-06-11:
+estimated new supply 9,706,880 ZEPH, an estimated change of +2,056,803 against the supply then
+reported. Our figure at the fork block is 2,067,576.</p>
+<p>On X the project gave a larger figure <span class="basis">stated, X</span>. Its thread of 2025-06-15
+(<a href="https://x.com/zephyr_org/status/1934252619540664495">post</a>) says &quot;$ZEPH was underreported by +2.39M, bringing total
+circulating supply to 9.75M&quot;, with a table: ZEPH reported 7,360,588.16, audited 9,750,021.39,
+difference +2,389,433.23; ZSD 473,976.71 and 419,218.23; ZRS 1,166,020.32 and 1,028,603.22; ZYS
+189,500.28 and 185,474.35. Its overview article of 2025-07-28 speaks of &quot;an inflation of ~2.39M
+$ZEPH compared to the expected emission schedule&quot;. The audited figures are those of <code>supply_info</code>
+at height 536010 and agree with ours. The base is not the emission at the fork. All four
+&quot;reported&quot; figures of that table are those of the project's own audit-log table of 2025-05-03,
+day 32 of the audit (<a href="https://discord.com/channels/1112605073948819559/1359471488364970104/1368212122236096554">message</a>) <span class="basis">stated,
+Discord, audit-log-updates</span>, six weeks before hard fork 11. The coins generated through block
+536009 are 7,682,445.64 ZEPH without the one-time mint (<a class="ref" href="#s6-3a">§6.3a</a>), 321,857 more than that figure.
+So the +2.39 million sets the audited total of June against the reported supply of early May.
+Against the coins generated at the fork the excess is 2,067,576; the project's own estimate of
+2025-06-11, repeated in its post-audit report of 2025-09-06 and on 2026-04-13, is +2,056,803.</p>
+<p>The tables the project published during the audit count as &quot;audited&quot; the reserve, the audit
+transactions and the newly mined coins, and set them against a &quot;reported&quot; figure. On 2025-05-09,
+after the first window: 7,296,446 ZEPH audited (of which 2,187,899 in the reserve) against
+7,395,570 reported. On 2025-05-16, the last table: 7,439,432 against 7,458,205. Up to then the
+audited total was below the reported one. The excess appears only afterwards, with the remaining
+audits of the extension and the one-time mint of 1,921,650. The project's reserve figures in these
+tables agree with our rebuild (<a class="ref" href="#s6-3a">§6.3a</a>).</p>
+<p><strong>Check against the project's own figures.</strong> In its Discord announcement of hard fork 11 the
+project published the output of the wallet's <code>supply_info</code> at height 536010: 9,750,021.39 ZEPH in
+total, 2,339,897.346230 ZEPH in the reserve and 282,410.979309 ZSD in the yield reserve <span class="basis">stated,
+Discord, 2025-06-15</span>. The node's record of coins generated through block 536009 is 9,604,095.64,
+so that total is 145,925.75 ZEPH above emission: the figure in the table, from a different height
+and a different source. Our rebuilt reserve after block 536009 is 2,339,897.346856 and our rebuilt
+yield reserve 282,410.979309 (<a class="ref" href="#s6-3a">§6.3a</a>).</p>
+<h3 id="s6-3a">6.3a The reserve and the other assets, rebuilt from genesis <span class="basis">chain</span></h3>
+<p>The reserve is a counter kept by the node, and the project set it by hand once (block 274662,
+v1.1.0). To test it we rebuilt it from block 0 from public data only: the reserve's share of
+every block reward, plus the ZEPH paid in by every mint conversion, minus the ZEPH paid out by
+every redeem conversion (<code>amount_burnt</code> and <code>amount_minted</code> are public in conversions). The same
+pass rebuilds the totals of the other assets and reads the coins generated per block as the node
+stored them.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>After block</th>
+<th>Rebuilt reserve (ZEPH)</th>
+<th>Compared with</th>
+<th>Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="nw">274661</td>
+<td>1,355,089.749101175250</td>
+<td>constant in the source for that height, 1,355,089.749101175250</td>
+<td>none</td>
+</tr>
+<tr>
+<td class="nw">274662</td>
+<td class="nw">1,355,092.382800</td>
+<td>value the project set by hand, 1,355,092.382175</td>
+<td class="nw">0.000625</td>
+</tr>
+<tr>
+<td class="nw">507999</td>
+<td class="nw">2,187,899.36</td>
+<td>project's audit tables, 2,187,899</td>
+<td>none at their precision</td>
+</tr>
+<tr>
+<td class="nw">536009</td>
+<td class="nw">2,339,897.346856</td>
+<td>project's <code>supply_info</code> at 536010, 2,339,897.346230</td>
+<td class="nw">0.000625</td>
+</tr>
+<tr>
+<td class="nw">902083</td>
+<td class="nw">4,926,030.856934</td>
+<td>node's reserve at height 902084, 4,926,030.856309</td>
+<td class="nw">0.000625</td>
+</tr>
+</tbody>
+</table></div>
+<p>The hand-set value differs from the rebuilt one by 0.000625 ZEPH, and the difference is the same
+at the two later points of comparison. At every point where the reserve counter can be compared
+it agrees with the rebuild to within a thousandth of a ZEPH, and the correction of 2024 set it
+to what the public data give. No historical values of the counter are stored, so heights in
+between cannot be compared. Through block
+481499 the reserve received 1,237,538 ZEPH in block rewards and 4,108,725 ZEPH from mint
+conversions, and paid out 3,257,399 ZEPH in redeem conversions; there were 23,076 conversions of
+all kinds.</p>
+<p>The other assets, rebuilt the same way (conversions and yield rewards), against the figures the
+project called &quot;reported&quot; in its audit tables:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>Rebuilt</th>
+<th>Project's &quot;reported&quot;</th>
+<th>Supply table after the audit (height 536010)</th>
+<th>Missing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ZRS (after block 481499)</td>
+<td class="nw">1,166,020.32</td>
+<td class="nw">1,166,020.32</td>
+<td>1,028,603.22 (rebuilt to the same block: 1,171,111.52)</td>
+<td class="nw">142,508.30</td>
+</tr>
+<tr>
+<td>ZYS (after block 481499)</td>
+<td class="nw">189,500.28</td>
+<td class="nw">189,500.28</td>
+<td class="nw">185,474.35</td>
+<td class="nw">4,025.93</td>
+</tr>
+<tr>
+<td>ZSD (after block 507999)</td>
+<td class="nw">475,010.68</td>
+<td class="nw">475,010.68</td>
+<td>419,218.23 (rebuilt to the same block: 535,371.54)</td>
+<td class="nw">116,153.31</td>
+</tr>
+</tbody>
+</table></div>
+<p>The &quot;reported&quot; figures are thus what the public conversions add up to, and after the audit
+262,688 units of the other assets are missing from the supply table: 116,153 ZSD, 142,508 ZRS and
+4,026 ZYS. The yield reserve rebuilt to block 536009 equals the project's figure to the last
+digit. The same three differences stand at the tip of the database (height 902084: 142,508.30
+ZRS, 116,153.31 ZSD, 4,025.93 ZYS), so between those two points the node's totals have moved by
+exactly what the public conversions add up to.</p>
+<p><strong>Emission.</strong> The coins generated per block were read from the database instead of being
+simulated. A simulation without block-weight penalties ends 28.33 ZEPH above the node's record
+at block 902083; 5,412 blocks carry a penalty and no block's reward is above the formula (<a class="ref" href="#s5-4">§5.4</a>).
+The figures in this report use the node's record.</p>
+<p><strong>What the excess means.</strong> The accounting result needs no assumption: at block 536000 the supply
+table holds 2,067,576 ZEPH more than ordinary emission to that block, 1,921,650 of it issued by
+the one-time mint. What it says about earlier coins rests on the project's statement that the
+mint replaced an existing balance that could not be audited (<a class="ref" href="#s6-4">§6.4</a>). On that statement the figure
+is a net one: coins honoured that were never emitted, minus emitted coins that were never
+audited (lost keys, holders who missed both windows). The first quantity is then at least
+2,067,576 and higher by the unknown second. Both parts rest on public data: the
+1,921,650 of the one-time mint is a constant in the code and an output on the chain, and the
+145,926 follows from the audited amounts, the coins generated and the rebuilt reserve.</p>
+<p><strong>Where the non-emitted coins were</strong> cannot be decided from the chain. The two limiting cases,
+both on the project's statement about that balance:</p>
+<ul>
+<li>the unaudited exchange balance consisted almost entirely of them, and what the other holders
+audited was almost entirely emitted coins (their excess is only 145,926);</li>
+<li>the exchange balance consisted of emitted coins, in which case it belongs inside the
+5,019,225, and about two million non-emitted ZEPH were among the coins other holders audited.</li>
+</ul>
+<p>Anything between is possible, and this report does not choose. An exchange holds what its
+customers deposited; nothing in this evidence establishes anything about the exchange's conduct.</p>
+<h3 id="s6-4">6.4 The one-time mint <span class="basis">code, chain, stated</span></h3>
+<ul>
+<li>Constant <code>UNAUDITABLE_ZEPH_AMOUNT</code>, 1,921,650 ZEPH
+(<a href="https://github.com/ZephyrProtocol/zephyr/blob/v2.3.0/src/cryptonote_config.h#L188"><code>cryptonote_config.h</code> L188</a>),
+required as second coinbase output of block 536000
+(<a href="https://github.com/ZephyrProtocol/zephyr/blob/v2.3.0/src/cryptonote_core/blockchain.cpp#L1443-L1456"><code>blockchain.cpp</code> L1443-L1456</a>).</li>
+<li>On chain: block 536000 (<code>33ee82a6ee048d66355eac94d61e86471f4f1ff703cf7769fcada0bd36b28d6f</code>),
+miner transaction <code>cac7f5bd918a9d55fa0071cb01007e1e4471734878bbec896d762a69df0489c1</code>, second
+output 1,921,650.000000000000 ZPH.</li>
+<li>The output is paid to <code>GOV_WALLET_ADDRESS_2</code>, an address the project fixed in the source
+(<a href="https://github.com/ZephyrProtocol/zephyr/blob/v2.3.0/src/cryptonote_core/cryptonote_tx_utils.cpp#L238-L258"><code>cryptonote_tx_utils.cpp</code> L238-L258</a>);
+nothing in the code ties it to an exchange.</li>
+<li>For whom <span class="basis">stated, Discord and release notes</span>: 2025-05-07, &quot;we have had confirmation that MEXC
+has yet to audit all of their coins&quot;; 2025-05-09, &quot;MEXC has the largest wallet, with the most
+amount of coins to audit which was always going to be more challenging than regular users, and
+the coins that are contained in their wallet are user funds&quot;; 2025-06-11, &quot;Due to MEXC being
+unable to audit their entire wallet balance, we are including a mint for their unauditable
+balance (1,921,650 ZEPH) in this Hardfork&quot;; 2025-06-16, &quot;Working with MEXC to get them online
+ASAP!&quot;.</li>
+<li>Why the balance was not audited <span class="basis">stated, Discord, minor-announcements and general</span>: on
+2025-05-21, &quot;they have been running the <code>audit_all</code> command for over 24 hours ... The command is
+running, just slowly, which means there is some limitation in their server environment&quot;; on
+2025-05-24, 48 hours &quot;on a new environment&quot;; on 2025-06-01, &quot;strict OpSec restrictions&quot; kept
+MEXC from acting on the project's suggestions. The project wanted the balance audited, not
+minted: &quot;I really want them to complete the audit in this on-chain, clear way&quot;, and of the
+mint, &quot;it's self evident just how much of a mess that is, it would be a last resort&quot;
+(2025-05-21). The mint was decided on 2025-05-27.</li>
+<li>How the amount was established and handed over, as reported on 2025-06-17 <span class="basis">stated, Discord</span>: &quot;I received their
+exchange wallet seed to confirm the balance. I have now done so and paid them to their new
+exchange wallet&quot;, with a wallet screenshot showing &quot;Balance: 1921649.728246938366 ... ZEPH
+(unaudited)&quot;. The constant of 1,921,650 was already in the release of 2025-06-11, so the figure
+was known to the project before this check, which confirmed it to within 0.28 ZEPH; the
+announcements do not say how it was supplied. Earlier the project had
+MEXC's holdings only as a range: &quot;its 2-3M&quot; (2025-01-20), &quot;less than 3M but they didn't share
+with me exact figures&quot; (2025-04-14). In the same conversations it wrote: &quot;MEXC &amp; TO figures are on
+the highside, but you can make some assumptions about the rest and it tallies up to reasonable
+levels. If exchanges had like 10M in wallets then the scope would be self evident&quot;
+(2025-01-20), and &quot;We are still waiting on MEXC to complete their audit ... As it stands at the
+moment once they put theirs through we will be in the ballpark of the expected amount&quot;
+(2025-04-14) <span class="basis">stated, Discord, general</span>.</li>
+<li>What this does and does not show. By this account the mint replaced old-type coins that existed
+as unspent outputs in one wallet, not a figure on paper. We cannot verify the screenshot, that
+the wallet is MEXC's, or the payment to the new wallet: amounts and addresses are hidden.
+Nothing on the chain names an exchange. MEXC's public notices mention the suspensions only.</li>
+<li>The project announced the change to emission openly (2025-06-11): &quot;we are adjusting our emission
+schedule to reflect this. Our emission and new emission rate will be effectively at the end of
+Year 3 for ZEPH. This was done to ensure that the 18.4M Max supply of ZEPH (before tail
+emission) remains.&quot;
+That limit is the one in the project's whitepaper: &quot;Total Supply: 18.4 Million (+ tail
+emission 0.6 ZEPH p/block)&quot; <span class="basis">stated, whitepaper, p. 3</span>.</li>
+<li>Accounting: the amount is added to the block's base reward and so to the counter of generated
+coins. The base reward, by the emission formula on that counter, fell from 10.27 ZEPH in block
+536000 to 8.43 ZEPH in block 536001, about 18 % less. The lead over the original schedule was
+2,067,576 ZEPH at block 536000 and about 1,494,000 at height 907724 (2026-11-14, <code>supply.txt</code>).
+It keeps shrinking only while rewards follow the emission curve. The reward has a floor of 0.6
+ZEPH per block, the tail reward; the mint brings the moment that floor is reached forward, and
+once both schedules pay the floor the difference no longer changes. A projection without
+block-weight penalties puts that at block 3,307,370 with the mint and 3,513,570 without it,
+about ten years after the audit, with 123,720 ZEPH of the mint still ahead of the original
+schedule. So lower rewards offset about 1.8 million of the mint, not all of it, and the
+145,926 are not offset at all. Lower rewards mean less for miners, for the reserve share and
+for the yield share; the minted coins themselves stay in the supply.</li>
+</ul>
+<h3 id="s6-5">6.5 The other assets</h3>
+<p>ZSD, ZRS and ZYS have no emission schedule; they arise from conversions, whose amounts are
+public. Rebuilt from those (<a class="ref" href="#s6-3a">§6.3a</a>), 262,688 units are missing after the audit. The project's estimate of 2025-06-11 against its reported
+supply <span class="basis">stated, Discord</span>: ZSD −106,320.68, ZRS −146,210.32, ZYS −4,103.28, together 256,634 units
+fewer than reported. It adds (2025-05-07): &quot;The other assets look like they will come in under
+expected, and we know that some of those assets were likely morphed into ZEPH.&quot;</p>
+<p><strong>What follows for the two defects</strong> (inference). Under defect B one unit of another asset
+becomes one ZEPH and the old count of that asset keeps it. A unit that was morphed into ZEPH and
+stayed there therefore shows up as a unit missing at the audit, next to units that were simply
+not audited: units missing = net morphing into ZEPH + units not audited. (Morphing the other way
+would offset it; one of the sixteen partial rings runs that way, <a class="ref" href="#s5-3">§5.3</a>.) On this accounting,
+and with the totals of the other assets being what the public conversions add up to, defect B
+can explain at most about 262,688 ZEPH of the excess (the units missing by our rebuild, <a class="ref" href="#s6-3a">§6.3a</a>; the
+project's estimate of June was 256,634); the project's own best guess for morphing is about
+200,000. Of the excess of 2,067,576 at least about 1.8 million is therefore not explained by
+defect B. The only other known defect is A, and three
+transactions with invalid range proofs exist; but the chain does not show what they created, so
+we do not attribute the remainder to them. It is unexplained by B, and A could explain it.</p>
+<p>The project's post-audit report leaves the same question open <span class="basis">stated, X, 2025-09-06</span>. Of the
+range-proof transactions: &quot;We were not able to determine if or how much net chain-wide inflation
+originated from this vector, but the possibility that this contributed could also not be ruled
+out.&quot; Of the outcome: the other assets &quot;fell below pre‑audit expectations; consistent with
+ZSD/ZRS → ZEPH morphing&quot;. The report gives the deltas (ZEPH +2,056,803; ZSD −106,320.68; ZRS
+−146,210.32; ZYS −4,103.28) and does not say what accounts for the part of the ZEPH figure that
+morphing cannot.</p>
+<h2 id="s7">7. Haven, where the code came from <span class="basis">code; stated, Discord</span></h2>
+<p>What can be shown about Haven from its public repository, cloned on 2026-11-14:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Haven Protocol</th>
+<th>Zephyr Protocol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Defect A in the code</td>
+<td>from commit <code>141d4a359</code> (2023-04-25)</td>
+<td>from the first commit (2023-05-26), live from genesis (2023-05-29)</td>
+</tr>
+<tr>
+<td>Corrected</td>
+<td>commit <code>6f361aadf</code>, &quot;fix range proof exploit&quot;, 2024-12-11</td>
+<td>commit <code>427277f7d</code>, 2024-09-29, in force from block 360000 (2024-10-13)</td>
+</tr>
+<tr>
+<td>Own supply audit</td>
+<td>hard fork 25 &quot;supply audit&quot; on 2024-11-19, end fork on 2025-01-02 (hard-fork table)</td>
+<td>hard forks 8 to 11, 2025-03-31 to 2025-06-15</td>
+</tr>
+<tr>
+<td>Repository</td>
+<td>last commit 2024-12-11</td>
+<td>last commit 2025-06-10</td>
+</tr>
+</tbody>
+</table></div>
+<p>Zephyr's correction is ten weeks earlier than Haven's. Haven's code has a supply-audit
+transaction type that carries an amount proof, after which old funds can no longer be spent
+(<code>rctSigs.cpp</code>, <code>RCTTypeSupplyAudit</code>). Zephyr's audit, four months later, has the same shape:
+holders move their coins once through an audit transaction, and unaudited coins become invalid.
+Of the 591 substantive lines that Zephyr's audit commit (<code>7475f2d5a</code>) adds, 2 occur in Haven's
+code (<code>heritage.py</code>), so the idea is shared and the implementation is Zephyr's own.</p>
+<p>What Zephyr itself wrote about Haven <span class="basis">stated, Discord</span>: on 2024-12-29, &quot;the invalid range-proof
+issue that affected 50 Haven transactions&quot;; on 2024-12-30, &quot;The reason why the Haven team were
+made aware was because of the absolutely INSANE amount of coins on TradeOgre.&quot; We did not verify
+either statement and did not scan Haven's chain. What happened to Haven as a project, and how
+other chains of the same lineage dealt with similar defects, is outside what we could establish
+from sources we read in full, and is left out.</p>
+<h2 id="s8">8. How the incident was handled</h2>
+<p>Observations, not a verdict. This report does not judge who is to blame; the weighing is left to
+the reader.</p>
+<p><strong>What the project did.</strong></p>
+<ul>
+<li>It made public announcements at each of these steps: the three transactions (2024-12-29), the deposit stop
+(2025-01-06), defect B with its own count and estimate two days after the hotfix, the expected
+inflation before the audit closed (2025-05-07), and the mint with its amount and the change to
+emission (2025-06-11).</li>
+<li>It published its own post-audit report (2025-08-27 on its website, 2025-09-06 on X), with the
+figures and with sections on what went well and what did not, and it names the origin of both
+defects (<a class="ref" href="#s3">§3</a>).</li>
+<li>Both defects are closed. The chain kept producing blocks throughout, while ordinary
+transfers and conversions were off for 54,500 blocks (<a class="ref" href="#s6-1">§6.1</a>). Defect A was closed
+by the v2.0.0 release, by the project's account before it knew of the defect (<a class="ref" href="#s4-1">§4.1</a>); defect B
+by a hotfix in the month in which, by the project's account, it was reported (&quot;Jan 2025&quot;)
+<span class="basis">stated, X, 2025-07-28</span>.</li>
+<li>The audit produced, for the first time, supply figures that anyone can verify from the chain.</li>
+<li>The emission parameter was not raised: the one-time mint was booked as emission and is, for
+the larger part, offset by lower rewards in the years after (<a class="ref" href="#s6-4">§6.4</a>).</li>
+<li>The project wanted the exchange balance audited on chain and called minting it &quot;a last
+resort&quot; (<a class="ref" href="#s6-4">§6.4</a>).</li>
+<li>The accounting can be reproduced from public source code and a public chain, which is what
+made this review possible. The attribution of the mint and the check of the balance are the
+project's statements.</li>
+</ul>
+<p><strong>What stays open.</strong></p>
+<ul>
+<li>Defect A was live for sixteen and a half months and defect B for almost sixteen. On
+2025-01-06 the project wrote that its work &quot;includes a comprehensive review of our entire
+codebase, alongside the already planned audit&quot; <span class="basis">stated, X</span>; we found no account of the outcome
+of such a review. A search of the project's Discord server and of its X account on 2026-11-14
+returned none, and none of the 34 announcements from that date to the end of 2025 reports on
+one (<a class="ref" href="#s11">§11</a>). Asked on 2025-08-25 whether there would be a third-party
+review of the code, it answered: &quot;None are planned, but they aren't ruled out!&quot;, and said it
+had placed its trust in the audits of Haven's code (<a class="ref" href="#s3">§3</a>) <span class="basis">stated, X</span>.</li>
+<li>In July 2026 the project announced &quot;We have selected Sherlock for the external audit&quot;
+<span class="basis">stated, Discord, 2026-07-14</span>. That audit concerns the project's EVM bridge. The scope the
+project published names &quot;off-chain bridge repository, API, watchers and relayers&quot; and
+&quot;Solidity smart contracts&quot; <span class="basis">stated, Discord, community-funding, 2026-07-28</span>; the node's
+consensus code is not in it. The project had said so beforehand. Asked whether the audit
+would also look at the base chain, an account with the team role &quot;Marketing Lead&quot; answered:
+&quot;Scoped to the EVM bridge only: the smart contracts plus the off-chain bridge API/watchers.
+Not the L1.&quot;, and added: &quot;That's not to say we'll never look at the L1... as the protocol
+scales, a dedicated L1-focused review is a reasonable step&quot; <span class="basis">stated, Discord, general,
+2026-07-08</span>. The first round of the bridge audit was reported complete on 2026-08-10 <span class="basis">stated,
+Discord</span>. We found no third-party review of Zephyr's node code: not in the project's
+statements, and not in its public repositories of the node and the wallets, which hold no
+audit report and no reference to one (checked 2026-11-14).</li>
+<li>The correction of defect A in v2.0.0 was not announced as a security fix at the time; by the
+project's account it was not known to be one. The project disclosed the substance afterwards:
+on 2024-12-29 as a possibility, on 2025-01-13 in full (&quot;incorrect, an oversight on our part&quot;),
+and on 2025-01-23 as distinct from asset morphing. The fullest of these statements is in the
+general chat, not in an announcement or the release notes.</li>
+<li>The project's estimate for defect B is about 200,000 ZEPH; the excess is about 2.07 million.
+The project's post-audit report says it could not determine how much came from the
+range-proof transactions, so what accounts for the difference is open by its own account as
+well (<a class="ref" href="#s6-5">§6.5</a>).</li>
+<li>The audit could not remove coins that had not been emitted and were presented; it turned them
+into audited coins. That is a limit of the method, even if every holder takes part (<a class="ref" href="#s6-2">§6.2</a>).</li>
+<li>Holders who did not move their coins in the two windows lost them. Their number is unknown.</li>
+<li>The one-time mint is 1,921,650 ZEPH, a quarter of everything emitted by then, created by a
+constant in the source and paid to a project-designated address. The amount was fixed in the
+release before the project checked the balance from the exchange's wallet seed; the check, the
+identity of the wallet and the payout rest on the project's word and cannot be verified on
+chain. Its cost falls on miners and on the reserve and yield shares of later blocks.</li>
+<li>We found no independent post-mortem; the public account we could read consists of the
+project's posts, its own post-audit report and the release notes.</li>
+</ul>
+<h2 id="s9">9. State of the code on 2026-11-14 <span class="basis">code</span></h2>
+<ul>
+<li>Both defects are closed in v2.3.0, the current release. Blocks below hard fork 6 are,
+necessarily, still validated with the old function; that affects history only.</li>
+<li>The public repository's only branch ends at the v2.3.0 commit of 2025-06-10; the release was
+published the next day. There is no later commit and no later release (checked 2026-11-14).</li>
+</ul>
+<p>This report does not assess the present economic state of the protocol, such as its reserve
+ratio, the price or the access to exchanges. Those are different questions from whether the
+supply is right.</p>
+<h2 id="s10">10. Reproducing this report</h2>
+<p>Tools are in <code>tools/</code>, their results in <code>results/</code>, the transcripts in <code>sources/</code>:</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chainscan.cpp</code></td>
+<td>the scan of <a class="ref" href="#s2">§2</a>: foreign ring members and range proofs, per block range</td>
+</tr>
+<tr>
+<td><code>scan-findings.tsv</code>, <code>scan-stats.tsv</code></td>
+<td>all findings and the per-range counters of the scan</td>
+</tr>
+<tr>
+<td><code>gaptest.cpp</code>, <code>gaptest.txt</code></td>
+<td>the executed test of defect A and what it printed</td>
+</tr>
+<tr>
+<td><code>ringdetail.cpp</code>, <code>ringdetail.tsv</code></td>
+<td>every foreign ring member of the 30 flagged transactions, with global output index and creation height</td>
+</tr>
+<tr>
+<td><code>origin.cpp</code>, <code>origin.tsv</code>, <code>ring-ages.tsv</code></td>
+<td>the creating transaction of every ring member of the 49 flagged inputs, and the oldest and newest member of every ring of the 30 transactions</td>
+</tr>
+<tr>
+<td><code>refs.cpp</code>, <code>refs-bpp.tsv</code></td>
+<td>later rings that reference the outputs of the three invalid-proof transactions</td>
+</tr>
+<tr>
+<td><code>revalidate.cpp</code>, <code>revalidate-stats.tsv</code></td>
+<td>the re-validation of <a class="ref" href="#s2">§2</a> and the counters per block range; it printed no failure line</td>
+</tr>
+<tr>
+<td><code>keyimages.cpp</code>, <code>keyimages.tsv</code></td>
+<td>the check that no key image occurs twice</td>
+</tr>
+<tr>
+<td><code>coinbase.cpp</code>, <code>coinbase.tsv</code></td>
+<td>the miner-payout check of <a class="ref" href="#s2">§2</a>, with totals per fork period</td>
+</tr>
+<tr>
+<td><code>ledger.cpp</code>, <code>ledger.tsv</code></td>
+<td>coins generated, the reserve and the asset totals rebuilt from genesis, with snapshots at the fork heights</td>
+</tr>
+<tr>
+<td><code>blockhash.cpp</code>, <code>blockhash-local.tsv</code></td>
+<td>block hashes of the scanned database at the fork heights and its tip, for comparison with any other node</td>
+</tr>
+<tr>
+<td><code>audit_sum.py</code>, <code>audit-transactions.tsv</code>, <code>audit-summary.txt</code></td>
+<td>the audit transactions read through a node's RPC: the list, and the sums per asset</td>
+</tr>
+<tr>
+<td><code>supply.py</code>, <code>supply.txt</code></td>
+<td>emission formula and reconciliation through a node's RPC; it simulates the schedule without penalties and so ends 28 ZEPH above the node's record</td>
+</tr>
+<tr>
+<td><code>heritage.py</code>, <code>heritage.txt</code></td>
+<td>the code comparison of <a class="ref" href="#s2">§2</a> and <a class="ref" href="#s7">§7</a> and what it printed</td>
+</tr>
+<tr>
+<td><code>sources/discord-announcements.txt</code>, <code>sources/discord-channels.txt</code>, <code>sources/discord-sherlock.txt</code>, <code>sources/discord-code-review.txt</code>, <code>sources/x-posts.txt</code>, <code>sources/web-sources.txt</code>, <code>sources/release-notes.txt</code></td>
+<td>the transcripts of the statements that this report quotes (<a class="ref" href="#s11">§11</a>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The C++ programs are built against the libraries of a normal build of <code>ZephyrProtocol/zephyr</code>
+v2.3.0 (compile flags and link line of <code>zephyr-blockchain-stats</code>, libraries in one linker group)
+and open the LMDB database read-only. Any fully synced v2.3.0 node database gives the same
+result. All results in this directory were produced with the programs as they are here. The RPC queries need only a restricted node:</p>
+<pre><code>get_circulating_supply   get_reserve_info   get_block_header_by_height
+get_block_headers_range  get_block          /get_transactions (decode_as_json, prune)
+</code></pre>
+<h2 id="s11">11. Sources</h2>
+<p>Code and releases:</p>
+<ul>
+<li>https://github.com/ZephyrProtocol/zephyr (tags v0.1.0 to v2.3.0). The notes of its fifteen
+releases, as the GitHub API gives them, are in <code>sources/release-notes.txt</code>.</li>
+<li>https://github.com/haven-protocol-org/haven-main</li>
+<li>https://zephyrprotocol.com/docs/zephyr_whitepaper.pdf</li>
+</ul>
+<p>Statements read by us:</p>
+<ul>
+<li>Web pages, transcript taken on 2026-11-14 (<code>sources/web-sources.txt</code>):
+<ul>
+<li>MEXC, 2025-01-22: https://www.mexc.com/announcements/article/suspension-of-deposits-for-zeph-17827791521494</li>
+<li>MEXC, 2025-05-14: https://www.mexc.com/announcements/article/suspension-of-zeph-deposits-and-withdrawals-17827791524070</li>
+<li>Kryptex, 2025-01-07: https://www.kryptex.com/en/news/zephyr-exchnage-pending-en</li>
+<li>The project's website, &quot;Zephyr Audit – Postmortem&quot;, dated 2025-08-27: https://zephyrprotocol.com/blog/2025-08-27-Zephyr-Audit-Postmortem.
+Apart from its title and two headings its text is the same, line for line, as the post-audit
+report the project published on X on 2025-09-06, which is the one this report cites.</li>
+<li>The project's website, announcement of v2.0.0, dated 2024-09-30: https://zephyrprotocol.com/blog/2024-09-30-Zephyr-Protocol-v2-0-0-ZSD-Yield-Hardfork-Annoucement</li>
+<li>The index of the project's blog (13 posts), and its bridge proposal of 2025-09-25, which was
+read and is not cited. The other ten posts were not read; two of them, of 2023-06-01 and
+2023-06-15, were searched for any mention of a review or audit of the software (fourth
+Discord transcript, below).</li>
+</ul>
+</li>
+<li>Zephyr's Discord announcements channel: transcript of 64 messages by the account &quot;fennzar&quot; in
+six date ranges between 2024-06-10 and 2025-10-31, taken on 2026-11-14 from the rendered channel
+(timestamps and message ids from the page). The published copy leaves out the twelve
+announcements of July to October 2025, none of which is cited.</li>
+<li>A second Discord transcript of the same date: the channels &quot;audit-log-updates&quot; (whole channel,
+25 messages, 2025-04-09 to 2025-05-16) and &quot;minor-announcements&quot; (2025-04-02 to 2025-07-31, 14
+messages), and a server search for messages by &quot;fennzar&quot; containing MEXC, unauditable, &quot;range
+proof&quot;, morph or blacklist (36 further messages, mostly from the general channel). Discord's
+search may be incomplete. The published copy keeps the two channels in full and, of the search,
+the seven cited messages.</li>
+<li>A third Discord transcript, taken on 2026-11-14 for one question: what the project has said
+about an external audit. It holds a server search for six terms (Sherlock, &quot;bridge audit&quot;,
+&quot;audit contest&quot;, &quot;security audit&quot;, auditor, &quot;audited by&quot;), the same search limited to the
+account &quot;fennzar&quot;, and the channels &quot;announcements&quot;, &quot;minor-announcements&quot; and
+&quot;bridge-testing&quot; read from 2025-08-01. Messages by the accounts &quot;fennzar&quot; and &quot;hydratedGoose&quot;
+(shown with the team role &quot;Marketing Lead&quot;) were copied; messages by other members were
+counted, not copied. The published copy holds the four cited items.</li>
+<li>A fourth Discord transcript, taken on 2026-11-14 for one question: whether anyone has reviewed
+or audited the node software. It holds a server search for fifteen terms (&quot;code review&quot;, &quot;code
+audit&quot;, &quot;audit of the code&quot;, &quot;audited code&quot;, &quot;third party audit&quot;, &quot;3rd party&quot;, &quot;external
+audit&quot;, &quot;peer review&quot;, &quot;reviewed by&quot;, &quot;bug bounty&quot;, &quot;security review&quot;, codebase, the names of
+two audit firms, &quot;Haven audit&quot;), the same searches limited to the account &quot;fennzar&quot;, three
+searches for the review of the codebase promised on 2025-01-06, and the channel
+&quot;announcements&quot; read from 2025-01-06 to the end of 2025 (34 messages). It also holds four
+searches of the X account and six pages of the project's website. Messages by &quot;fennzar&quot;,
+&quot;hydratedGoose&quot; and accounts shown with the role &quot;Mod&quot; or &quot;X-Desk&quot; were copied; messages by other members
+were counted, not copied. Two of the searches were read to their sixtieth result only. The
+published copy holds the one cited item.</li>
+<li>The project's X account @zephyr_org: transcript of 173 post entries taken on 2026-11-14 from
+the rendered pages (timestamps from the pages' <code>datetime</code> attribute, UTC). It holds seven given
+posts with the @zephyr_org posts shown with them, and four searches of the account: all posts
+from 2024-12-10 to 2025-02-28 (23 results) and from 2025-03-20 to 2025-07-15 (54 results);
+posts from 2025-07-15 to 2025-12-31 containing audit, supply, MEXC, &quot;range proof&quot;, morph,
+inflation, exploit or mint (14 results); posts since 2024-09-01 containing v2.0.0, hardfork or
+&quot;hard fork&quot; (36 results). Videos were read from their first frame only; replies by the account
+under other accounts' posts may be missing, and X's search may be incomplete. The published
+copy holds the cited posts with their context: the post-audit report in full, the history
+chapter of the overview article, the cited question and answer of the AMA article, the whole
+thread of 2025-06-15, and each reply together with the post it answers.</li>
+</ul>
+<p>Messages and posts cited, by date. A Discord link opens only for members of the project's server,
+and X does not show every post to visitors without an account; the transcripts are there for
+that reason. Inside a quotation the source's own quotation marks are shown as single quotes,
+its bold and italics are not reproduced, and omissions are marked with &quot;...&quot; or &quot;[...]&quot;.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Where</th>
+<th>Link</th>
+<th>Cited in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="nw">2024-12-29</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1322858944879792189">1</a> <a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1322858954241478678">2</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-1a">§6.1a</a>, <a class="ref" href="#s7">§7</a></td>
+</tr>
+<tr>
+<td class="nw">2024-12-30</td>
+<td>Discord, general</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605075416817686/1323101153449480293">1</a></td>
+<td><a class="ref" href="#s7">§7</a></td>
+</tr>
+<tr>
+<td class="nw">2025-01-02</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1324168891647397948">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a> (first of five messages)</td>
+</tr>
+<tr>
+<td class="nw">2025-01-06</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1325691467523686452">1</a> <a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1325691481251512331">2</a></td>
+<td><a class="ref" href="#s5-1">§5.1</a>, <a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-1a">§6.1a</a></td>
+</tr>
+<tr>
+<td class="nw">2025-01-06</td>
+<td>X</td>
+<td><a href="https://x.com/zephyr_org/status/1876209588460249297">1</a></td>
+<td><a class="ref" href="#s4-1">§4.1</a>, <a class="ref" href="#s6-1a">§6.1a</a>, <a class="ref" href="#s8">§8</a></td>
+</tr>
+<tr>
+<td class="nw">2025-01-13</td>
+<td>Discord, general</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605075416817686/1328217871263731722">1</a></td>
+<td><a class="ref" href="#s4-1">§4.1</a>, <a class="ref" href="#s5-1">§5.1</a>, <a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s8">§8</a></td>
+</tr>
+<tr>
+<td class="nw">2025-01-20</td>
+<td>Discord, general</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605075416817686/1330843937648410635">1</a> <a href="https://discord.com/channels/1112605073948819559/1112605075416817686/1330845887580340264">2</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-4">§6.4</a></td>
+</tr>
+<tr>
+<td class="nw">2025-01-21</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1331136889872191541">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a></td>
+</tr>
+<tr>
+<td class="nw">2025-01-23</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1331846800767713281">1</a> <a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1331846830748864512">2</a> <a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1331846862793084959">3</a></td>
+<td><a class="ref" href="#s1">§1</a>, <a class="ref" href="#s4-2">§4.2</a>, <a class="ref" href="#s5-1">§5.1</a> to <a class="ref" href="#s5-3">§5.3</a>, <a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-1a">§6.1a</a></td>
+</tr>
+<tr>
+<td class="nw">2025-02-19</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1341686311936987176">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a></td>
+</tr>
+<tr>
+<td class="nw">2025-04-14</td>
+<td>Discord, general</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605075416817686/1361284789159858207">1</a> <a href="https://discord.com/channels/1112605073948819559/1112605075416817686/1361290568507985970">2</a></td>
+<td><a class="ref" href="#s6-4">§6.4</a></td>
+</tr>
+<tr>
+<td class="nw">2025-05-03</td>
+<td>Discord, audit-log-updates</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1359471488364970104/1368212122236096554">1</a></td>
+<td><a class="ref" href="#s6-3">§6.3</a></td>
+</tr>
+<tr>
+<td class="nw">2025-05-07</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1369634054516899870">1</a> <a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1369634061143900181">2</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-3">§6.3</a>, <a class="ref" href="#s6-4">§6.4</a>, <a class="ref" href="#s6-5">§6.5</a></td>
+</tr>
+<tr>
+<td class="nw">2025-05-09</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1370262965470629978">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-3">§6.3</a>, <a class="ref" href="#s6-4">§6.4</a></td>
+</tr>
+<tr>
+<td class="nw">2025-05-16</td>
+<td>Discord, audit-log-updates</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1359471488364970104/1372889014855663696">1</a></td>
+<td><a class="ref" href="#s6-3">§6.3</a></td>
+</tr>
+<tr>
+<td class="nw">2025-05-21</td>
+<td>Discord, minor-announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1179739666434498570/1374653773690966110">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-4">§6.4</a>, <a class="ref" href="#s8">§8</a></td>
+</tr>
+<tr>
+<td class="nw">2025-05-24</td>
+<td>Discord, general</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605075416817686/1375777565796466790">1</a></td>
+<td><a class="ref" href="#s6-4">§6.4</a></td>
+</tr>
+<tr>
+<td class="nw">2025-05-27</td>
+<td>Discord, minor-announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1179739666434498570/1376889077193769122">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-4">§6.4</a></td>
+</tr>
+<tr>
+<td class="nw">2025-06-01</td>
+<td>Discord, minor-announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1179739666434498570/1378565857126387773">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-4">§6.4</a></td>
+</tr>
+<tr>
+<td class="nw">2025-06-11</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1382206300896628746">1</a></td>
+<td><a class="ref" href="#s1">§1</a>, <a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-3">§6.3</a>, <a class="ref" href="#s6-4">§6.4</a>, <a class="ref" href="#s6-5">§6.5</a></td>
+</tr>
+<tr>
+<td class="nw">2025-06-11</td>
+<td>X, post and a reply</td>
+<td><a href="https://x.com/zephyr_org/status/1932718400146448736">1</a> <a href="https://x.com/zephyr_org/status/1932786647004840331">2</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-2">§6.2</a></td>
+</tr>
+<tr>
+<td class="nw">2025-06-15</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1383781909716271154">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-3">§6.3</a></td>
+</tr>
+<tr>
+<td class="nw">2025-06-15</td>
+<td>X, second post of a thread of eight</td>
+<td><a href="https://x.com/zephyr_org/status/1934252619540664495">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-3">§6.3</a></td>
+</tr>
+<tr>
+<td class="nw">2025-06-16</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1383992838965952655">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-4">§6.4</a></td>
+</tr>
+<tr>
+<td class="nw">2025-06-17</td>
+<td>Discord, minor-announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1179739666434498570/1384673840084418620">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-4">§6.4</a></td>
+</tr>
+<tr>
+<td class="nw">2025-07-28</td>
+<td>X, overview article</td>
+<td><a href="https://x.com/zephyr_org/status/1949870293406666898">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-3">§6.3</a>, <a class="ref" href="#s8">§8</a></td>
+</tr>
+<tr>
+<td class="nw">2025-08-25</td>
+<td>X, AMA article</td>
+<td><a href="https://x.com/zephyr_org/status/1960023215444488459">1</a></td>
+<td><a class="ref" href="#s1">§1</a>, <a class="ref" href="#s3">§3</a>, <a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-1a">§6.1a</a>, <a class="ref" href="#s8">§8</a></td>
+</tr>
+<tr>
+<td class="nw">2025-09-06</td>
+<td>X, post-audit report</td>
+<td><a href="https://x.com/zephyr_org/status/1964371016303407282">1</a></td>
+<td><a class="ref" href="#s1">§1</a>, <a class="ref" href="#s4-1">§4.1</a>, <a class="ref" href="#s5-2">§5.2</a>, <a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-3">§6.3</a>, <a class="ref" href="#s6-5">§6.5</a></td>
+</tr>
+<tr>
+<td class="nw">2026-04-13</td>
+<td>X, reply</td>
+<td><a href="https://x.com/zephyr_org/status/2043732782224957593">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s6-3">§6.3</a></td>
+</tr>
+<tr>
+<td class="nw">2026-07-08</td>
+<td>Discord, general</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605075416817686/1524482538028925000">1</a></td>
+<td><a class="ref" href="#s1">§1</a>, <a class="ref" href="#s8">§8</a></td>
+</tr>
+<tr>
+<td class="nw">2026-07-14</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1526384501843034273">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s8">§8</a></td>
+</tr>
+<tr>
+<td class="nw">2026-07-28</td>
+<td>Discord, community-funding</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1439644649265303665/1531604756433469480">1</a></td>
+<td><a class="ref" href="#s8">§8</a></td>
+</tr>
+<tr>
+<td class="nw">2026-08-10</td>
+<td>Discord, announcements</td>
+<td><a href="https://discord.com/channels/1112605073948819559/1112605856488493176/1536191562755608637">1</a></td>
+<td><a class="ref" href="#s6-1">§6.1</a>, <a class="ref" href="#s8">§8</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>Not read, and not used: the project's articles on Medium; ten of the thirteen posts on its website's blog (two of them were searched for one question, see above); the rest of its X account.</p>
+<p>Not consulted: Telegram, Reddit and bitcointalk discussions; the rest of Zephyr's Discord (the general chat was only searched, not read); the parties themselves.</p>
+
+</main>
+</div>
+<footer class="site">
+<p>Reports: <a href="https://github.com/loki-notfound/zephyr-supply-review/blob/main/LICENSE-REPORTS.md">CC BY 4.0</a>. Programs: <a href="https://github.com/loki-notfound/zephyr-supply-review/blob/main/LICENSE">BSD 3-Clause</a>.
+Corrections of fact are welcome: <a href="https://github.com/loki-notfound/zephyr-supply-review/issues">open an issue</a>.</p>
+</footer>
+</body>
+</html>
