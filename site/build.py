@@ -110,14 +110,27 @@ def parts(toc):
 def render(root, src, out, sections):
     text = open(os.path.join(root, src), encoding="utf-8").read()
     text = re.sub(r"<!--.*?-->\n?", "", text, flags=re.S)
-    body, toc = headings(MarkdownIt("commonmark").enable("table").render(text))
+    body, toc = headings(MarkdownIt("commonmark", {"typographer": True}).enable(["table", "smartquotes"]).render(text))
     title = re.search(r"<h1[^>]*>(.*?)</h1>", body, re.S)
     title = re.sub(r"<[^>]+>", "", title.group(1)) if title else src
     body = re.sub(r'href="([^"]+)"', lambda m: f'href="{html.escape(link(html.unescape(m.group(1)), out))}"', body)
     body = body.replace("<table>", '<div class="table"><table>').replace("</table>", "</table></div>")
     # short cells that hold only a date, a time or a number stay on one line
     body = re.sub(r"<td>(\s*[0-9][0-9 :.,/−+-]{0,18}\s*)</td>", r'<td class="nw">\1</td>', body)
+    # a numbered question that opens a paragraph or a list item stands on its own line
+    body = re.sub(r"<p><strong>(\d+)\. ([^<]*\?)</strong>\s*",
+                  r'<p class="qa"><strong class="q"><span class="qn">\1.</span> \2</strong>', body)
+    body = re.sub(r"<li><strong>([^<]*\?)</strong>\s*", r'<li class="qa"><strong class="q">\1</strong>', body)
+    body = re.sub(r"<p>(<strong>In short[:.]</strong>)", r'<p class="inshort">\1', body)
+    # a numbered finding gets the same treatment, with its basis as a label behind the title
+    def finding(m):
+        label = f' <span class="basis">{m.group(3)}</span>' if m.group(3) else ""
+        return f'<p class="fd"><strong class="q"><span class="qn">{m.group(1)}.</span> {m.group(2)}{label}</strong>'
+    body = re.sub(r"<p><strong>(\d+[a-z]?)\. ([^<]+?)</strong>(?:\s*\(([^()]{1,60})\)[.:]?)?\s*", finding, body)
     body = text_nodes(body, lambda s: BASIS.sub(r'<span class="basis">\1</span>', s))
+    # a date stays on one line, and so does a number with its per cent sign
+    body = text_nodes(body, lambda s: re.sub(r"(?<![\w-])(\d{4}-\d{2}-\d{2})(?![\w-])", r'<span class="nb">\1</span>', s))
+    body = text_nodes(body, lambda s: re.sub(r"(\d) %", "\\1\u00a0%", s))
 
     def ref(m):
         sid = "s" + m.group(1).replace(".", "-")

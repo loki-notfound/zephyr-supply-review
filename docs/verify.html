@@ -40,7 +40,7 @@ quotation and source.</li>
 <li><strong>Analysis and writing.</strong> I used Claude Fable 5.2, an AI model made by Anthropic, to read the
 source code, to write and run the programs in <code>tools/</code>, to compare their results and to draft
 the reports.</li>
-<li><strong>Sources.</strong> The statements on Discord, on X and on the project's website were transcribed by
+<li><strong>Sources.</strong> The statements on Discord, on X and on the project’s website were transcribed by
 a second AI model (Claude Sonnet 5.5, Anthropic) working in my own browser, on my instructions
 and with read-only use of my accounts. Nothing was posted or changed.</li>
 <li><strong>Review.</strong> Two other AI models (GPT-6 Astra by OpenAI and Gemini 4 Hydrogen by Google) each
@@ -53,14 +53,14 @@ quotations with the originals. If something is wrong, the error is mine.</p>
 <p>The programs and their results are published so that no finding depends on trusting me or any
 model: each one can be repeated.</p>
 <h2 id="in-one-paragraph">In one paragraph</h2>
-<p>Zephyr's multi-asset code came from Haven Protocol and carried two consensus defects: range
+<p>Zephyr’s multi-asset code came from Haven Protocol and carried two consensus defects: range
 proofs were not verified until hard fork 6, and ring members were not required to match the asset
 type of the input until hard fork 7. Three transactions with invalid range proofs and thirty with
 ring members of another asset are on the chain. After the audit of 2025 the chain holds 2,067,576
 ZEPH more than was emitted, of which 1,921,650 is a one-time mint for an exchange balance that was
 not audited. Amounts are hidden, so the chain shows that this happened and when, not who did it
 or how much each transaction created. Both defects are closed in the current release. Up to
-block 902083 every transaction passes the node's checks on range proof, balance, conversion
+block 902083 every transaction passes the node’s checks on range proof, balance, conversion
 amount and ring signatures, no output was spent twice, and no block paid out more than reward
 and fees allow. The review establishes what happened and what the supply is; it does not judge
 who is to blame.</p>
@@ -75,7 +75,7 @@ who is to blame.</p>
 <tbody>
 <tr>
 <td><code>tools/</code></td>
-<td>the programs: a read-only chain scanner, a re-validation of every transaction, a check of every key image and of every block's miner payout, a rebuild of emission and reserve from genesis, a direct test of the range-proof defect, a code comparison, and two scripts that query a node</td>
+<td>the programs: a read-only chain scanner, a re-validation of every transaction, a check of every key image and of every block’s miner payout, a rebuild of emission and reserve from genesis, a direct test of the range-proof defect, a code comparison, and two scripts that query a node</td>
 </tr>
 <tr>
 <td><code>results/</code></td>
@@ -83,7 +83,7 @@ who is to blame.</p>
 </tr>
 <tr>
 <td><code>sources/</code></td>
-<td>transcripts of the project's Discord channels, of its posts on X and of the web pages that the reports quote, and the release notes</td>
+<td>transcripts of the project’s Discord channels, of its posts on X and of the web pages that the reports quote, and the release notes</td>
 </tr>
 <tr>
 <td><code>docs/</code>, <code>site/</code></td>
@@ -111,7 +111,7 @@ nothing in it.</p>
 </code></pre>
 </li>
 <li>
-<p><strong>Run them</strong> on the node's database directory (<code>~/.zephyr/lmdb</code> by default). All of them open
+<p><strong>Run them</strong> on the node’s database directory (<code>~/.zephyr/lmdb</code> by default). All of them open
 it read-only; stop the daemon first or work on a copy.</p>
 <div class="table"><table>
 <thead>
@@ -208,7 +208,7 @@ them to <code>workdir/audit-transactions.tsv</code> and prints the sums per asse
 <li>The real spend inside a ring cannot be identified.</li>
 <li>Statements of the project are quoted from texts that were read in full and are marked as statements;
 they are not verified unless the report says so.</li>
-<li>The results end at block 902083 (2026-11-07).</li>
+<li>The results end at block 902083 (<span class="nb">2026-11-07</span>).</li>
 </ul>
 <h2 id="licence">Licence</h2>
 <p>Programs: BSD 3-Clause (<a href="https://github.com/loki-notfound/zephyr-supply-review/blob/main/LICENSE"><code>LICENSE</code></a>). Reports: CC BY 4.0

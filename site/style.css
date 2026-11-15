@@ -150,6 +150,8 @@ main {
 }
 main > * { max-width: var(--measure); }
 main > .table, main > pre { max-width: 100%; }
+/* a small table keeps the width of the text; only a wide one takes the room beside it */
+main > .table { width: fit-content; min-width: min(100%, var(--measure)); }
 
 aside nav.toc { display: none; }
 aside details.toc {
@@ -375,6 +377,7 @@ tbody tr:last-child td { border-bottom: 0; }
 tbody tr:hover td { background: var(--surface); }
 
 td code { font-size: 0.8rem; }
+.nb { white-space: nowrap; }
 td.nw { white-space: nowrap; }
 td:not(.nw) { min-width: 6.5rem; }
 td:not(.nw):has(> code:only-child) { min-width: 0; }
@@ -450,4 +453,35 @@ h2:target, h3:target {
   a { color: inherit; text-decoration: underline; text-decoration-color: #999; }
   h1, h2, h3 { break-after: avoid; }
   tr, blockquote, pre { break-inside: avoid; }
+}
+
+/* The five questions and the answer in short */
+.qa .q, .fd .q {
+  display: block;
+  margin-bottom: 0.3rem;
+  font: 650 1.06rem/1.35 var(--sans);
+  letter-spacing: -0.005em;
+  color: var(--text);
+}
+.qa .qn, .fd .qn { color: var(--accent); margin-right: 0.15em; }
+p.qa {
+  margin: 1.6rem 0 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rule-strong);
+}
+li.qa { margin-top: 1.1rem; }
+p.fd { margin: 2rem 0 0.4rem; }
+p.fd:has(> .q:only-child) { margin-bottom: 0.2rem; }
+.q .basis { margin-left: 0.35em; vertical-align: 0.08em; display: inline-block; max-width: 100%; white-space: normal; line-height: 1.25; }
+li.qa::marker { font: 650 1.06rem/1.35 var(--sans); color: var(--accent); }
+.inshort {
+  margin-top: 1.9rem;
+  padding: 0.95rem 1.15rem;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+}
+@media print {
+  p.qa, .inshort { break-inside: avoid; }
+  .inshort { background: none; }
 }
